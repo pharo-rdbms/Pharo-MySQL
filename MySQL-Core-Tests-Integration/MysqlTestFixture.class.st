@@ -1,7 +1,7 @@
 Class {
 	#name : #MySQLTestFixture,
 	#superclass : #Object,
-	#category : #'MySQL-Core-Tests-Integration'
+	#category : #'MySQL-Core-Tests-Integration-Test-Fixtures'
 }
 
 { #category : #'as yet unclassified' }

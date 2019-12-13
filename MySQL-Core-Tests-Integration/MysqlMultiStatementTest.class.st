@@ -11,7 +11,7 @@ Connection with multistatement enabled
 Class {
 	#name : #MySQLMultiStatementTest,
 	#superclass : #MySQLTestCase,
-	#category : #'MySQL-Core-Tests-Integration'
+	#category : #'MySQL-Core-Tests-Integration-Base'
 }
 
 { #category : #'as yet unclassified' }

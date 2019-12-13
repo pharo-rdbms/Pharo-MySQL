@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'stmt'
 	],
-	#category : #'MySQL-Core-Tests-Integration'
+	#category : #'MySQL-Core-Tests-Integration-Base'
 }
 
 { #category : #'as yet unclassified' }

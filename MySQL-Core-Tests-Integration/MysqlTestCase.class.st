@@ -1,7 +1,7 @@
 Class {
 	#name : #MySQLTestCase,
 	#superclass : #TestCase,
-	#category : #'MySQL-Core-Tests-Integration'
+	#category : #'MySQL-Core-Tests-Integration-Base'
 }
 
 { #category : #'as yet unclassified' }

@@ -17,7 +17,7 @@
 Class {
 	#name : #MySQLQueryStatusTest,
 	#superclass : #MySQLTestCase,
-	#category : #'MySQL-Core-Tests-Integration'
+	#category : #'MySQL-Core-Tests-Integration-Base'
 }
 
 { #category : #'as yet unclassified' }

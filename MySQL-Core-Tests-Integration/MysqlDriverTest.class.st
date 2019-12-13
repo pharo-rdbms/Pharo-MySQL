@@ -7,7 +7,7 @@ Class {
 	#classInstVars : [
 		'protocol'
 	],
-	#category : #'MySQL-Core-Tests-Integration'
+	#category : #'MySQL-Core-Tests-Integration-Driver'
 }
 
 { #category : #'as yet unclassified' }

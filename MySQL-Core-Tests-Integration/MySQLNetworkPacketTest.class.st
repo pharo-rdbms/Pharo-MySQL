@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'ioStream'
 	],
-	#category : #'MySQL-Core-Tests-Integration'
+	#category : #'MySQL-Core-Tests-Integration-Network'
 }
 
 { #category : #'as yet unclassified' }

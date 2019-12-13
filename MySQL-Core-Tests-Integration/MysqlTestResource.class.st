@@ -5,7 +5,7 @@ Class {
 		'conn',
 		'testConn'
 	],
-	#category : #'MySQL-Core-Tests-Integration'
+	#category : #'MySQL-Core-Tests-Integration-Test-Resources'
 }
 
 { #category : #'as yet unclassified' }

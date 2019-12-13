@@ -1,20 +1,23 @@
+"
+MySQL quit command
+"
 Class {
 	#name : #MySQLCommandQuit,
 	#superclass : #MySQLCommandBase,
 	#category : #'MySQL-Core-Command'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : #defaults }
 MySQLCommandQuit >> commandArg [
 	^ nil
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #defaults }
 MySQLCommandQuit >> commandCode [
 	^ ComQuit 
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #reading }
 MySQLCommandQuit >> readResponse [
 	^ nil
 		

@@ -1,3 +1,6 @@
+"
+Binary reader for MySQL
+"
 Class {
 	#name : #MySQLBinaryReader,
 	#superclass : #Object,

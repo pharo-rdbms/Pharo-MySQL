@@ -1,3 +1,6 @@
+"
+Database bind parameter for MySQL
+"
 Class {
 	#name : #MySQLBindParameter,
 	#superclass : #Object,

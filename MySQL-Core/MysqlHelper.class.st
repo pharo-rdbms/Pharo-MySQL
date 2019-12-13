@@ -1,3 +1,6 @@
+"
+Helper class for MySQL
+"
 Class {
 	#name : #MySQLHelper,
 	#superclass : #Object,
@@ -9,7 +12,7 @@ Class {
 	#category : #'MySQL-Core-Utilities'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : #utilities }
 MySQLHelper class >> bytesFromHexString: hexString [
 	| strm bytes aByte ii high low hexAlphabet |
 	(hexString size \\ 2 = 0) ifFalse: [self error: 'Not proper hex encoding'].
@@ -30,7 +33,7 @@ MySQLHelper class >> bytesFromHexString: hexString [
 	
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #utilities }
 MySQLHelper class >> bytesFromSha1Hash: num [
 	| index bytes |
 	index := 0.
@@ -40,7 +43,7 @@ MySQLHelper class >> bytesFromSha1Hash: num [
 	^ bytes
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #encoding }
 MySQLHelper class >> decodeLcbFrom: byteStream [ 
 	"parse length coded binary"
 	| first |
@@ -57,7 +60,7 @@ MySQLHelper class >> decodeLcbFrom: byteStream [
 	^ nil
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #encoding }
 MySQLHelper class >> decodeLcsFrom: aStream [ 
 	"parses length coded string"
 	| len |
@@ -67,7 +70,7 @@ MySQLHelper class >> decodeLcsFrom: aStream [
 	
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #encoding }
 MySQLHelper class >> encodeLcb: value on: aStream [
 	value < -1
 		ifTrue: [ self
@@ -100,7 +103,7 @@ MySQLHelper class >> encodeLcb: value on: aStream [
 		yourself
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #encoding }
 MySQLHelper class >> encodeLcs: bytes on: aStream [
 	| len |
 	len := bytes size .
@@ -149,7 +152,7 @@ MySQLHelper class >> hash: message [
 
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #utilities }
 MySQLHelper class >> hexStringFromBytes: aByteArray [
 	^ aByteArray inject: '' into: [:result :each | 
 		result, (each printPaddedWith: $0 to: 2 base: 16)].
@@ -207,13 +210,13 @@ MySQLHelper class >> scramble323: message with: password [
 	
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #scrambling }
 MySQLHelper class >> scramble323MessageLimit [
 	^ 8
 	
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #scrambling }
 MySQLHelper class >> secureScramble: seed with: password [ 
 
 	| sha1 hashStage1 hashStage2 hash3 reply |

@@ -1,3 +1,6 @@
+"
+MySQL Error packet
+"
 Class {
 	#name : #MySQLError,
 	#superclass : #MySQLResult,
@@ -8,25 +11,25 @@ Class {
 		'sqlState',
 		'message'
 	],
-	#category : #'MySQL-Core-Packet'
+	#category : #'MySQL-Core-Packet-Results'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
 MySQLError >> errNo [
 	^ errNo 
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #testing }
 MySQLError >> isError [
 	^ true
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
 MySQLError >> message [
 	^ message 
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #parsing }
 MySQLError >> parse [
 	fieldCount := inStream next. "always 0xFF"
 	errNo := inStream next + (inStream next bitShift: 8).	
@@ -36,7 +39,7 @@ MySQLError >> parse [
 
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
 MySQLError >> sqlState [
 	^ sqlState 
 ]

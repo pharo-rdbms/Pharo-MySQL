@@ -1,3 +1,6 @@
+"
+MySQL Header for a result set 
+"
 Class {
 	#name : #MySQLResultSetHeader,
 	#superclass : #MySQLPacket,
@@ -5,15 +8,15 @@ Class {
 		'fieldCount',
 		'extra'
 	],
-	#category : #'MySQL-Core-Packet'
+	#category : #'MySQL-Core-Packet-Results'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
 MySQLResultSetHeader >> fieldCount [
 	^ fieldCount 
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #parsing }
 MySQLResultSetHeader >> parse [
 	fieldCount := self decodeLcbFrom: inStream.
 	"exrta field may appear for some results (like show column)"

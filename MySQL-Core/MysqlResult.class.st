@@ -7,20 +7,20 @@ Class {
 	#instVars : [
 		'nextResult'
 	],
-	#category : #'MySQL-Core-Packet'
+	#category : #'MySQL-Core-Packet-Results'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : #testing }
 MySQLResult >> hasMoreResults [
 	^ false 
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
 MySQLResult >> nextResult [
 	^ nextResult 
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
 MySQLResult >> nextResult: aResult [
 	nextResult := aResult 
 	

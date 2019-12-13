@@ -1,3 +1,6 @@
+"
+Abtract superclass for network packet exchanged with MySQL
+"
 Class {
 	#name : #MySQLPacket,
 	#superclass : #Object,
@@ -28,14 +31,14 @@ Class {
 	#category : #'MySQL-Core-Packet'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : #'instance creation' }
 MySQLPacket class >> from: data [
 	^ self new 
 		read: data
 	
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #initialization }
 MySQLPacket class >> initCapabilititesFlags [
 	CapLongPassword := 1.
 	CapFoundRows := 1 bitShift: 1.
@@ -58,7 +61,7 @@ MySQLPacket class >> initCapabilititesFlags [
 
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #initialization }
 MySQLPacket class >> initialize [
 	"
 	self initialize
@@ -68,85 +71,80 @@ MySQLPacket class >> initialize [
 
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
 MySQLPacket class >> maxNetPacketLength [
 	^ MySQLNetworkPacket maxLength
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #parsing }
 MySQLPacket >> decodeLcbFrom: byteStream [ 
 	^ MySQLHelper decodeLcbFrom: byteStream 
 	
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #parsing }
 MySQLPacket >> decodeLcsFrom: aStream [ 
 	^ MySQLHelper decodeLcsFrom: aStream 
 	
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #parsing }
 MySQLPacket >> encodeLcb: value on: aStream [ 
 	^ MySQLHelper encodeLcb: value on: aStream 
 	
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #parsing }
 MySQLPacket >> encodeLcs: bytes on: aStream [
 	MySQLHelper encodeLcs: bytes on: aStream
 	
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #testing }
 MySQLPacket >> isEof [
 	^ (discriminator = 16rFE) and: [inStream size < 9]
 
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #testing }
 MySQLPacket >> isError [
 	^ discriminator = 16rFF
 
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #testing }
 MySQLPacket >> isOkay [
 	^ discriminator = 16r00
 
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #testing }
 MySQLPacket >> isOkayOrError [
 	^ self isOkay or: [self isError]
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #testing }
 MySQLPacket >> isPrepareResponse [
 	^ false
 	
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #testing }
 MySQLPacket >> isResultSet [
 	^ false
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #parsing }
 MySQLPacket >> parse [
 	"Default implementation; required for reading a generic (yet unknown) type of packet"
 	"No parsing here; subclasses implement packet specific parsing"
 	
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #reading }
 MySQLPacket >> read: buffer [
 	discriminator := buffer first.
 	inStream := ReadStream on: buffer.
 	self parse
 	
-]
-
-{ #category : #'as yet unclassified' }
-MySQLPacket >> write [
-	self subclassResponsibility 
 ]

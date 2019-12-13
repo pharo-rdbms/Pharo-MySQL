@@ -1,19 +1,22 @@
+"
+String row data packet for MySQL
+"
 Class {
 	#name : #MySQLStringRowData,
 	#superclass : #MySQLBinaryRowData,
 	#instVars : [
 		'columnStrings'
 	],
-	#category : #'MySQL-Core-Packet'
+	#category : #'MySQL-Core-Packet-RowData'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
 MySQLStringRowData >> atIndex: indx [
 	^ columnStrings at: indx ifAbsent: [MySQLInvalidRowAccess signal: 'No data at this index']
 	
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #parsing }
 MySQLStringRowData >> parse [
 	super parse.
 	columnStrings := columnValues collect: [:each | 
@@ -23,4 +26,9 @@ MySQLStringRowData >> parse [
 					(each isKindOf: DateAndTime) ifTrue: [each asISOString] ifFalse: [
 						each asString]]]]]
 	
+]
+
+{ #category : #writing }
+MySQLStringRowData >> write [
+	self subclassResponsibility 
 ]

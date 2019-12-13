@@ -1,3 +1,6 @@
+"
+Handshake packet for MySQL
+"
 Class {
 	#name : #MySQLHandshake,
 	#superclass : #MySQLPacket,
@@ -14,7 +17,7 @@ Class {
 	#category : #'MySQL-Core-Packet'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : #parsing }
 MySQLHandshake >> parse [ 
 	protocolVer := inStream next.
 	serverVer := (inStream upTo: 0) asString.
@@ -42,7 +45,7 @@ MySQLHandshake >> scrambleBuff [
 		ifFalse: [^ scrambleBuff]."
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #scrambling }
 MySQLHandshake >> scrambleBuffMore [
 	^scrambleBuffMore 
 ]
@@ -67,7 +70,7 @@ MySQLHandshake >> serverVer [
 	^ serverVer
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #testing }
 MySQLHandshake >> supportsProtocol41 [
 	^ (serverCap bitAnd: CapProtocol41) = CapProtocol41
 ]

@@ -1,3 +1,6 @@
+"
+Server status for MySQL server
+"
 Class {
 	#name : #MySQLServerStatus,
 	#superclass : #Object,

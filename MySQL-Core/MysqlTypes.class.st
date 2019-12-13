@@ -1,3 +1,6 @@
+"
+MySQL database types
+"
 Class {
 	#name : #MySQLTypes,
 	#superclass : #Object,
@@ -40,7 +43,7 @@ Class {
 	#category : #'MySQL-Core-Utilities'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : #'accessing - types - all' }
 MySQLTypes class >> blobTypes [
 	blobTypes ifNil: [
 		blobTypes := Array 
@@ -49,7 +52,7 @@ MySQLTypes class >> blobTypes [
 	
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'accessing - types - all' }
 MySQLTypes class >> dateTimeTypes [
 	dateTimeTypes ifNil: [
 		dateTimeTypes := Array 
@@ -60,7 +63,7 @@ MySQLTypes class >> dateTimeTypes [
 	
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'private - initialization' }
 MySQLTypes class >> initFieldTypes [
  	TypeBIT := 16.
  	TypeBLOB := 252.
@@ -92,15 +95,13 @@ MySQLTypes class >> initFieldTypes [
 
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'class initialization' }
 MySQLTypes class >> initialize [
-	"self initialize"
-
-	self initFieldTypes.
+	self initFieldTypes
 
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'accessing - types - all' }
 MySQLTypes class >> integerTypes [
 	integerTypes ifNil: [
 		integerTypes := Array 
@@ -110,37 +111,37 @@ MySQLTypes class >> integerTypes [
 	
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #testing }
 MySQLTypes class >> isBigInt: type [
 	^ type = TypeLONGLONG
 	
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #testing }
 MySQLTypes class >> isLongInt: type [
 	^ type = TypeLONG
 	
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #testing }
 MySQLTypes class >> isMediumInt: type [
 	^ type = TypeINT24
 	
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #testing }
 MySQLTypes class >> isSmallInt: type [
 	^ type = TypeSHORT
 	
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #testing }
 MySQLTypes class >> isTinyInt: type [
 	^ type = TypeTINY
 	
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'accessing - types - all' }
 MySQLTypes class >> realTypes [
 	realTypes ifNil: [
 		realTypes := Array 
@@ -149,7 +150,7 @@ MySQLTypes class >> realTypes [
 	
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'accessing - types - all' }
 MySQLTypes class >> stringTypes [
 	stringTypes ifNil: [
 		stringTypes := Array with: TypeSTRING with: TypeVARCHAR with: TypeVARSTRING ].
@@ -157,162 +158,162 @@ MySQLTypes class >> stringTypes [
 	
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'accessing - types' }
 MySQLTypes class >> typeBIT [
 	^ TypeBIT
 	
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'accessing - types' }
 MySQLTypes class >> typeBLOB [
 	^ TypeBLOB
 	
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'accessing - types' }
 MySQLTypes class >> typeDATE [
 	^ TypeDATE
 	
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'accessing - types' }
 MySQLTypes class >> typeDATETIME [
 	^ TypeDATETIME
 	
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'accessing - types' }
 MySQLTypes class >> typeDECIMAL [
 	^ TypeDECIMAL
 	
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'accessing - types' }
 MySQLTypes class >> typeDOUBLE [
 	^ TypeDOUBLE
 	
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'accessing - types' }
 MySQLTypes class >> typeENUM [
 	^ TypeENUM
 	
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'accessing - types' }
 MySQLTypes class >> typeFLOAT [
 	^ TypeFLOAT
 	
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'accessing - types' }
 MySQLTypes class >> typeGEOMETRY [
 	^ TypeGEOMETRY
 	
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'accessing - types' }
 MySQLTypes class >> typeINT24 [
 	^ TypeINT24
 	
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'accessing - types' }
 MySQLTypes class >> typeLONG [
 	^ TypeLONG
 	
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'accessing - types' }
 MySQLTypes class >> typeLONGBLOB [
 	^ TypeLONGBLOB
 	
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'accessing - types' }
 MySQLTypes class >> typeLONGLONG [
 	^ TypeLONGLONG
 	
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'accessing - types' }
 MySQLTypes class >> typeMEDIUMBLOB [
 	^ TypeMEDIUMBLOB
 	
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'accessing - types' }
 MySQLTypes class >> typeNEWDATE [
 	^ TypeNEWDATE
 	
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'accessing - types' }
 MySQLTypes class >> typeNEWDECIMAL [
 	^ TypeNEWDECIMAL
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'accessing - types' }
 MySQLTypes class >> typeNULL [
 	^ TypeNULL
 	
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'accessing - types' }
 MySQLTypes class >> typeSET [
 	^ TypeSET
 	
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'accessing - types' }
 MySQLTypes class >> typeSHORT [
 	^ TypeSHORT
 	
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'accessing - types' }
 MySQLTypes class >> typeSTRING [
 	^ TypeSTRING
 	
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'accessing - types' }
 MySQLTypes class >> typeTIME [
 	^ TypeTIME
 	
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'accessing - types' }
 MySQLTypes class >> typeTIMESTAMP [
 	^ TypeTIMESTAMP
 	
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'accessing - types' }
 MySQLTypes class >> typeTINY [
 	^ TypeTINY
 	
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'accessing - types' }
 MySQLTypes class >> typeTINYBLOB [
 	^ TypeTINYBLOB
 	
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'accessing - types' }
 MySQLTypes class >> typeVARCHAR [
 	^ TypeVARCHAR
 	
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'accessing - types' }
 MySQLTypes class >> typeVARSTRING [
 	^ TypeVARSTRING
 	
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'accessing - types' }
 MySQLTypes class >> typeYEAR [
 	^ TypeYEAR
 	

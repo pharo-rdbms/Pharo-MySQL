@@ -1,3 +1,6 @@
+"
+MySQL fetch command
+"
 Class {
 	#name : #MySQLCommandFetch,
 	#superclass : #MySQLCommandBase,
@@ -10,7 +13,7 @@ Class {
 	#category : #'MySQL-Core-Command'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : #defaults }
 MySQLCommandFetch >> commandArg [
 	ByteArray
 		streamContents: [ :strm | 
@@ -26,44 +29,44 @@ MySQLCommandFetch >> commandArg [
 			^ strm contents ]
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #defaults }
 MySQLCommandFetch >> commandCode [
 	^ ComStmtFetch 
 	
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
 MySQLCommandFetch >> gotEof [
 	^ (MySQLPacket from: session peek) isEof 
 
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #initialization }
 MySQLCommandFetch >> initialize [
 	super initialize.
 	mapResultsToNativeTypes := true
 	
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
 MySQLCommandFetch >> mapResultsToNativeTypes: aBoolean [
 	mapResultsToNativeTypes := aBoolean
 	
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
 MySQLCommandFetch >> numRows: count [
 	numRows := count
 	
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #reading }
 MySQLCommandFetch >> readEof [
 	^ MySQLEof from: session read
 
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #reading }
 MySQLCommandFetch >> readOneRow: fields [ 
 	| row |
 	row := mapResultsToNativeTypes 
@@ -74,7 +77,7 @@ MySQLCommandFetch >> readOneRow: fields [
 	^ row
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #reading }
 MySQLCommandFetch >> readResponse [
 	| resp |
 	resp := self readResult.
@@ -82,7 +85,7 @@ MySQLCommandFetch >> readResponse [
 	
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #reading }
 MySQLCommandFetch >> readResult [
 	| pkt fieldsEof rows fields rowsEof |
 	pkt := MySQLPacket from: session peek.
@@ -102,7 +105,7 @@ MySQLCommandFetch >> readResult [
 		
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #reading }
 MySQLCommandFetch >> readRowData: fields [ 
 	| respRows row |
 	respRows := OrderedCollection new.
@@ -116,13 +119,13 @@ MySQLCommandFetch >> readRowData: fields [
 
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
 MySQLCommandFetch >> resultSetContext: partialResultSet [
 	resultSetContext := partialResultSet 
 	
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
 MySQLCommandFetch >> statementId: id [
 	stmtId := id
 	

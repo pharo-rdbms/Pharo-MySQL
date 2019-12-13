@@ -1,3 +1,6 @@
+"
+Driver class for MySQL
+"
 Class {
 	#name : #MySQLDriver,
 	#superclass : #Object,
@@ -169,7 +172,7 @@ MySQLDriver >> readResponse [
 	^ resp
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #scrambling }
 MySQLDriver >> send323Scramble: seed password: password [
 	| scrmblPkt |
 	scrmblPkt := MySQL323Scramble new.

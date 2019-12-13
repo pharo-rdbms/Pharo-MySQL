@@ -1,3 +1,6 @@
+"
+MySQL Error packet
+"
 Class {
 	#name : #MySQLOkay,
 	#superclass : #MySQLResult,
@@ -9,21 +12,21 @@ Class {
 		'warningCount',
 		'serverStatus'
 	],
-	#category : #'MySQL-Core-Packet'
+	#category : #'MySQL-Core-Packet-Results'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
 MySQLOkay >> affectedRows [
 	^ affectedRows 
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #testing }
 MySQLOkay >> hasMoreResults [
 	^ (serverStatus bitAnd: MySQLServerStatus moreResultsExist) ~= 0
 	
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
 MySQLOkay >> inTransaction [
 	| autoCommit inTx |
 	autoCommit := (serverStatus bitAnd: MySQLServerStatus statusInTransaction) ~= 0.
@@ -32,22 +35,22 @@ MySQLOkay >> inTransaction [
 	
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
 MySQLOkay >> insertId [
 	^ insertId 
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #testing }
 MySQLOkay >> isOkay [
 	^ true
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
 MySQLOkay >> message [
 	^ message 
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #parsing }
 MySQLOkay >> parse [ 
 	fieldCount := self decodeLcbFrom: inStream . "always 0"
 	affectedRows := self decodeLcbFrom: inStream .
@@ -58,12 +61,12 @@ MySQLOkay >> parse [
 	
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
 MySQLOkay >> serverStatus [
 	^ serverStatus 
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
 MySQLOkay >> warningCount [
 	^ warningCount 
 ]

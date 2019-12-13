@@ -1,22 +1,25 @@
+"
+Common superclass for MySQL row data
+"
 Class {
 	#name : #MySQLRowData,
 	#superclass : #MySQLPacket,
-	#category : #'MySQL-Core-Packet'
+	#category : #'MySQL-Core-Packet-RowData'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
 MySQLRowData >> at: index [
 	
 	^ self atIndex: index
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
 MySQLRowData >> atIndex: indx [
 	self subclassResponsibility
 	
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #parsing }
 MySQLRowData >> parse [
 	self subclassResponsibility 
 	

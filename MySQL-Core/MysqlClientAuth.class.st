@@ -1,3 +1,6 @@
+"
+Client authentication packet for MySQL
+"
 Class {
 	#name : #MySQLClientAuth,
 	#superclass : #MySQLPacket,
@@ -14,48 +17,48 @@ Class {
 	#category : #'MySQL-Core-Packet'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
 MySQLClientAuth >> charset: csNum [
 	charset := csNum
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
 MySQLClientAuth >> database: db [
 	database := db
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #initialization }
 MySQLClientAuth >> initialize [
 	clientCaps := CapLongFlag + CapTransactions + CapLongPassword + CapConnectWithDb.
 	clientCaps := clientCaps + CapProtocol41 + CapSecureConnection.
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
 MySQLClientAuth >> password: pwd [
 	password := pwd.
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #scrambling }
 MySQLClientAuth >> scrambleBuff: buffer [
 	scrambleBuff := buffer.
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #scrambling }
 MySQLClientAuth >> scrambleBuffMore: more [
 	scrambleBuffMore := more
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
 MySQLClientAuth >> serverCaps: caps [ 
 	serverCaps := caps
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
 MySQLClientAuth >> user: userName [
 	user := userName
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #writing }
 MySQLClientAuth >> write [
 	| flags scrmbl buffStream maxNetPacketLength |
 	buffStream := WriteStream on: (ByteArray new: 1024).

@@ -1,3 +1,6 @@
+"
+323 scramble packet for MySQL
+"
 Class {
 	#name : #MySQL323Scramble,
 	#superclass : #MySQLPacket,
@@ -8,19 +11,19 @@ Class {
 	#category : #'MySQL-Core-Packet'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
 MySQL323Scramble >> password: pwd [
 	password := pwd
 	
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
 MySQL323Scramble >> scrambleBuff: scramble [
 	scrambleBuff := scramble 
 	
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #writing }
 MySQL323Scramble >> write [
 	| scrmbl buffStream |
 	buffStream := WriteStream on: (ByteArray new: 256).

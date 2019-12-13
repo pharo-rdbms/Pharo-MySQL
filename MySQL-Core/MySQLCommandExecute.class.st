@@ -1,3 +1,6 @@
+"
+MySQL command to execute
+"
 Class {
 	#name : #MySQLCommandExecute,
 	#superclass : #MySQLCommandBase,
@@ -10,7 +13,7 @@ Class {
 	#category : #'MySQL-Core-Command'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : #defaults }
 MySQLCommandExecute >> commandArg [
 	| paramType nonLongs |
 	ByteArray
@@ -45,19 +48,19 @@ MySQLCommandExecute >> commandArg [
 			^ strm contents ]
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #defaults }
 MySQLCommandExecute >> commandCode [
 	^ ComStmtExecute 
 	
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
 MySQLCommandExecute >> cursoredFetch: aBoolean [ 
 	cursoredFetch := aBoolean
 	
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #operating }
 MySQLCommandExecute >> execute [
 	| resp |
 	"Remember to send long data for the longdata params before calling here"
@@ -67,19 +70,19 @@ MySQLCommandExecute >> execute [
 	
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #testing }
 MySQLCommandExecute >> gotEof [
 	^ (MySQLPacket from: session peek) isEof 
 
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #testing }
 MySQLCommandExecute >> hasNewParamBound [
 	^ params anySatisfy: [:each | each isRebound]
 	
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #initialization }
 MySQLCommandExecute >> initialize [
 	super initialize.
 	cursoredFetch := false.
@@ -87,13 +90,13 @@ MySQLCommandExecute >> initialize [
 	
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
 MySQLCommandExecute >> mapResultsToNativeTypes: aBoolean [
 	mapResultsToNativeTypes := aBoolean
 	
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'private - accessing' }
 MySQLCommandExecute >> nullBitMap [
 	| nullBitMap mapByte byteIndex bitMask |
 	nullBitMap := ByteArray new: (params size + 7) // 8.
@@ -111,19 +114,19 @@ MySQLCommandExecute >> nullBitMap [
 	
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
 MySQLCommandExecute >> params: inParams [
-	params := inParams.
+	params := inParams
 	
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #reading }
 MySQLCommandExecute >> readEof [
 	^ MySQLEof from: session read
 
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #reading }
 MySQLCommandExecute >> readFields [
 	| respFields field |
 	respFields := OrderedCollection new.
@@ -137,13 +140,13 @@ MySQLCommandExecute >> readFields [
 			
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #reading }
 MySQLCommandExecute >> readOneField [
 	^ MySQLField from: session read.
 
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #reading }
 MySQLCommandExecute >> readOneRow: fields [ 
 	| row |
 	row := mapResultsToNativeTypes 
@@ -154,7 +157,7 @@ MySQLCommandExecute >> readOneRow: fields [
 	^ row
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #reading }
 MySQLCommandExecute >> readResponse [
 	| resp |
 	resp := self readResult.
@@ -165,7 +168,7 @@ MySQLCommandExecute >> readResponse [
 	
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #reading }
 MySQLCommandExecute >> readResult [
 	| resultSetHdr pkt fieldsEof rows fields rowsEof |
 	pkt := super readResponse.
@@ -188,7 +191,7 @@ MySQLCommandExecute >> readResult [
 		yourself
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #reading }
 MySQLCommandExecute >> readRowData: fields [ 
 	| respRows row |
 	respRows := OrderedCollection new.
@@ -202,13 +205,13 @@ MySQLCommandExecute >> readRowData: fields [
 
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #operating }
 MySQLCommandExecute >> resetNewParamBound [
 	params do: [:each | each resetReboundFlag]
 	
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
 MySQLCommandExecute >> statementId: id [
 	stmtId := id
 	

@@ -1,3 +1,6 @@
+"
+MySQL prepare command
+"
 Class {
 	#name : #MySQLCommandPrepare,
 	#superclass : #MySQLCommandBase,
@@ -7,19 +10,19 @@ Class {
 	#category : #'MySQL-Core-Command'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : #defaults }
 MySQLCommandPrepare >> commandArg [
 	^ query 
 	
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #defaults }
 MySQLCommandPrepare >> commandCode [
 	^ ComStmtPrepare 
 	
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #testing }
 MySQLCommandPrepare >> gotEof [
 	| resp |
 	resp := MySQLPacket from: session peek.
@@ -27,31 +30,31 @@ MySQLCommandPrepare >> gotEof [
 	
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
 MySQLCommandPrepare >> queryString: queryString [ 
 	query := queryString
 	
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #reading }
 MySQLCommandPrepare >> readColumnDescr [
 	^ MySQLField from: session read.
 
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #reading }
 MySQLCommandPrepare >> readEof [
 	^ MySQLEof from: session read
 	
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #reading }
 MySQLCommandPrepare >> readParamDescr [
 	^ MySQLField from: session read.
 
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #reading }
 MySQLCommandPrepare >> readPrepareOkay [
 	| prepOkay params columns paramEof columnEof indx |
 	
@@ -83,7 +86,7 @@ MySQLCommandPrepare >> readPrepareOkay [
 	
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #reading }
 MySQLCommandPrepare >> readResponse [
 	| resp |
 	resp := MySQLPacket from: session peek.

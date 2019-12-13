@@ -1,3 +1,6 @@
+"
+MySQL unsupported authentication
+"
 Class {
 	#name : #MySQLUnsuportedAuthError,
 	#superclass : #MySQLDriverError,

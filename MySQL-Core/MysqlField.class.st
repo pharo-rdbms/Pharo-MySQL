@@ -1,3 +1,6 @@
+"
+Field packet for MySQL
+"
 Class {
 	#name : #MySQLField,
 	#superclass : #MySQLPacket,
@@ -32,7 +35,7 @@ Class {
 	#category : #'MySQL-Core-Packet'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : #'private - initialization' }
 MySQLField class >> initBitMasksForFlags [
 	NotNullFlag := 16r0001.
 	PrimaryKeyFlag := 16r0002.
@@ -51,61 +54,61 @@ MySQLField class >> initBitMasksForFlags [
 
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #initialization }
 MySQLField class >> initialize [
 	"self initialize"
 	self initBitMasksForFlags.
 	
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
 MySQLField >> db [
 	^ db
 	
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
 MySQLField >> decimals [
 	^ decimals 
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #testing }
 MySQLField >> isAutoIncrement [
 	^ (flags bitAnd: AutoIncrFlag) = AutoIncrFlag   
 	
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #testing }
 MySQLField >> isNullable [
 	^ (flags bitAnd: NotNullFlag) ~= NotNullFlag  
 	
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #testing }
 MySQLField >> isPrimaryKey [
 	^ (flags bitAnd: PrimaryKeyFlag) = PrimaryKeyFlag  
 	
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #testing }
 MySQLField >> isUnsigned [
 	^ (flags bitAnd: UnsignedFlag) = UnsignedFlag 
 	
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
 MySQLField >> length [
 	^ length 
 	
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
 MySQLField >> name [
 	^ name
 	
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
 MySQLField >> parse [
 	catalog := (self decodeLcsFrom: inStream) asString.
 	db := (self decodeLcsFrom: inStream) asString.
@@ -126,13 +129,13 @@ MySQLField >> parse [
 	
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
 MySQLField >> table [
 	^ table
 	
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
 MySQLField >> type [
 	^ type
 	

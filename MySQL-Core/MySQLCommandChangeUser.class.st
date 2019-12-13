@@ -1,3 +1,6 @@
+"
+MySQL command to change user
+"
 Class {
 	#name : #MySQLCommandChangeUser,
 	#superclass : #MySQLCommandBase,
@@ -12,12 +15,12 @@ Class {
 	#category : #'MySQL-Core-Command'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
 MySQLCommandChangeUser >> charset: cset [ 
 	charset := cset
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #defaults }
 MySQLCommandChangeUser >> commandArg [
 	| buffStream |
 	buffStream := WriteStream on: ByteArray new.
@@ -37,22 +40,22 @@ MySQLCommandChangeUser >> commandArg [
 	^ buffStream contents
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #defaults }
 MySQLCommandChangeUser >> commandCode [
 	^ ComChangeUser 
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
 MySQLCommandChangeUser >> database: dbName [
 	database := dbName
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
 MySQLCommandChangeUser >> password: pwd [
 	password := pwd
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #operating }
 MySQLCommandChangeUser >> readResponse [
 	| pkt |
 
@@ -73,19 +76,19 @@ MySQLCommandChangeUser >> readResponse [
 	
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #scrambling }
 MySQLCommandChangeUser >> scrambleBuff: seed [
 	scrambleBuff := seed
 	
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #scrambling }
 MySQLCommandChangeUser >> scrambledPassword: pwd [
 	scrambledPassword := pwd
 	
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #scrambling }
 MySQLCommandChangeUser >> send323Scramble [
 	| scrmblPkt |
 	scrmblPkt := MySQL323Scramble new.
@@ -94,7 +97,7 @@ MySQLCommandChangeUser >> send323Scramble [
 	
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
 MySQLCommandChangeUser >> user: userName [
 	user := userName
 ]

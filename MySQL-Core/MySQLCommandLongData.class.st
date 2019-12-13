@@ -1,3 +1,6 @@
+"
+MySQL command for long datas
+"
 Class {
 	#name : #MySQLCommandLongData,
 	#superclass : #MySQLCommandBase,
@@ -9,7 +12,7 @@ Class {
 	#category : #'MySQL-Core-Command'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : #defaults }
 MySQLCommandLongData >> commandArg [
 	ByteArray
 		streamContents: [ :strm | 
@@ -25,32 +28,32 @@ MySQLCommandLongData >> commandArg [
 			^ strm contents ]
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #defaults }
 MySQLCommandLongData >> commandCode [
 	^ ComStmtSendLongData 
 	
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
 MySQLCommandLongData >> dataBytes: aByteArray [
 	dataBytes := aByteArray 
 	
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
 MySQLCommandLongData >> paramNum: aNumber [
 	paramNum := aNumber
 	
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #reading }
 MySQLCommandLongData >> readResponse [
-	"This command does not hae any response from server"
+	"This command does not have any response from server"
 	^ nil
 	
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
 MySQLCommandLongData >> statementId: anId [
 	statementId := anId
 	

@@ -1,3 +1,6 @@
+"
+Binding error for MySQL
+"
 Class {
 	#name : #MySQLBindError,
 	#superclass : #MySQLDriverError,

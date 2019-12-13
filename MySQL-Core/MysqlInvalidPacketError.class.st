@@ -1,3 +1,6 @@
+"
+Received an invalid packet for MySQL
+"
 Class {
 	#name : #MySQLInvalidPacketError,
 	#superclass : #MySQLDriverError,

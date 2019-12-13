@@ -1,3 +1,6 @@
+"
+Driver specification
+"
 Class {
 	#name : #MySQLDriverSpec,
 	#superclass : #Object,
@@ -12,62 +15,62 @@ Class {
 	#category : #'MySQL-Core-Driver'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
 MySQLDriverSpec >> database: dbName [
 	database := dbName
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
 MySQLDriverSpec >> db [
 	^ database
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
 MySQLDriverSpec >> db: dbName [
 	database := dbName
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
 MySQLDriverSpec >> host [
 	^ host
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
 MySQLDriverSpec >> host: server [
 	host := server
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
 MySQLDriverSpec >> options: driverOptions [
 	options := driverOptions
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
 MySQLDriverSpec >> password [
 	^ password
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
 MySQLDriverSpec >> password: userPassword [
 	password := userPassword
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
 MySQLDriverSpec >> port [
 	^ port
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
 MySQLDriverSpec >> port: serverPort [
 	port := serverPort
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
 MySQLDriverSpec >> user [
 	^ user
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
 MySQLDriverSpec >> user: userName [
 	user := userName
 ]

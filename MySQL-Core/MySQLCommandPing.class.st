@@ -1,20 +1,23 @@
+"
+MySQL ping command
+"
 Class {
 	#name : #MySQLCommandPing,
 	#superclass : #MySQLCommandBase,
 	#category : #'MySQL-Core-Command'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : #defaults }
 MySQLCommandPing >> commandArg [
 	^ nil
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #defaults }
 MySQLCommandPing >> commandCode [
 	^ ComPing 
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #reading }
 MySQLCommandPing >> readResponse [
 	| pkt |
 

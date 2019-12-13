@@ -1,3 +1,6 @@
+"
+Prepare response packet for MySQL
+"
 Class {
 	#name : #MySQLPrepareResponse,
 	#superclass : #MySQLComplexResult,
@@ -8,65 +11,65 @@ Class {
 		'columnDescriptors',
 		'columnEof'
 	],
-	#category : #'MySQL-Core-Packet'
+	#category : #'MySQL-Core-Packet-Results'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
 MySQLPrepareResponse >> columnDescriptors [
 	^ columnDescriptors
 	
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
 MySQLPrepareResponse >> columnDescriptors: fields [
 	columnDescriptors := fields 
 	
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
 MySQLPrepareResponse >> columnEof: anEof [
 	columnEof := anEof
 	
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #testing }
 MySQLPrepareResponse >> isOkay [
 	^ prepareOkay isOkay 
 	
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #testing }
 MySQLPrepareResponse >> isPrepareResponse [
 	^ true
 	
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
 MySQLPrepareResponse >> paramDescriptors [
 	^ paramDescriptors
 	 
 	
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
 MySQLPrepareResponse >> paramDescriptors: fields [
 	paramDescriptors := fields 
 	
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
 MySQLPrepareResponse >> paramEof: anEof [
 	paramEof := anEof 
 	
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
 MySQLPrepareResponse >> prepareOkay [
 	^ prepareOkay
 	
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
 MySQLPrepareResponse >> prepareOkay: prepOkay [
 	prepareOkay := prepOkay
 	

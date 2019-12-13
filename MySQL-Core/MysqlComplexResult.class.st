@@ -1,7 +1,10 @@
+"
+Packet for complex result sets for MySQL
+"
 Class {
 	#name : #MySQLComplexResult,
 	#superclass : #MySQLResult,
-	#category : #'MySQL-Core-Packet'
+	#category : #'MySQL-Core-Packet-Results'
 }
 
 { #category : #'as yet unclassified' }

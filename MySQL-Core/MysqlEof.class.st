@@ -1,3 +1,6 @@
+"
+End of File (EOF) received
+"
 Class {
 	#name : #MySQLEof,
 	#superclass : #MySQLPacket,
@@ -9,30 +12,30 @@ Class {
 	#category : #'MySQL-Core-Packet'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : #testing }
 MySQLEof >> hasLastRowSent [
 	^ (serverStatus bitAnd: MySQLServerStatus statusLastRowSent) ~= 0
 	
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #testing }
 MySQLEof >> hasMoreResults [
 	^ (serverStatus bitAnd: MySQLServerStatus moreResultsExist) ~= 0
 	
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #testing }
 MySQLEof >> hasOpenCursor [
 	^ (serverStatus bitAnd: MySQLServerStatus statusCursorExists) ~= 0
 	
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #testing }
 MySQLEof >> isEof [
 	^ true
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
 MySQLEof >> parse [
 	fieldCount := inStream next.
 	warningCount := inStream next + (inStream next bitShift: 8).
@@ -40,12 +43,12 @@ MySQLEof >> parse [
 
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
 MySQLEof >> serverStatus [
 	^ serverStatus 
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
 MySQLEof >> warningCount [
 	^ warningCount 
 ]

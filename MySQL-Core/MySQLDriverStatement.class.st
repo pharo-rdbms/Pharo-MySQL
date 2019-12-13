@@ -1,3 +1,6 @@
+"
+MySQL driver statement
+"
 Class {
 	#name : #MySQLDriverStatement,
 	#superclass : #Object,
@@ -21,7 +24,7 @@ MySQLDriverStatement class >> onConnection: aDriver [
 		
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
 MySQLDriverStatement >> addBinding: anObject [
 	
 	params add: (MySQLBindParameter new bindValue: anObject)

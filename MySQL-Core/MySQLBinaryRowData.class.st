@@ -1,3 +1,6 @@
+"
+Common superclass for MySQL binary row data
+"
 Class {
 	#name : #MySQLBinaryRowData,
 	#superclass : #MySQLRowData,
@@ -7,22 +10,22 @@ Class {
 		'columnDescriptors',
 		'columnValues'
 	],
-	#category : #'MySQL-Core-Packet'
+	#category : #'MySQL-Core-Packet-RowData'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
 MySQLBinaryRowData >> atIndex: indx [
 	^ columnValues at: indx ifAbsent: [MySQLInvalidRowAccess signal: 'No data at this index']
 	
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
 MySQLBinaryRowData >> columnDescriptors: fieldList [
 	columnDescriptors := fieldList 
 	
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #testing }
 MySQLBinaryRowData >> isColumnNullAt: index [
 	| byteIndex bitsToShift bitMask |
 	byteIndex := index + 9 // 8.
@@ -34,13 +37,13 @@ MySQLBinaryRowData >> isColumnNullAt: index [
 	
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
 MySQLBinaryRowData >> nullBitMap: byteArray [ "primarily for testing"
 	nullBitMap := byteArray 
 	
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #parsing }
 MySQLBinaryRowData >> parse [
 	| col |
 	header := inStream next.	"always 0"
@@ -59,7 +62,7 @@ MySQLBinaryRowData >> parse [
 			put: col ]
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #reading }
 MySQLBinaryRowData >> readColumnFrom: aStream perDescrption: columnDescr [
 	| reader value mask |
 

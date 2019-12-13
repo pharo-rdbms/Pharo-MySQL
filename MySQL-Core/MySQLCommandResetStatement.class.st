@@ -1,3 +1,6 @@
+"
+MySQL reset statement command
+"
 Class {
 	#name : #MySQLCommandResetStatement,
 	#superclass : #MySQLCommandBase,
@@ -7,7 +10,7 @@ Class {
 	#category : #'MySQL-Core-Command'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : #defaults }
 MySQLCommandResetStatement >> commandArg [
 	ByteArray
 		streamContents: [ :strm | 
@@ -19,14 +22,14 @@ MySQLCommandResetStatement >> commandArg [
 			^ strm contents ]
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #defaults }
 MySQLCommandResetStatement >> commandCode [
 	^ ComStmtReset 
 	
 
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #reading }
 MySQLCommandResetStatement >> readResponse [
 	| pkt |
 
@@ -37,7 +40,7 @@ MySQLCommandResetStatement >> readResponse [
 		
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
 MySQLCommandResetStatement >> statementId: idValue [ "4 byte integer"
 	statementId := idValue
 	

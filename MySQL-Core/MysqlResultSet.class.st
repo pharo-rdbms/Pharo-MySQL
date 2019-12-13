@@ -12,30 +12,30 @@ Class {
 		'rowsEof',
 		'statement'
 	],
-	#category : #'MySQL-Core-Packet'
+	#category : #'MySQL-Core-Packet-Results'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
 MySQLResultSet >> fields [
 	^ fields 
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
 MySQLResultSet >> fields: flds [
 	fields := flds
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
 MySQLResultSet >> fieldsEof [
 	^ fieldsEof 
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
 MySQLResultSet >> fieldsEof: eofPkt [ 
 	fieldsEof := eofPkt
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #testing }
 MySQLResultSet >> hasLastRowSent [
 	"This is signaled during cursor based fetch for the rows. Therefore we
 	check for the singal in the eof field following the rows in the response."
@@ -43,7 +43,7 @@ MySQLResultSet >> hasLastRowSent [
 	
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #testing }
 MySQLResultSet >> hasMoreResults [
 	"Looks like the flag, when set, will be set by the server in both the
 	field eof and rowdata eof packets. We are only using field eof here, since
@@ -52,23 +52,23 @@ MySQLResultSet >> hasMoreResults [
 	
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #testing }
 MySQLResultSet >> hasOpenCursor [
 	^ fieldsEof hasOpenCursor 
 	
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
 MySQLResultSet >> header [
 	^ header
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
 MySQLResultSet >> header: hdr [
 	header := hdr
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #testing }
 MySQLResultSet >> isResultSet [
 	^ true
 ]
@@ -82,34 +82,34 @@ MySQLResultSet >> nextRow [
 	^ rows ifEmpty: [ nil ] ifNotEmpty: [ rows removeFirst ]
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #parsing }
 MySQLResultSet >> parse [
 	self shouldNotImplement
 	
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
 MySQLResultSet >> rows [
 	^ rows
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
 MySQLResultSet >> rows: allRows [
 	rows := allRows
 	
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
 MySQLResultSet >> rowsEof [
 	^ rowsEof 
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
 MySQLResultSet >> rowsEof: eofPkt [
 	rowsEof := eofPkt
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
 MySQLResultSet >> serverStatus [
 	^ fieldsEof serverStatus
 	

@@ -1,3 +1,6 @@
+"
+MySQL query command
+"
 Class {
 	#name : #MySQLCommandQuery,
 	#superclass : #MySQLCommandBase,
@@ -7,34 +10,34 @@ Class {
 	#category : #'MySQL-Core-Command'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : #defaults }
 MySQLCommandQuery >> commandArg [
 	^ query 
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #defaults }
 MySQLCommandQuery >> commandCode [
 	^ ComQuery 
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #testing }
 MySQLCommandQuery >> gotEof [
 	^ (MySQLPacket from: session peek) isEof 
 	
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
 MySQLCommandQuery >> queryString: queryString [ 
 	query := queryString
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #reading }
 MySQLCommandQuery >> readEof [
 	^ MySQLEof from: session read
 
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #reading }
 MySQLCommandQuery >> readFields [
 	| respFields field |
 	respFields := OrderedCollection new.
@@ -48,13 +51,13 @@ MySQLCommandQuery >> readFields [
 	
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #reading }
 MySQLCommandQuery >> readOneField [
 	^ MySQLField from: session read
 	
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #reading }
 MySQLCommandQuery >> readOneRow: fieldCount [
 	| row |
 	row := MySQLQueryRowData new.
@@ -64,7 +67,7 @@ MySQLCommandQuery >> readOneRow: fieldCount [
 	
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #reading }
 MySQLCommandQuery >> readResponse [
 	| resp |
 	resp := self readResult.
@@ -72,7 +75,7 @@ MySQLCommandQuery >> readResponse [
 	^ resp
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #reading }
 MySQLCommandQuery >> readResult [
 	| fields fieldsEof rows rowsEof resultSetHdr pkt |
 	pkt := super readResponse.
@@ -92,7 +95,7 @@ MySQLCommandQuery >> readResult [
 		yourself
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #reading }
 MySQLCommandQuery >> readRowData: fieldCount [ 
 	| respRows row |
 	respRows := OrderedCollection new.
@@ -106,7 +109,7 @@ MySQLCommandQuery >> readRowData: fieldCount [
 	
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #reading }
 MySQLCommandQuery >> readRsHeader [
 	^ MySQLResultSetHeader from: session read
 	

@@ -1,3 +1,6 @@
+"
+Prepare okay packet for MySQL
+"
 Class {
 	#name : #MySQLPrepareOkay,
 	#superclass : #MySQLPacket,
@@ -10,23 +13,23 @@ Class {
 	#category : #'MySQL-Core-Packet'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : #testing }
 MySQLPrepareOkay >> isOkay [
 	^ true
 	
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
 MySQLPrepareOkay >> numColumns [
 	^ numColumns
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
 MySQLPrepareOkay >> numParams [
 	^ numParams
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #parsing }
 MySQLPrepareOkay >> parse [ 
 	inStream next.	"always 0, marker for oaky pakcet"
 	stmtId := inStream next + (inStream next bitShift: 8) + 
@@ -38,12 +41,12 @@ MySQLPrepareOkay >> parse [
 	
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
 MySQLPrepareOkay >> stmtHandlerId [
 	^ stmtId
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
 MySQLPrepareOkay >> warningCount [
 	^ warningCount
 	

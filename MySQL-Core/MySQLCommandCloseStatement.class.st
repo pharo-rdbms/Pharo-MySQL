@@ -1,3 +1,6 @@
+"
+MySQL command to close statement
+"
 Class {
 	#name : #MySQLCommandCloseStatement,
 	#superclass : #MySQLCommandBase,
@@ -7,7 +10,7 @@ Class {
 	#category : #'MySQL-Core-Command'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : #defaults }
 MySQLCommandCloseStatement >> commandArg [
 	ByteArray
 		streamContents: [ :strm | 
@@ -19,21 +22,22 @@ MySQLCommandCloseStatement >> commandArg [
 			^ strm contents ]
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #defaults }
 MySQLCommandCloseStatement >> commandCode [
 	^ ComStmtClose
 	
 
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #operating }
 MySQLCommandCloseStatement >> readResponse [
 	^ nil
 	
 ]
 
-{ #category : #'as yet unclassified' }
-MySQLCommandCloseStatement >> statementId: idValue [ "4 byte integer"
+{ #category : #accessing }
+MySQLCommandCloseStatement >> statementId: idValue [ 
+	"4 byte integer"
 	statementId := idValue
 	
 	

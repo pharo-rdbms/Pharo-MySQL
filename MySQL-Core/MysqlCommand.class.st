@@ -1,3 +1,6 @@
+"
+Command packet for MySQL
+"
 Class {
 	#name : #MySQLCommand,
 	#superclass : #MySQLPacket,
@@ -8,14 +11,14 @@ Class {
 	#category : #'MySQL-Core-Packet'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
 MySQLCommand >> command: cmd arg: text [
 	command := cmd.
 	arg := text.
 	
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #writing }
 MySQLCommand >> write [
 	| buffStream |
 	buffStream := WriteStream on: ByteArray new.

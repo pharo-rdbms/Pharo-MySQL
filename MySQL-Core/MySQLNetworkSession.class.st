@@ -1,3 +1,6 @@
+"
+A MySQL Network session
+"
 Class {
 	#name : #MySQLNetworkSession,
 	#superclass : #Object,

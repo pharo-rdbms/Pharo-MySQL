@@ -1,3 +1,6 @@
+"
+Abstract superclass for all MySQL commands
+"
 Class {
 	#name : #MySQLCommandBase,
 	#superclass : #Object,
@@ -28,7 +31,7 @@ Class {
 	#category : #'MySQL-Core-Command'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : #'class initialization' }
 MySQLCommandBase class >> initialize [
 	"self initialize"
 	
@@ -50,23 +53,23 @@ MySQLCommandBase class >> initialize [
 	ComStmtFetch := 16r1C.
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'instance creation' }
 MySQLCommandBase class >> onSession: ioSession [
 	^ self new session: ioSession
 	
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #defaults }
 MySQLCommandBase >> commandArg [
 	self subclassResponsibility 
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #defaults }
 MySQLCommandBase >> commandCode [
 	self subclassResponsibility 
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #operating }
 MySQLCommandBase >> execute [
 	| resp cmd |
 	session resetSequence.
@@ -77,12 +80,12 @@ MySQLCommandBase >> execute [
 	^ resp
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #initialization }
 MySQLCommandBase >> initialize [
 	errorDict := Dictionary new
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #operating }
 MySQLCommandBase >> prepare [
 	| cmd |
 	cmd := MySQLCommand new.
@@ -90,7 +93,7 @@ MySQLCommandBase >> prepare [
 	^ cmd
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #operating }
 MySQLCommandBase >> readResponse [
 	| resp |
 
@@ -101,7 +104,7 @@ MySQLCommandBase >> readResponse [
 	^ resp "Response type unknown at this point"
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #operating }
 MySQLCommandBase >> send: cmd [
 	| buffer |
 
@@ -110,12 +113,12 @@ MySQLCommandBase >> send: cmd [
 
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #operating }
 MySQLCommandBase >> session: ioSession [
 	session := ioSession
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #operating }
 MySQLCommandBase >> writePacket: packet [
 	| buffer |
 	

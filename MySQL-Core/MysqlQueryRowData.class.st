@@ -1,29 +1,32 @@
+"
+Query row data packet for MySQL
+"
 Class {
 	#name : #MySQLQueryRowData,
 	#superclass : #MySQLRowData,
 	#instVars : [
 		'columns'
 	],
-	#category : #'MySQL-Core-Packet'
+	#category : #'MySQL-Core-Packet-RowData'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
 MySQLQueryRowData >> at: indx [
 	^ self atIndex: indx
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
 MySQLQueryRowData >> atIndex: indx [
 	^ columns at: indx ifAbsent: [MySQLInvalidRowAccess signal: 'No data at this index']
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
 MySQLQueryRowData >> columnCount: aCount [
 	columns := Array new: aCount 
 	
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #parsing }
 MySQLQueryRowData >> parse [
 	|indx value |
 

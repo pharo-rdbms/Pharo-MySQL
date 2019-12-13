@@ -1,3 +1,6 @@
+"
+A MySQL Network packet
+"
 Class {
 	#name : #MySQLNetworkPacket,
 	#superclass : #Object,
@@ -12,14 +15,14 @@ Class {
 	#category : #'MySQL-Core-Network'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : #'class initialization' }
 MySQLNetworkPacket class >> initialize [
-	"self initialize"
-	MaxPacketLength := 16rFFFFFF.
+ 
+	MaxPacketLength := 16rFFFFFF
 
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
 MySQLNetworkPacket class >> maxLength [
 	^ MaxPacketLength
 ]

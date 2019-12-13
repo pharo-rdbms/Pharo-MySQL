@@ -1,5 +1,5 @@
 Class {
-	#name : #MysqlTestResource,
+	#name : #MySQLTestResource,
 	#superclass : #TestResource,
 	#instVars : [
 		'conn',
@@ -9,23 +9,23 @@ Class {
 }
 
 { #category : #'as yet unclassified' }
-MysqlTestResource class >> alternativeUser [
+MySQLTestResource class >> alternativeUser [
 	^ 'sodbxtest2'
 ]
 
 { #category : #'as yet unclassified' }
-MysqlTestResource class >> alternativeUsername [
+MySQLTestResource class >> alternativeUsername [
 	^ 'sodbxtest2'
 ]
 
 { #category : #'as yet unclassified' }
-MysqlTestResource class >> dbName [
+MySQLTestResource class >> dbName [
 	^ 'sodbxtest2'
 ]
 
 { #category : #'as yet unclassified' }
-MysqlTestResource class >> driverSpecNoDb [
-	^ MysqlDriverSpec new
+MySQLTestResource class >> driverSpecNoDb [
+	^ MySQLDriverSpec new
 		host: 'localhost';
 		port: 3306;
 		user: 'sodbxtest';
@@ -34,7 +34,7 @@ MysqlTestResource class >> driverSpecNoDb [
 ]
 
 { #category : #'as yet unclassified' }
-MysqlTestResource class >> driverSpecWithDb [
+MySQLTestResource class >> driverSpecWithDb [
 	^ self driverSpecNoDb
 		db: self dbName;
 		yourself
@@ -42,7 +42,7 @@ MysqlTestResource class >> driverSpecWithDb [
 ]
 
 { #category : #'as yet unclassified' }
-MysqlTestResource >> clearTestTables [
+MySQLTestResource >> clearTestTables [
 	#(
 	'nameValue' 'warn' 'mix' 'testMisc' 'testIntegers' 'testReals' 'testTimes' 'testChars'
 	'testBinaries' 'testBlobs' 'testTexts') 
@@ -51,16 +51,16 @@ MysqlTestResource >> clearTestTables [
 ]
 
 { #category : #'as yet unclassified' }
-MysqlTestResource >> connectToServer [
+MySQLTestResource >> connectToServer [
 	| resp |
-	conn := MysqlDriver new.
+	conn := MySQLDriver new.
 	resp := conn connect: self class driverSpecNoDb.
 	resp isOkay 
 		ifFalse: [ ^ self error: 'Failed to connect to MySQL server' ]
 ]
 
 { #category : #'as yet unclassified' }
-MysqlTestResource >> createAlternativeUser [
+MySQLTestResource >> createAlternativeUser [
 	"Creates an aalternative user with the same password as the main test user"
 	| resp |
 	resp := conn query: 'CREATE USER ''', self class alternativeUsername , '''@''%''IDENTIFIED BY ''', self class driverSpecNoDb password , ''';'.
@@ -68,7 +68,7 @@ MysqlTestResource >> createAlternativeUser [
 ]
 
 { #category : #'as yet unclassified' }
-MysqlTestResource >> createMiscTestTables [
+MySQLTestResource >> createMiscTestTables [
 	| resp |
 	self ddlMiscTestTables do: [:each |
 		resp := conn query: each.
@@ -77,7 +77,7 @@ MysqlTestResource >> createMiscTestTables [
 ]
 
 { #category : #'as yet unclassified' }
-MysqlTestResource >> createTestDb [
+MySQLTestResource >> createTestDb [
 	| resp |
 	resp := conn query: 'create database if not exists ', self class dbName, ' DEFAULT CHARACTER SET latin1'.
 	resp isOkay ifFalse: [^ self error: 'Can not create test database'].
@@ -88,7 +88,7 @@ MysqlTestResource >> createTestDb [
 ]
 
 { #category : #'as yet unclassified' }
-MysqlTestResource >> createTypeTestTables [
+MySQLTestResource >> createTypeTestTables [
 	| resp |
 	self ddlTypeTestTables do: [:each |
 		resp := conn query: each.
@@ -97,7 +97,7 @@ MysqlTestResource >> createTypeTestTables [
 ]
 
 { #category : #'as yet unclassified' }
-MysqlTestResource >> ddlMiscTestTables [
+MySQLTestResource >> ddlMiscTestTables [
 	^ #(
 	'create table if not exists nameValue (
 		id int not null auto_increment primary key,
@@ -168,7 +168,7 @@ MysqlTestResource >> ddlMiscTestTables [
 ]
 
 { #category : #'as yet unclassified' }
-MysqlTestResource >> ddlTypeTestTables [
+MySQLTestResource >> ddlTypeTestTables [
 	^ #(
 	
 	'create table if not exists testIntegers (
@@ -230,40 +230,40 @@ MysqlTestResource >> ddlTypeTestTables [
 ]
 
 { #category : #'as yet unclassified' }
-MysqlTestResource >> deleteAlternativeUser [
+MySQLTestResource >> deleteAlternativeUser [
 	| resp |
 	resp := conn query: 'DROP USER ''', self class alternativeUsername, ''';'.
 	resp isOkay ifFalse: [^ self error: 'Can not create second user'].
 ]
 
 { #category : #'as yet unclassified' }
-MysqlTestResource >> deleteTestDb [
+MySQLTestResource >> deleteTestDb [
 	| resp |
 	resp := conn query: 'drop database if exists ', self class dbName.
 	resp isOkay ifFalse: [^ self error: 'Can not create test database']	
 ]
 
 { #category : #'as yet unclassified' }
-MysqlTestResource >> disconnecTestConnection [
+MySQLTestResource >> disconnecTestConnection [
 	testConn ifNotNil:[
-		[testConn disconnect] on: MysqlNoConnectionError do: [:ex |]]
+		[testConn disconnect] on: MySQLNoConnectionError do: [:ex |]]
 
 ]
 
 { #category : #'as yet unclassified' }
-MysqlTestResource >> disconnectFromServer [
-	[conn disconnect] on: MysqlNoConnectionError do: [:ex |].
+MySQLTestResource >> disconnectFromServer [
+	[conn disconnect] on: MySQLNoConnectionError do: [:ex |].
 
 ]
 
 { #category : #'as yet unclassified' }
-MysqlTestResource >> resourceConnection [
+MySQLTestResource >> resourceConnection [
 	^ conn
 	
 ]
 
 { #category : #'as yet unclassified' }
-MysqlTestResource >> setUp [
+MySQLTestResource >> setUp [
 	self 
 		connectToServer;
 		createTestDb;
@@ -274,7 +274,7 @@ MysqlTestResource >> setUp [
 ]
 
 { #category : #'as yet unclassified' }
-MysqlTestResource >> tearDown [
+MySQLTestResource >> tearDown [
 	self disconnecTestConnection.	
 	self deleteTestDb.
 	self deleteAlternativeUser.
@@ -283,13 +283,13 @@ MysqlTestResource >> tearDown [
 ]
 
 { #category : #'as yet unclassified' }
-MysqlTestResource >> testConnection [
+MySQLTestResource >> testConnection [
 	"Returns a connection to be used for the testXyz methods. 
 	Not to be confused with the internal connection instance 
 	for setting up schemas and tables"
 	(testConn isNil or: [ testConn connected not ]) 
 		ifTrue: [
-			testConn := MysqlDriver new.
+			testConn := MySQLDriver new.
 			testConn connect: self class driverSpecWithDb].
 	^ testConn
 ]

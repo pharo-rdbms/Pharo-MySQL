@@ -1,5 +1,5 @@
 Class {
-	#name : #MysqlBindError,
-	#superclass : #MysqlDriverError,
+	#name : #MySQLBindError,
+	#superclass : #MySQLDriverError,
 	#category : #'MySQL-Core-Exception'
 }

@@ -1,5 +1,5 @@
 Class {
-	#name : #MysqlDriver,
+	#name : #MySQLDriver,
 	#superclass : #Object,
 	#instVars : [
 		'netSession',
@@ -9,21 +9,21 @@ Class {
 }
 
 { #category : #testing }
-MysqlDriver >> assertConnection [
-	self connected ifFalse: [^ MysqlNoConnectionError signal: 'Driver is not connected'].
+MySQLDriver >> assertConnection [
+	self connected ifFalse: [^ MySQLNoConnectionError signal: 'Driver is not connected'].
 	
 
 ]
 
 { #category : #accessing }
-MysqlDriver >> changeUser: connSpec [ 
+MySQLDriver >> changeUser: connSpec [ 
 	| com scrmbl |
 	self assertConnection.
-	com := MysqlComChangeUser onSession: netSession.
+	com := MySQLCommandChangeUser onSession: netSession.
 	scrmbl := connSpec password isEmptyOrNil 
 		ifTrue: [ '' asByteArray ]
 		ifFalse: [ 
-			MysqlHelper 
+			MySQLHelper 
 				secureScramble: 
 					handshakeInfo scrambleBuff , handshakeInfo scrambleBuffMore
 				with: connSpec password ].
@@ -38,11 +38,11 @@ MysqlDriver >> changeUser: connSpec [
 ]
 
 { #category : #accessing }
-MysqlDriver >> connect: connSpec [ 
+MySQLDriver >> connect: connSpec [ 
 	| handshake resp |
 	
-	self connected ifTrue: [^ MysqlDriverError signal: 'Driver is already connected'].
-	netSession ifNil: [netSession := MysqlNetSession new].
+	self connected ifTrue: [^ MySQLDriverError signal: 'Driver is already connected'].
+	netSession ifNil: [netSession := MySQLNetworkSession new].
 	netSession toHost: connSpec host andPort: connSpec port.
 
 	handshake := self readHandshake.
@@ -57,78 +57,78 @@ MysqlDriver >> connect: connSpec [
 		We need to send back the 323 scramble"
 		self send323Scramble: handshake scrambleBuff password: connSpec password.
 		resp := self peekResponse]. 
-	resp isError ifTrue: [^ MysqlError from: netSession read].
+	resp isError ifTrue: [^ MySQLError from: netSession read].
 	resp isOkay ifTrue: [
 		self keepHandshakeInfo: handshake.
-		^ MysqlOkay from: netSession read].
+		^ MySQLOkay from: netSession read].
 	
-	MysqlDriverError signal: 'Unexpected response from server: data is not okay/error/eof'
+	MySQLDriverError signal: 'Unexpected response from server: data is not okay/error/eof'
 	
 ]
 
 { #category : #testing }
-MysqlDriver >> connected [
+MySQLDriver >> connected [
 	^ netSession isNil not and: [netSession connected]
 	
 ]
 
 { #category : #accessing }
-MysqlDriver >> disconnect [
+MySQLDriver >> disconnect [
 	self assertConnection.
-	(MysqlComQuit  onSession: netSession) execute.
+	(MySQLCommandQuit  onSession: netSession) execute.
 	netSession disconnect.
 	
 ]
 
 { #category : #private }
-MysqlDriver >> errorFromResponse: resp [
-	^ MysqlError from: resp data
+MySQLDriver >> errorFromResponse: resp [
+	^ MySQLError from: resp data
 
 ]
 
 { #category : #private }
-MysqlDriver >> handshakeInfo [
+MySQLDriver >> handshakeInfo [
 	^ handshakeInfo 
 ]
 
 { #category : #private }
-MysqlDriver >> keepHandshakeInfo: handshake [
+MySQLDriver >> keepHandshakeInfo: handshake [
 	handshakeInfo := handshake
 ]
 
 { #category : #accessing }
-MysqlDriver >> netSession [
+MySQLDriver >> netSession [
 	^ netSession
 	
 ]
 
 { #category : #private }
-MysqlDriver >> okayFromResponse: resp [
-	^ MysqlOkay from: resp data
+MySQLDriver >> okayFromResponse: resp [
+	^ MySQLOkay from: resp data
 ]
 
 { #category : #private }
-MysqlDriver >> peekResponse [
+MySQLDriver >> peekResponse [
 	| buffer resp |
 	
 	buffer := netSession peek.
-	resp := MysqlPacket from: buffer.
+	resp := MySQLPacket from: buffer.
 	^ resp
 	
 ]
 
 { #category : #accessing }
-MysqlDriver >> ping [
+MySQLDriver >> ping [
 	self assertConnection.
-	^ (MysqlComPing onSession: netSession) execute
+	^ (MySQLCommandPing onSession: netSession) execute
 ]
 
 { #category : #accessing }
-MysqlDriver >> prepare: queryString [
+MySQLDriver >> prepare: queryString [
 	| prepStmt prepResp |
 
 	self assertConnection.		
-	prepStmt := MysqlComPrepare onSession: netSession.
+	prepStmt := MySQLCommandPrepare onSession: netSession.
 	prepStmt queryString: queryString.
 	prepResp := prepStmt execute. "error or prepare reponse"
 	
@@ -137,11 +137,11 @@ MysqlDriver >> prepare: queryString [
 ]
 
 { #category : #accessing }
-MysqlDriver >> query: queryString [
+MySQLDriver >> query: queryString [
 	| qry results |
 
 	self assertConnection.		
-	qry := MysqlComQuery onSession: netSession.
+	qry := MySQLCommandQuery onSession: netSession.
 	qry queryString: queryString.
 	results := qry execute.
 	
@@ -150,42 +150,42 @@ MysqlDriver >> query: queryString [
 ]
 
 { #category : #private }
-MysqlDriver >> readHandshake [
+MySQLDriver >> readHandshake [
 
 	| buffer handshake |
 
 	buffer := netSession read.
-	handshake := MysqlHandshake from: buffer.
+	handshake := MySQLHandshake from: buffer.
 
 	^handshake 
 ]
 
 { #category : #private }
-MysqlDriver >> readResponse [
+MySQLDriver >> readResponse [
 	| buffer resp |
 	
 	buffer := netSession read.
-	resp := MysqlPacket from: buffer.
+	resp := MySQLPacket from: buffer.
 	^ resp
 ]
 
 { #category : #'as yet unclassified' }
-MysqlDriver >> send323Scramble: seed password: password [
+MySQLDriver >> send323Scramble: seed password: password [
 	| scrmblPkt |
-	scrmblPkt := Mysql323Scramble new.
+	scrmblPkt := MySQL323Scramble new.
 	scrmblPkt password: password; scrambleBuff: seed.
 	self writePacket: scrmblPkt.
 	
 ]
 
 { #category : #private }
-MysqlDriver >> writeAuthForHandshake: handshake onConnection: connSpec [
+MySQLDriver >> writeAuthForHandshake: handshake onConnection: connSpec [
 
 	| auth |
 
 	handshake supportsProtocol41 
-		ifTrue: [auth := MysqlClientAuth new]
-		ifFalse: [MysqlUnsupportedProtocolError signal: 'Server does not support protocol version 41'].
+		ifTrue: [auth := MySQLClientAuth new]
+		ifFalse: [MySQLUnsupportedProtocolError signal: 'Server does not support protocol version 41'].
 	
 	auth
 		serverCaps: handshake serverCaps ;
@@ -200,7 +200,7 @@ MysqlDriver >> writeAuthForHandshake: handshake onConnection: connSpec [
 ]
 
 { #category : #private }
-MysqlDriver >> writePacket: packet [
+MySQLDriver >> writePacket: packet [
 	| buffer |
 	
 	buffer := packet write.

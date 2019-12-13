@@ -1,5 +1,5 @@
 Class {
-	#name : #MysqlNameLookupFailure,
-	#superclass : #MysqlDriverError,
+	#name : #MySQLNameLookupFailure,
+	#superclass : #MySQLDriverError,
 	#category : #'MySQL-Core-Exception'
 }

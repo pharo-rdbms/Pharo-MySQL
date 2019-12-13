@@ -1,5 +1,5 @@
 Class {
-	#name : #MysqlDriverError,
+	#name : #MySQLDriverError,
 	#superclass : #Error,
 	#category : #'MySQL-Core-Exception'
 }

@@ -1,11 +1,11 @@
 Class {
-	#name : #MysqlTestFixture,
+	#name : #MySQLTestFixture,
 	#superclass : #Object,
 	#category : #'MySQL-Core-Tests-Integration'
 }
 
 { #category : #'as yet unclassified' }
-MysqlTestFixture class >> fixtureBlobs [
+MySQLTestFixture class >> fixtureBlobs [
 	^ #(
 	'insert into 
 		testBlobs (tinyblobValue, blobValue, mediumblobValue, longBlobValue)
@@ -16,7 +16,7 @@ MysqlTestFixture class >> fixtureBlobs [
 ]
 
 { #category : #'as yet unclassified' }
-MysqlTestFixture class >> fixtureChars [
+MySQLTestFixture class >> fixtureChars [
 	^ #(
 	'insert into 
 		testChars (charValue, varcharValue)
@@ -28,7 +28,7 @@ MysqlTestFixture class >> fixtureChars [
 ]
 
 { #category : #'as yet unclassified' }
-MysqlTestFixture class >> fixtureIntegers [
+MySQLTestFixture class >> fixtureIntegers [
 	^ #(
 	'insert into 
 		testIntegers (tinyintValue, smallIntValue, mediumintValue, intValue, bigintValue)
@@ -40,7 +40,7 @@ MysqlTestFixture class >> fixtureIntegers [
 ]
 
 { #category : #'as yet unclassified' }
-MysqlTestFixture class >> fixtureReals [
+MySQLTestFixture class >> fixtureReals [
 	^ #(
 	'insert into 
 		testReals (floatValue, doubleValue, realValue, decimalValue, numericValue)
@@ -52,7 +52,7 @@ MysqlTestFixture class >> fixtureReals [
 ]
 
 { #category : #'as yet unclassified' }
-MysqlTestFixture class >> fixtureTimes [
+MySQLTestFixture class >> fixtureTimes [
 	^ #(
 	'insert into 
 		testTimes (dateValue, timeValue, datetimeValue, timestampvalue, yearValue)
@@ -65,7 +65,7 @@ MysqlTestFixture class >> fixtureTimes [
 ]
 
 { #category : #'as yet unclassified' }
-MysqlTestFixture class >> fixtureZero [
+MySQLTestFixture class >> fixtureZero [
 	^ #(
 	'insert into testMisc (name, value, entryOn, notes) values 
 		(''key-0001'', ''value-0001'', ''2011-07-01'', ''test entry 1''), 

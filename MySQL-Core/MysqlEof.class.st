@@ -1,6 +1,6 @@
 Class {
-	#name : #MysqlEof,
-	#superclass : #MysqlPacket,
+	#name : #MySQLEof,
+	#superclass : #MySQLPacket,
 	#instVars : [
 		'fieldCount',
 		'warningCount',
@@ -10,30 +10,30 @@ Class {
 }
 
 { #category : #'as yet unclassified' }
-MysqlEof >> hasLastRowSent [
-	^ (serverStatus bitAnd: MysqlServerStatus statusLastRowSent) ~= 0
+MySQLEof >> hasLastRowSent [
+	^ (serverStatus bitAnd: MySQLServerStatus statusLastRowSent) ~= 0
 	
 ]
 
 { #category : #'as yet unclassified' }
-MysqlEof >> hasMoreResults [
-	^ (serverStatus bitAnd: MysqlServerStatus moreResultsExist) ~= 0
+MySQLEof >> hasMoreResults [
+	^ (serverStatus bitAnd: MySQLServerStatus moreResultsExist) ~= 0
 	
 ]
 
 { #category : #'as yet unclassified' }
-MysqlEof >> hasOpenCursor [
-	^ (serverStatus bitAnd: MysqlServerStatus statusCursorExists) ~= 0
+MySQLEof >> hasOpenCursor [
+	^ (serverStatus bitAnd: MySQLServerStatus statusCursorExists) ~= 0
 	
 ]
 
 { #category : #'as yet unclassified' }
-MysqlEof >> isEof [
+MySQLEof >> isEof [
 	^ true
 ]
 
 { #category : #'as yet unclassified' }
-MysqlEof >> parse [
+MySQLEof >> parse [
 	fieldCount := inStream next.
 	warningCount := inStream next + (inStream next bitShift: 8).
 	serverStatus := inStream next + (inStream next bitShift: 8).
@@ -41,11 +41,11 @@ MysqlEof >> parse [
 ]
 
 { #category : #'as yet unclassified' }
-MysqlEof >> serverStatus [
+MySQLEof >> serverStatus [
 	^ serverStatus 
 ]
 
 { #category : #'as yet unclassified' }
-MysqlEof >> warningCount [
+MySQLEof >> warningCount [
 	^ warningCount 
 ]

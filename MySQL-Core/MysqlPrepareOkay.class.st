@@ -1,6 +1,6 @@
 Class {
-	#name : #MysqlPrepareOkay,
-	#superclass : #MysqlPacket,
+	#name : #MySQLPrepareOkay,
+	#superclass : #MySQLPacket,
 	#instVars : [
 		'warningCount',
 		'numColumns',
@@ -11,23 +11,23 @@ Class {
 }
 
 { #category : #'as yet unclassified' }
-MysqlPrepareOkay >> isOkay [
+MySQLPrepareOkay >> isOkay [
 	^ true
 	
 ]
 
 { #category : #'as yet unclassified' }
-MysqlPrepareOkay >> numColumns [
+MySQLPrepareOkay >> numColumns [
 	^ numColumns
 ]
 
 { #category : #'as yet unclassified' }
-MysqlPrepareOkay >> numParams [
+MySQLPrepareOkay >> numParams [
 	^ numParams
 ]
 
 { #category : #'as yet unclassified' }
-MysqlPrepareOkay >> parse [ 
+MySQLPrepareOkay >> parse [ 
 	inStream next.	"always 0, marker for oaky pakcet"
 	stmtId := inStream next + (inStream next bitShift: 8) + 
 			(inStream next bitShift: 16) + (inStream next bitShift: 24).
@@ -39,12 +39,12 @@ MysqlPrepareOkay >> parse [
 ]
 
 { #category : #'as yet unclassified' }
-MysqlPrepareOkay >> stmtHandlerId [
+MySQLPrepareOkay >> stmtHandlerId [
 	^ stmtId
 ]
 
 { #category : #'as yet unclassified' }
-MysqlPrepareOkay >> warningCount [
+MySQLPrepareOkay >> warningCount [
 	^ warningCount
 	
 ]

@@ -9,13 +9,13 @@ Connection with multistatement enabled
 
 "
 Class {
-	#name : #MysqlMultiStatementTest,
-	#superclass : #MysqlTestCase,
+	#name : #MySQLMultiStatementTest,
+	#superclass : #MySQLTestCase,
 	#category : #'MySQL-Core-Tests-Integration'
 }
 
 { #category : #'as yet unclassified' }
-MysqlMultiStatementTest >> testErrorAtEnd [
+MySQLMultiStatementTest >> testErrorAtEnd [
 	| resp qString conn |
 	qString := 
 		'select * from nameValue where id=''1'';', "good"
@@ -35,7 +35,7 @@ MysqlMultiStatementTest >> testErrorAtEnd [
 ]
 
 { #category : #'as yet unclassified' }
-MysqlMultiStatementTest >> testErrorAtFirst [
+MySQLMultiStatementTest >> testErrorAtFirst [
 	| resp qString conn |
 	
 	qString := 
@@ -50,7 +50,7 @@ MysqlMultiStatementTest >> testErrorAtFirst [
 ]
 
 { #category : #'as yet unclassified' }
-MysqlMultiStatementTest >> testErrorAtMiddle [
+MySQLMultiStatementTest >> testErrorAtMiddle [
 	| resp qString conn |
 	qString := 
 		'select * from nameValue where id=''1'';', "good"
@@ -67,7 +67,7 @@ MysqlMultiStatementTest >> testErrorAtMiddle [
 ]
 
 { #category : #'as yet unclassified' }
-MysqlMultiStatementTest >> testNoError [
+MySQLMultiStatementTest >> testNoError [
 	| resp qString conn |
 	qString := 
 		'select * from nameValue where id=''1'';', "good"

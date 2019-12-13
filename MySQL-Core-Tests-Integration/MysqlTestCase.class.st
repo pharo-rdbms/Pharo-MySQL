@@ -1,55 +1,55 @@
 Class {
-	#name : #MysqlTestCase,
+	#name : #MySQLTestCase,
 	#superclass : #TestCase,
 	#category : #'MySQL-Core-Tests-Integration'
 }
 
 { #category : #'as yet unclassified' }
-MysqlTestCase class >> fixtureClass [
+MySQLTestCase class >> fixtureClass [
 	"Override this in order to offer test specific fixture class"
-	^ MysqlTestFixture
+	^ MySQLTestFixture
 	
 ]
 
 { #category : #'as yet unclassified' }
-MysqlTestCase class >> resourceClass [
-	^ MysqlTestResource
+MySQLTestCase class >> resourceClass [
+	^ MySQLTestResource
 ]
 
 { #category : #'as yet unclassified' }
-MysqlTestCase class >> resources [
+MySQLTestCase class >> resources [
 	^ Set new 
 		add: self resourceClass; 
 		yourself
 ]
 
 { #category : #'as yet unclassified' }
-MysqlTestCase >> cleanUpFixtureData [
+MySQLTestCase >> cleanUpFixtureData [
 	self class resourceClass current clearTestTables 
 	
 ]
 
 { #category : #'as yet unclassified' }
-MysqlTestCase >> configureNotStrict: connection [
+MySQLTestCase >> configureNotStrict: connection [
 	"Change the sql_mode for the current session test (in case of strict mode enabled)"
 	
 	connection query: 'SET SESSION sql_mode = ''NO_ENGINE_SUBSTITUTION'';'.
 ]
 
 { #category : #'as yet unclassified' }
-MysqlTestCase >> connection [
+MySQLTestCase >> connection [
 	^ self testConnection
 	
 ]
 
 { #category : #'as yet unclassified' }
-MysqlTestCase >> driverSpec [
+MySQLTestCase >> driverSpec [
 	^ self class resourceClass driverSpecWithDb
 	
 ]
 
 { #category : #'as yet unclassified' }
-MysqlTestCase >> loadOneFixture: fixtureName [
+MySQLTestCase >> loadOneFixture: fixtureName [
 	| fixtureSel fixtureStmtList conn resp |
 	fixtureSel := 'fixture', fixtureName capitalized.
 	fixtureStmtList := self class fixtureClass perform: fixtureSel asSymbol.
@@ -62,30 +62,30 @@ MysqlTestCase >> loadOneFixture: fixtureName [
 ]
 
 { #category : #'as yet unclassified' }
-MysqlTestCase >> resourceConnection [
+MySQLTestCase >> resourceConnection [
 	^ self class resourceClass current resourceConnection 
 	
 ]
 
 { #category : #'as yet unclassified' }
-MysqlTestCase >> specForTest [
+MySQLTestCase >> specForTest [
 	^ self class resourceClass current specForTest
 ]
 
 { #category : #'as yet unclassified' }
-MysqlTestCase >> tearDown [
+MySQLTestCase >> tearDown [
 	self cleanUpFixtureData
 	
 ]
 
 { #category : #'as yet unclassified' }
-MysqlTestCase >> testConnection [
+MySQLTestCase >> testConnection [
 	^ self class resourceClass current testConnection
 	
 ]
 
 { #category : #'as yet unclassified' }
-MysqlTestCase >> withFixtures: fixtureNameList do: testBlock [
+MySQLTestCase >> withFixtures: fixtureNameList do: testBlock [
 	fixtureNameList do: [:each | self loadOneFixture: each].
 	testBlock value: self resourceConnection 
 	

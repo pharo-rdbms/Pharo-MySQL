@@ -1,5 +1,5 @@
 Class {
-	#name : #MysqlDriverTest,
+	#name : #MySQLDriverTest,
 	#superclass : #TestCase,
 	#instVars : [
 		'connector'
@@ -11,7 +11,7 @@ Class {
 }
 
 { #category : #'as yet unclassified' }
-MysqlDriverTest >> badConnectionSpec [
+MySQLDriverTest >> badConnectionSpec [
 	| connSpec |
 	
 	connSpec := self goodConnectionSpec .
@@ -21,8 +21,8 @@ MysqlDriverTest >> badConnectionSpec [
 ]
 
 { #category : #'as yet unclassified' }
-MysqlDriverTest >> goodConnectionSpec [
-	^ MysqlDriverSpec new
+MySQLDriverTest >> goodConnectionSpec [
+	^ MySQLDriverSpec new
 		host: 'localhost';
 		port: 3306;
 		user: 'root';
@@ -31,7 +31,7 @@ MysqlDriverTest >> goodConnectionSpec [
 ]
 
 { #category : #'as yet unclassified' }
-MysqlDriverTest >> invalidHostNameConnectionSpec [
+MySQLDriverTest >> invalidHostNameConnectionSpec [
 	| connSpec |
 	
 	connSpec := self goodConnectionSpec .
@@ -41,17 +41,17 @@ MysqlDriverTest >> invalidHostNameConnectionSpec [
 ]
 
 { #category : #'as yet unclassified' }
-MysqlDriverTest >> setUp [
-	connector := MysqlDriver new
+MySQLDriverTest >> setUp [
+	connector := MySQLDriver new
 ]
 
 { #category : #'as yet unclassified' }
-MysqlDriverTest >> tearDown [
+MySQLDriverTest >> tearDown [
 	connector connected ifTrue: [connector disconnect]
 ]
 
 { #category : #'as yet unclassified' }
-MysqlDriverTest >> testConnectAssorted [
+MySQLDriverTest >> testConnectAssorted [
 	| connSpec |
 	
 	connSpec := self goodConnectionSpec .
@@ -69,7 +69,7 @@ MysqlDriverTest >> testConnectAssorted [
 ]
 
 { #category : #'as yet unclassified' }
-MysqlDriverTest >> testConnectBad [
+MySQLDriverTest >> testConnectBad [
 	| connSpec |
 	connSpec := self badConnectionSpec .
 	self assert: (connector connect: connSpec) isError .
@@ -77,7 +77,7 @@ MysqlDriverTest >> testConnectBad [
 ]
 
 { #category : #'as yet unclassified' }
-MysqlDriverTest >> testConnectGood [
+MySQLDriverTest >> testConnectGood [
 
 	| connSpec resp |
 	
@@ -88,7 +88,7 @@ MysqlDriverTest >> testConnectGood [
 ]
 
 { #category : #'as yet unclassified' }
-MysqlDriverTest >> testConnectWithDb [
+MySQLDriverTest >> testConnectWithDb [
 	| connSpec resp |
 	connSpec := self goodConnectionSpec.
 	connSpec db: 'sodbxtest2'.
@@ -103,20 +103,20 @@ MysqlDriverTest >> testConnectWithDb [
 ]
 
 { #category : #'as yet unclassified' }
-MysqlDriverTest >> testDisconnect [
+MySQLDriverTest >> testDisconnect [
 
 	| connSpec |
 	
 	connSpec := self goodConnectionSpec .
 	self assert: (connector connect: connSpec) isOkay.
-	self shouldnt: [connector disconnect] raise: MysqlNoConnectionError .
-	self should: [connector disconnect] raise: MysqlNoConnectionError .
+	self shouldnt: [connector disconnect] raise: MySQLNoConnectionError .
+	self should: [connector disconnect] raise: MySQLNoConnectionError .
 ]
 
 { #category : #'as yet unclassified' }
-MysqlDriverTest >> testHostLookupError [
+MySQLDriverTest >> testHostLookupError [
 	| connSpec |
 	connSpec := self invalidHostNameConnectionSpec.
-	self should: [connector connect: connSpec] raise: MysqlNameLookupFailure.
+	self should: [connector connect: connSpec] raise: MySQLNameLookupFailure.
 
 ]

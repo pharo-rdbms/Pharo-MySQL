@@ -1,6 +1,6 @@
 Class {
-	#name : #MysqlError,
-	#superclass : #MysqlResult,
+	#name : #MySQLError,
+	#superclass : #MySQLResult,
 	#instVars : [
 		'fieldCount',
 		'errNo',
@@ -12,22 +12,22 @@ Class {
 }
 
 { #category : #'as yet unclassified' }
-MysqlError >> errNo [
+MySQLError >> errNo [
 	^ errNo 
 ]
 
 { #category : #'as yet unclassified' }
-MysqlError >> isError [
+MySQLError >> isError [
 	^ true
 ]
 
 { #category : #'as yet unclassified' }
-MysqlError >> message [
+MySQLError >> message [
 	^ message 
 ]
 
 { #category : #'as yet unclassified' }
-MysqlError >> parse [
+MySQLError >> parse [
 	fieldCount := inStream next. "always 0xFF"
 	errNo := inStream next + (inStream next bitShift: 8).	
 	sqlStateMarker := inStream next asCharacter. "always #"
@@ -37,6 +37,6 @@ MysqlError >> parse [
 ]
 
 { #category : #'as yet unclassified' }
-MysqlError >> sqlState [
+MySQLError >> sqlState [
 	^ sqlState 
 ]

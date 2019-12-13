@@ -1,5 +1,5 @@
 Class {
-	#name : #MysqlHelper,
+	#name : #MySQLHelper,
 	#superclass : #Object,
 	#classInstVars : [
 		'seedOne',
@@ -10,7 +10,7 @@ Class {
 }
 
 { #category : #'as yet unclassified' }
-MysqlHelper class >> bytesFromHexString: hexString [
+MySQLHelper class >> bytesFromHexString: hexString [
 	| strm bytes aByte ii high low hexAlphabet |
 	(hexString size \\ 2 = 0) ifFalse: [self error: 'Not proper hex encoding'].
 	strm := ReadStream on: hexString.
@@ -31,7 +31,7 @@ MysqlHelper class >> bytesFromHexString: hexString [
 ]
 
 { #category : #'as yet unclassified' }
-MysqlHelper class >> bytesFromSha1Hash: num [
+MySQLHelper class >> bytesFromSha1Hash: num [
 	| index bytes |
 	index := 0.
 	bytes := ByteArray new: (num bytesCount max: 20).	"gurantee 20 bytes; required for authentication"
@@ -41,7 +41,7 @@ MysqlHelper class >> bytesFromSha1Hash: num [
 ]
 
 { #category : #'as yet unclassified' }
-MysqlHelper class >> decodeLcbFrom: byteStream [ 
+MySQLHelper class >> decodeLcbFrom: byteStream [ 
 	"parse length coded binary"
 	| first |
 	first := byteStream next.
@@ -58,7 +58,7 @@ MysqlHelper class >> decodeLcbFrom: byteStream [
 ]
 
 { #category : #'as yet unclassified' }
-MysqlHelper class >> decodeLcsFrom: aStream [ 
+MySQLHelper class >> decodeLcsFrom: aStream [ 
 	"parses length coded string"
 	| len |
 	len := self decodeLcbFrom: aStream.
@@ -68,7 +68,7 @@ MysqlHelper class >> decodeLcsFrom: aStream [
 ]
 
 { #category : #'as yet unclassified' }
-MysqlHelper class >> encodeLcb: value on: aStream [
+MySQLHelper class >> encodeLcb: value on: aStream [
 	value < -1
 		ifTrue: [ self
 				error: 'Can not encode value' , value asString , ' to length coded binary' ].
@@ -101,7 +101,7 @@ MysqlHelper class >> encodeLcb: value on: aStream [
 ]
 
 { #category : #'as yet unclassified' }
-MysqlHelper class >> encodeLcs: bytes on: aStream [
+MySQLHelper class >> encodeLcs: bytes on: aStream [
 	| len |
 	len := bytes size .
 	self encodeLcb: len on: aStream .
@@ -110,7 +110,7 @@ MysqlHelper class >> encodeLcs: bytes on: aStream [
 ]
 
 { #category : #private }
-MysqlHelper class >> hash: message [
+MySQLHelper class >> hash: message [
 	"Computes a hash form byte strings,
 	Returns an array of large positive integers.
 	Used in pre-4.1 authentication scheme"
@@ -150,14 +150,14 @@ MysqlHelper class >> hash: message [
 ]
 
 { #category : #'as yet unclassified' }
-MysqlHelper class >> hexStringFromBytes: aByteArray [
+MySQLHelper class >> hexStringFromBytes: aByteArray [
 	^ aByteArray inject: '' into: [:result :each | 
 		result, (each printPaddedWith: $0 to: 2 base: 16)].
 
 ]
 
 { #category : #private }
-MysqlHelper class >> myRandom [
+MySQLHelper class >> myRandom [
 	seedOne := (seedOne * 3 + seedTwo) \\ maxValue.
 	seedTwo := (seedOne + seedTwo + 33) \\ maxValue.
 	
@@ -166,7 +166,7 @@ MysqlHelper class >> myRandom [
 ]
 
 { #category : #private }
-MysqlHelper class >> randomInitWith: seedValue1 and: seedValue2 [
+MySQLHelper class >> randomInitWith: seedValue1 and: seedValue2 [
 	maxValue := 16r3FFFFFFF.
 	seedOne := seedValue1 \\ maxValue.
 	seedTwo := seedValue2 \\ maxValue.
@@ -174,7 +174,7 @@ MysqlHelper class >> randomInitWith: seedValue1 and: seedValue2 [
 ]
 
 { #category : #public }
-MysqlHelper class >> scramble323: message with: password [ 
+MySQLHelper class >> scramble323: message with: password [ 
 	"Scamble the bytestring message with password."
 	"Return a srambled byte string."
 	"Used in pre-4.1 authentication scheme"
@@ -208,13 +208,13 @@ MysqlHelper class >> scramble323: message with: password [
 ]
 
 { #category : #'as yet unclassified' }
-MysqlHelper class >> scramble323MessageLimit [
+MySQLHelper class >> scramble323MessageLimit [
 	^ 8
 	
 ]
 
 { #category : #'as yet unclassified' }
-MysqlHelper class >> secureScramble: seed with: password [ 
+MySQLHelper class >> secureScramble: seed with: password [ 
 
 	| sha1 hashStage1 hashStage2 hash3 reply |
 

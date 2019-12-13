@@ -1,6 +1,6 @@
 Class {
-	#name : #MysqlClientAuth,
-	#superclass : #MysqlPacket,
+	#name : #MySQLClientAuth,
+	#superclass : #MySQLPacket,
 	#instVars : [
 		'user',
 		'password',
@@ -15,48 +15,48 @@ Class {
 }
 
 { #category : #'as yet unclassified' }
-MysqlClientAuth >> charset: csNum [
+MySQLClientAuth >> charset: csNum [
 	charset := csNum
 ]
 
 { #category : #'as yet unclassified' }
-MysqlClientAuth >> database: db [
+MySQLClientAuth >> database: db [
 	database := db
 ]
 
 { #category : #'as yet unclassified' }
-MysqlClientAuth >> initialize [
+MySQLClientAuth >> initialize [
 	clientCaps := CapLongFlag + CapTransactions + CapLongPassword + CapConnectWithDb.
 	clientCaps := clientCaps + CapProtocol41 + CapSecureConnection.
 ]
 
 { #category : #'as yet unclassified' }
-MysqlClientAuth >> password: pwd [
+MySQLClientAuth >> password: pwd [
 	password := pwd.
 ]
 
 { #category : #'as yet unclassified' }
-MysqlClientAuth >> scrambleBuff: buffer [
+MySQLClientAuth >> scrambleBuff: buffer [
 	scrambleBuff := buffer.
 ]
 
 { #category : #'as yet unclassified' }
-MysqlClientAuth >> scrambleBuffMore: more [
+MySQLClientAuth >> scrambleBuffMore: more [
 	scrambleBuffMore := more
 ]
 
 { #category : #'as yet unclassified' }
-MysqlClientAuth >> serverCaps: caps [ 
+MySQLClientAuth >> serverCaps: caps [ 
 	serverCaps := caps
 ]
 
 { #category : #'as yet unclassified' }
-MysqlClientAuth >> user: userName [
+MySQLClientAuth >> user: userName [
 	user := userName
 ]
 
 { #category : #'as yet unclassified' }
-MysqlClientAuth >> write [
+MySQLClientAuth >> write [
 	| flags scrmbl buffStream maxNetPacketLength |
 	buffStream := WriteStream on: (ByteArray new: 1024).
 	flags := serverCaps bitAnd: clientCaps.
@@ -78,7 +78,7 @@ MysqlClientAuth >> write [
 	buffStream nextPut: 0.	"null terminated"
 	scrmbl := password isEmptyOrNil
 		ifTrue: [ '' asByteArray ]
-		ifFalse: [ MysqlHelper
+		ifFalse: [ MySQLHelper
 				secureScramble: scrambleBuff , scrambleBuffMore
 				with: password ].
 	self encodeLcs: scrmbl on: buffStream.

@@ -1,6 +1,6 @@
 Class {
-	#name : #MysqlStringRowData,
-	#superclass : #MysqlBinRowData,
+	#name : #MySQLStringRowData,
+	#superclass : #MySQLBinaryRowData,
 	#instVars : [
 		'columnStrings'
 	],
@@ -8,13 +8,13 @@ Class {
 }
 
 { #category : #'as yet unclassified' }
-MysqlStringRowData >> atIndex: indx [
-	^ columnStrings at: indx ifAbsent: [MysqlInvalidRowAccess signal: 'No data at this index']
+MySQLStringRowData >> atIndex: indx [
+	^ columnStrings at: indx ifAbsent: [MySQLInvalidRowAccess signal: 'No data at this index']
 	
 ]
 
 { #category : #'as yet unclassified' }
-MysqlStringRowData >> parse [
+MySQLStringRowData >> parse [
 	super parse.
 	columnStrings := columnValues collect: [:each | 
 		each ifNil: ['NULL'] ifNotNil: [

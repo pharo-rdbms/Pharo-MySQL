@@ -1,5 +1,5 @@
 Class {
-	#name : #MysqlPacket,
+	#name : #MySQLPacket,
 	#superclass : #Object,
 	#instVars : [
 		'inStream',
@@ -29,14 +29,14 @@ Class {
 }
 
 { #category : #'as yet unclassified' }
-MysqlPacket class >> from: data [
+MySQLPacket class >> from: data [
 	^ self new 
 		read: data
 	
 ]
 
 { #category : #'as yet unclassified' }
-MysqlPacket class >> initCapabilititesFlags [
+MySQLPacket class >> initCapabilititesFlags [
 	CapLongPassword := 1.
 	CapFoundRows := 1 bitShift: 1.
 	CapLongFlag := 1 bitShift: 2.
@@ -59,7 +59,7 @@ MysqlPacket class >> initCapabilititesFlags [
 ]
 
 { #category : #'as yet unclassified' }
-MysqlPacket class >> initialize [
+MySQLPacket class >> initialize [
 	"
 	self initialize
 	"
@@ -69,77 +69,77 @@ MysqlPacket class >> initialize [
 ]
 
 { #category : #'as yet unclassified' }
-MysqlPacket class >> maxNetPacketLength [
-	^ MysqlNetPacket maxLength
+MySQLPacket class >> maxNetPacketLength [
+	^ MySQLNetworkPacket maxLength
 ]
 
 { #category : #'as yet unclassified' }
-MysqlPacket >> decodeLcbFrom: byteStream [ 
-	^ MysqlHelper decodeLcbFrom: byteStream 
+MySQLPacket >> decodeLcbFrom: byteStream [ 
+	^ MySQLHelper decodeLcbFrom: byteStream 
 	
 ]
 
 { #category : #'as yet unclassified' }
-MysqlPacket >> decodeLcsFrom: aStream [ 
-	^ MysqlHelper decodeLcsFrom: aStream 
+MySQLPacket >> decodeLcsFrom: aStream [ 
+	^ MySQLHelper decodeLcsFrom: aStream 
 	
 ]
 
 { #category : #'as yet unclassified' }
-MysqlPacket >> encodeLcb: value on: aStream [ 
-	^ MysqlHelper encodeLcb: value on: aStream 
+MySQLPacket >> encodeLcb: value on: aStream [ 
+	^ MySQLHelper encodeLcb: value on: aStream 
 	
 ]
 
 { #category : #'as yet unclassified' }
-MysqlPacket >> encodeLcs: bytes on: aStream [
-	MysqlHelper encodeLcs: bytes on: aStream
+MySQLPacket >> encodeLcs: bytes on: aStream [
+	MySQLHelper encodeLcs: bytes on: aStream
 	
 ]
 
 { #category : #'as yet unclassified' }
-MysqlPacket >> isEof [
+MySQLPacket >> isEof [
 	^ (discriminator = 16rFE) and: [inStream size < 9]
 
 ]
 
 { #category : #'as yet unclassified' }
-MysqlPacket >> isError [
+MySQLPacket >> isError [
 	^ discriminator = 16rFF
 
 ]
 
 { #category : #'as yet unclassified' }
-MysqlPacket >> isOkay [
+MySQLPacket >> isOkay [
 	^ discriminator = 16r00
 
 ]
 
 { #category : #'as yet unclassified' }
-MysqlPacket >> isOkayOrError [
+MySQLPacket >> isOkayOrError [
 	^ self isOkay or: [self isError]
 ]
 
 { #category : #'as yet unclassified' }
-MysqlPacket >> isPrepareResponse [
+MySQLPacket >> isPrepareResponse [
 	^ false
 	
 ]
 
 { #category : #'as yet unclassified' }
-MysqlPacket >> isResultSet [
+MySQLPacket >> isResultSet [
 	^ false
 ]
 
 { #category : #'as yet unclassified' }
-MysqlPacket >> parse [
+MySQLPacket >> parse [
 	"Default implementation; required for reading a generic (yet unknown) type of packet"
 	"No parsing here; subclasses implement packet specific parsing"
 	
 ]
 
 { #category : #'as yet unclassified' }
-MysqlPacket >> read: buffer [
+MySQLPacket >> read: buffer [
 	discriminator := buffer first.
 	inStream := ReadStream on: buffer.
 	self parse
@@ -147,6 +147,6 @@ MysqlPacket >> read: buffer [
 ]
 
 { #category : #'as yet unclassified' }
-MysqlPacket >> write [
+MySQLPacket >> write [
 	self subclassResponsibility 
 ]

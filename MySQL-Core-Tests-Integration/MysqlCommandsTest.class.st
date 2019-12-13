@@ -1,11 +1,11 @@
 Class {
-	#name : #MysqlCommandsTest,
-	#superclass : #MysqlTestCase,
+	#name : #MySQLCommandsTest,
+	#superclass : #MySQLTestCase,
 	#category : #'MySQL-Core-Tests-Integration'
 }
 
 { #category : #'as yet unclassified' }
-MysqlCommandsTest >> testChangeUser [
+MySQLCommandsTest >> testChangeUser [
 	| spec altSpec conn |
 	spec := self driverSpec.
 	spec db: nil.
@@ -18,11 +18,11 @@ MysqlCommandsTest >> testChangeUser [
 	self assert: (conn changeUser: altSpec) isOkay.
 	self assert: (conn changeUser: spec) isOkay.
 	conn disconnect.
-	self should: [conn changeUser: spec] raise: MysqlNoConnectionError. 
+	self should: [conn changeUser: spec] raise: MySQLNoConnectionError. 
 ]
 
 { #category : #'as yet unclassified' }
-MysqlCommandsTest >> testDescribeTable [
+MySQLCommandsTest >> testDescribeTable [
 	| results |
 	results := self connection query: 'describe nameValue'.
 	self assert: (results rows size = 3).
@@ -30,16 +30,16 @@ MysqlCommandsTest >> testDescribeTable [
 ]
 
 { #category : #'as yet unclassified' }
-MysqlCommandsTest >> testPing [
+MySQLCommandsTest >> testPing [
 	| conn |
 	conn := self connection.
 	self assert: conn ping isOkay.
 	conn disconnect.
-	self should: [conn ping] raise: MysqlNoConnectionError 
+	self should: [conn ping] raise: MySQLNoConnectionError 
 ]
 
 { #category : #'as yet unclassified' }
-MysqlCommandsTest >> testStmtClose [
+MySQLCommandsTest >> testStmtClose [
 	| resp paramList prepResp conn stmt |
 
 	conn := self connection.
@@ -47,8 +47,8 @@ MysqlCommandsTest >> testStmtClose [
 	conn query: 'insert into mix values(''key02'', NULL)'.
 	prepResp := conn prepare: 'select * from mix where name = ?'.
 
-	stmt := MysqlDriverStmt onConnection: conn.
-	paramList := Array with: (MysqlBindParam new bindValue: 'key01').
+	stmt := MySQLDriverStatement onConnection: conn.
+	paramList := Array with: (MySQLBindParameter new bindValue: 'key01').
 	stmt stmtId: prepResp prepareOkay stmtHandlerId; params: paramList.
 	
 	stmt close. "will try to use after close"
@@ -60,14 +60,14 @@ MysqlCommandsTest >> testStmtClose [
 ]
 
 { #category : #'as yet unclassified' }
-MysqlCommandsTest >> testStmtExecute [
+MySQLCommandsTest >> testStmtExecute [
 	| resp paramList prepResp conn stmt |
 	conn := self connection.
 	conn query: 'insert into mix values(''key01'', ''111222333444.555666777'')'.
 	conn query: 'insert into mix values(''key02'', NULL)'.
 	prepResp := conn prepare: 'select * from mix where name = ?'.
-	stmt := MysqlDriverStmt onConnection: conn.
-	paramList := Array with: (MysqlBindParam new bindValue: 'key01').
+	stmt := MySQLDriverStatement onConnection: conn.
+	paramList := Array with: (MySQLBindParameter new bindValue: 'key01').
 	stmt
 		stmtId: prepResp prepareOkay stmtHandlerId;
 		params: paramList.
@@ -76,7 +76,7 @@ MysqlCommandsTest >> testStmtExecute [
 	self assert: resp rows size = 1.
 	self assert: (resp rows first atIndex: 1) = 'key01'.
 	self assert: (resp rows first atIndex: 2) = 111222333444.555666777s9.
-	paramList :=  Array with: (MysqlBindParam new bindValue: 'key02').
+	paramList :=  Array with: (MySQLBindParameter new bindValue: 'key02').
 	stmt params: paramList.
 	resp := 	stmt execute.
 	self assert: resp isResultSet.
@@ -87,7 +87,7 @@ MysqlCommandsTest >> testStmtExecute [
 ]
 
 { #category : #'as yet unclassified' }
-MysqlCommandsTest >> testStmtPrepare [
+MySQLCommandsTest >> testStmtPrepare [
 	| resp conn |
 	conn := self connection.
 	resp := conn query: 'insert into nameValue values(''1'', ''key01'', ''value01'')'.

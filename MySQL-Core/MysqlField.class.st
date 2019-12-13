@@ -1,6 +1,6 @@
 Class {
-	#name : #MysqlField,
-	#superclass : #MysqlPacket,
+	#name : #MySQLField,
+	#superclass : #MySQLPacket,
 	#instVars : [
 		'catalog',
 		'db',
@@ -33,7 +33,7 @@ Class {
 }
 
 { #category : #'as yet unclassified' }
-MysqlField class >> initBitMasksForFlags [
+MySQLField class >> initBitMasksForFlags [
 	NotNullFlag := 16r0001.
 	PrimaryKeyFlag := 16r0002.
 	UniqueKeyFlag := 16r0004.
@@ -52,61 +52,61 @@ MysqlField class >> initBitMasksForFlags [
 ]
 
 { #category : #'as yet unclassified' }
-MysqlField class >> initialize [
+MySQLField class >> initialize [
 	"self initialize"
 	self initBitMasksForFlags.
 	
 ]
 
 { #category : #'as yet unclassified' }
-MysqlField >> db [
+MySQLField >> db [
 	^ db
 	
 ]
 
 { #category : #'as yet unclassified' }
-MysqlField >> decimals [
+MySQLField >> decimals [
 	^ decimals 
 ]
 
 { #category : #'as yet unclassified' }
-MysqlField >> isAutoIncrement [
+MySQLField >> isAutoIncrement [
 	^ (flags bitAnd: AutoIncrFlag) = AutoIncrFlag   
 	
 ]
 
 { #category : #'as yet unclassified' }
-MysqlField >> isNullable [
+MySQLField >> isNullable [
 	^ (flags bitAnd: NotNullFlag) ~= NotNullFlag  
 	
 ]
 
 { #category : #'as yet unclassified' }
-MysqlField >> isPrimaryKey [
+MySQLField >> isPrimaryKey [
 	^ (flags bitAnd: PrimaryKeyFlag) = PrimaryKeyFlag  
 	
 ]
 
 { #category : #'as yet unclassified' }
-MysqlField >> isUnsigned [
+MySQLField >> isUnsigned [
 	^ (flags bitAnd: UnsignedFlag) = UnsignedFlag 
 	
 ]
 
 { #category : #'as yet unclassified' }
-MysqlField >> length [
+MySQLField >> length [
 	^ length 
 	
 ]
 
 { #category : #'as yet unclassified' }
-MysqlField >> name [
+MySQLField >> name [
 	^ name
 	
 ]
 
 { #category : #'as yet unclassified' }
-MysqlField >> parse [
+MySQLField >> parse [
 	catalog := (self decodeLcsFrom: inStream) asString.
 	db := (self decodeLcsFrom: inStream) asString.
 	table := (self decodeLcsFrom: inStream) asString.
@@ -127,13 +127,13 @@ MysqlField >> parse [
 ]
 
 { #category : #'as yet unclassified' }
-MysqlField >> table [
+MySQLField >> table [
 	^ table
 	
 ]
 
 { #category : #'as yet unclassified' }
-MysqlField >> type [
+MySQLField >> type [
 	^ type
 	
 ]

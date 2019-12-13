@@ -1,23 +1,23 @@
 Class {
-	#name : #MysqlRowData,
-	#superclass : #MysqlPacket,
+	#name : #MySQLRowData,
+	#superclass : #MySQLPacket,
 	#category : #'MySQL-Core-Packet'
 }
 
 { #category : #'as yet unclassified' }
-MysqlRowData >> at: index [
+MySQLRowData >> at: index [
 	
 	^ self atIndex: index
 ]
 
 { #category : #'as yet unclassified' }
-MysqlRowData >> atIndex: indx [
+MySQLRowData >> atIndex: indx [
 	self subclassResponsibility
 	
 ]
 
 { #category : #'as yet unclassified' }
-MysqlRowData >> parse [
+MySQLRowData >> parse [
 	self subclassResponsibility 
 	
 ]

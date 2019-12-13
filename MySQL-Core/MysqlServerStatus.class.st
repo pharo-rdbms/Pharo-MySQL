@@ -1,5 +1,5 @@
 Class {
-	#name : #MysqlServerStatus,
+	#name : #MySQLServerStatus,
 	#superclass : #Object,
 	#classVars : [
 		'ServerMoreResultsExist',
@@ -16,7 +16,7 @@ Class {
 }
 
 { #category : #'as yet unclassified' }
-MysqlServerStatus class >> initFlags [
+MySQLServerStatus class >> initFlags [
 	ServerStatusInTranssaction := 1. 		"transaction has started"
 	ServerStatusAutoCommit := 2. 		"in autocommit mode"
 	ServerMoreResultsExist := 8.			"multiple result sets for multi-query"
@@ -37,41 +37,41 @@ MysqlServerStatus class >> initFlags [
 ]
 
 { #category : #'as yet unclassified' }
-MysqlServerStatus class >> initialize [
+MySQLServerStatus class >> initialize [
 	"self initialize"
 	self initFlags.
 	
 ]
 
 { #category : #'as yet unclassified' }
-MysqlServerStatus class >> moreResultsExist [
+MySQLServerStatus class >> moreResultsExist [
 	^ ServerMoreResultsExist
 	
 ]
 
 { #category : #'as yet unclassified' }
-MysqlServerStatus class >> statusAutoCommit [
+MySQLServerStatus class >> statusAutoCommit [
 	^ ServerStatusAutoCommit
 ]
 
 { #category : #'as yet unclassified' }
-MysqlServerStatus class >> statusCursorExists [
+MySQLServerStatus class >> statusCursorExists [
 	^ ServerStatusCursorExists
 	
 ]
 
 { #category : #'as yet unclassified' }
-MysqlServerStatus class >> statusInTransaction [
+MySQLServerStatus class >> statusInTransaction [
 	^ ServerStatusInTranssaction
 ]
 
 { #category : #'as yet unclassified' }
-MysqlServerStatus class >> statusLastRowSent [
+MySQLServerStatus class >> statusLastRowSent [
 	^ ServerStatusLastRowSent
 	
 ]
 
 { #category : #'as yet unclassified' }
-MysqlServerStatus class >> statusNoIndexUsed [
+MySQLServerStatus class >> statusNoIndexUsed [
 	^ ServerQueryNoIndexUsed
 ]

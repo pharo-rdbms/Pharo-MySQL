@@ -1,6 +1,6 @@
 Class {
-	#name : #MysqlHandshake,
-	#superclass : #MysqlPacket,
+	#name : #MySQLHandshake,
+	#superclass : #MySQLPacket,
 	#instVars : [
 		'protocolVer',
 		'serverVer',
@@ -15,7 +15,7 @@ Class {
 }
 
 { #category : #'as yet unclassified' }
-MysqlHandshake >> parse [ 
+MySQLHandshake >> parse [ 
 	protocolVer := inStream next.
 	serverVer := (inStream upTo: 0) asString.
 	threadId := inStream next + (inStream next bitShift: 8) + 
@@ -33,7 +33,7 @@ MysqlHandshake >> parse [
 ]
 
 { #category : #accessing }
-MysqlHandshake >> scrambleBuff [
+MySQLHandshake >> scrambleBuff [
 	
 	^ scrambleBuff
 	
@@ -43,31 +43,31 @@ MysqlHandshake >> scrambleBuff [
 ]
 
 { #category : #'as yet unclassified' }
-MysqlHandshake >> scrambleBuffMore [
+MySQLHandshake >> scrambleBuffMore [
 	^scrambleBuffMore 
 ]
 
 { #category : #accessing }
-MysqlHandshake >> serverCaps [
+MySQLHandshake >> serverCaps [
 	^ serverCap
 ]
 
 { #category : #accessing }
-MysqlHandshake >> serverLang [
+MySQLHandshake >> serverLang [
 	^ serverLang
 ]
 
 { #category : #accessing }
-MysqlHandshake >> serverStatus [
+MySQLHandshake >> serverStatus [
 	^ serverStatus
 ]
 
 { #category : #accessing }
-MysqlHandshake >> serverVer [
+MySQLHandshake >> serverVer [
 	^ serverVer
 ]
 
 { #category : #'as yet unclassified' }
-MysqlHandshake >> supportsProtocol41 [
+MySQLHandshake >> supportsProtocol41 [
 	^ (serverCap bitAnd: CapProtocol41) = CapProtocol41
 ]

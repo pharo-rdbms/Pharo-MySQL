@@ -1,5 +1,5 @@
 Class {
-	#name : #MysqlUnsupportedProtocolError,
-	#superclass : #MysqlDriverError,
+	#name : #MySQLUnsupportedProtocolError,
+	#superclass : #MySQLDriverError,
 	#category : #'MySQL-Core-Exception'
 }

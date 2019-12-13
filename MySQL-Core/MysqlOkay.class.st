@@ -1,6 +1,6 @@
 Class {
-	#name : #MysqlOkay,
-	#superclass : #MysqlResult,
+	#name : #MySQLOkay,
+	#superclass : #MySQLResult,
 	#instVars : [
 		'message',
 		'fieldCount',
@@ -13,42 +13,42 @@ Class {
 }
 
 { #category : #'as yet unclassified' }
-MysqlOkay >> affectedRows [
+MySQLOkay >> affectedRows [
 	^ affectedRows 
 ]
 
 { #category : #'as yet unclassified' }
-MysqlOkay >> hasMoreResults [
-	^ (serverStatus bitAnd: MysqlServerStatus moreResultsExist) ~= 0
+MySQLOkay >> hasMoreResults [
+	^ (serverStatus bitAnd: MySQLServerStatus moreResultsExist) ~= 0
 	
 ]
 
 { #category : #'as yet unclassified' }
-MysqlOkay >> inTransaction [
+MySQLOkay >> inTransaction [
 	| autoCommit inTx |
-	autoCommit := (serverStatus bitAnd: MysqlServerStatus statusInTransaction) ~= 0.
-	inTx := (serverStatus bitAnd: MysqlServerStatus statusInTransaction) ~= 0.
+	autoCommit := (serverStatus bitAnd: MySQLServerStatus statusInTransaction) ~= 0.
+	inTx := (serverStatus bitAnd: MySQLServerStatus statusInTransaction) ~= 0.
 	^ autoCommit and: inTx
 	
 ]
 
 { #category : #'as yet unclassified' }
-MysqlOkay >> insertId [
+MySQLOkay >> insertId [
 	^ insertId 
 ]
 
 { #category : #'as yet unclassified' }
-MysqlOkay >> isOkay [
+MySQLOkay >> isOkay [
 	^ true
 ]
 
 { #category : #'as yet unclassified' }
-MysqlOkay >> message [
+MySQLOkay >> message [
 	^ message 
 ]
 
 { #category : #'as yet unclassified' }
-MysqlOkay >> parse [ 
+MySQLOkay >> parse [ 
 	fieldCount := self decodeLcbFrom: inStream . "always 0"
 	affectedRows := self decodeLcbFrom: inStream .
 	insertId := self decodeLcbFrom: inStream .
@@ -59,11 +59,11 @@ MysqlOkay >> parse [
 ]
 
 { #category : #'as yet unclassified' }
-MysqlOkay >> serverStatus [
+MySQLOkay >> serverStatus [
 	^ serverStatus 
 ]
 
 { #category : #'as yet unclassified' }
-MysqlOkay >> warningCount [
+MySQLOkay >> warningCount [
 	^ warningCount 
 ]

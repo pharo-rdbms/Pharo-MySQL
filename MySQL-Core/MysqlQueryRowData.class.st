@@ -1,6 +1,6 @@
 Class {
-	#name : #MysqlQueryRowData,
-	#superclass : #MysqlRowData,
+	#name : #MySQLQueryRowData,
+	#superclass : #MySQLRowData,
 	#instVars : [
 		'columns'
 	],
@@ -8,23 +8,23 @@ Class {
 }
 
 { #category : #'as yet unclassified' }
-MysqlQueryRowData >> at: indx [
+MySQLQueryRowData >> at: indx [
 	^ self atIndex: indx
 ]
 
 { #category : #'as yet unclassified' }
-MysqlQueryRowData >> atIndex: indx [
-	^ columns at: indx ifAbsent: [MysqlInvalidRowAccess signal: 'No data at this index']
+MySQLQueryRowData >> atIndex: indx [
+	^ columns at: indx ifAbsent: [MySQLInvalidRowAccess signal: 'No data at this index']
 ]
 
 { #category : #'as yet unclassified' }
-MysqlQueryRowData >> columnCount: aCount [
+MySQLQueryRowData >> columnCount: aCount [
 	columns := Array new: aCount 
 	
 ]
 
 { #category : #'as yet unclassified' }
-MysqlQueryRowData >> parse [
+MySQLQueryRowData >> parse [
 	|indx value |
 
 	indx := 1.

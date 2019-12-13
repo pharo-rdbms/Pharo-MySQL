@@ -1,5 +1,5 @@
 Class {
-	#name : #MysqlTypes,
+	#name : #MySQLTypes,
 	#superclass : #Object,
 	#classVars : [
 		'TypeBIT',
@@ -41,7 +41,7 @@ Class {
 }
 
 { #category : #'as yet unclassified' }
-MysqlTypes class >> blobTypes [
+MySQLTypes class >> blobTypes [
 	blobTypes ifNil: [
 		blobTypes := Array 
 			with: TypeTINYBLOB with: TypeMEDIUMBLOB with: TypeBLOB with: TypeLONGBLOB ].
@@ -50,7 +50,7 @@ MysqlTypes class >> blobTypes [
 ]
 
 { #category : #'as yet unclassified' }
-MysqlTypes class >> dateTimeTypes [
+MySQLTypes class >> dateTimeTypes [
 	dateTimeTypes ifNil: [
 		dateTimeTypes := Array 
 			with: TypeDATE with: TypeDATETIME with: TypeNEWDATE with: TypeTIME
@@ -61,7 +61,7 @@ MysqlTypes class >> dateTimeTypes [
 ]
 
 { #category : #'as yet unclassified' }
-MysqlTypes class >> initFieldTypes [
+MySQLTypes class >> initFieldTypes [
  	TypeBIT := 16.
  	TypeBLOB := 252.
  	TypeDATE := 10.
@@ -93,7 +93,7 @@ MysqlTypes class >> initFieldTypes [
 ]
 
 { #category : #'as yet unclassified' }
-MysqlTypes class >> initialize [
+MySQLTypes class >> initialize [
 	"self initialize"
 
 	self initFieldTypes.
@@ -101,7 +101,7 @@ MysqlTypes class >> initialize [
 ]
 
 { #category : #'as yet unclassified' }
-MysqlTypes class >> integerTypes [
+MySQLTypes class >> integerTypes [
 	integerTypes ifNil: [
 		integerTypes := Array 
 			with: TypeTINY with: TypeSHORT with: TypeINT24 with: TypeLONG 
@@ -111,37 +111,37 @@ MysqlTypes class >> integerTypes [
 ]
 
 { #category : #'as yet unclassified' }
-MysqlTypes class >> isBigInt: type [
+MySQLTypes class >> isBigInt: type [
 	^ type = TypeLONGLONG
 	
 ]
 
 { #category : #'as yet unclassified' }
-MysqlTypes class >> isLongInt: type [
+MySQLTypes class >> isLongInt: type [
 	^ type = TypeLONG
 	
 ]
 
 { #category : #'as yet unclassified' }
-MysqlTypes class >> isMediumInt: type [
+MySQLTypes class >> isMediumInt: type [
 	^ type = TypeINT24
 	
 ]
 
 { #category : #'as yet unclassified' }
-MysqlTypes class >> isSmallInt: type [
+MySQLTypes class >> isSmallInt: type [
 	^ type = TypeSHORT
 	
 ]
 
 { #category : #'as yet unclassified' }
-MysqlTypes class >> isTinyInt: type [
+MySQLTypes class >> isTinyInt: type [
 	^ type = TypeTINY
 	
 ]
 
 { #category : #'as yet unclassified' }
-MysqlTypes class >> realTypes [
+MySQLTypes class >> realTypes [
 	realTypes ifNil: [
 		realTypes := Array 
 			with: TypeFLOAT with: TypeDOUBLE with: TypeDECIMAL with: TypeNEWDECIMAL].
@@ -150,7 +150,7 @@ MysqlTypes class >> realTypes [
 ]
 
 { #category : #'as yet unclassified' }
-MysqlTypes class >> stringTypes [
+MySQLTypes class >> stringTypes [
 	stringTypes ifNil: [
 		stringTypes := Array with: TypeSTRING with: TypeVARCHAR with: TypeVARSTRING ].
 	^ stringTypes
@@ -158,162 +158,162 @@ MysqlTypes class >> stringTypes [
 ]
 
 { #category : #'as yet unclassified' }
-MysqlTypes class >> typeBIT [
+MySQLTypes class >> typeBIT [
 	^ TypeBIT
 	
 ]
 
 { #category : #'as yet unclassified' }
-MysqlTypes class >> typeBLOB [
+MySQLTypes class >> typeBLOB [
 	^ TypeBLOB
 	
 ]
 
 { #category : #'as yet unclassified' }
-MysqlTypes class >> typeDATE [
+MySQLTypes class >> typeDATE [
 	^ TypeDATE
 	
 ]
 
 { #category : #'as yet unclassified' }
-MysqlTypes class >> typeDATETIME [
+MySQLTypes class >> typeDATETIME [
 	^ TypeDATETIME
 	
 ]
 
 { #category : #'as yet unclassified' }
-MysqlTypes class >> typeDECIMAL [
+MySQLTypes class >> typeDECIMAL [
 	^ TypeDECIMAL
 	
 ]
 
 { #category : #'as yet unclassified' }
-MysqlTypes class >> typeDOUBLE [
+MySQLTypes class >> typeDOUBLE [
 	^ TypeDOUBLE
 	
 ]
 
 { #category : #'as yet unclassified' }
-MysqlTypes class >> typeENUM [
+MySQLTypes class >> typeENUM [
 	^ TypeENUM
 	
 ]
 
 { #category : #'as yet unclassified' }
-MysqlTypes class >> typeFLOAT [
+MySQLTypes class >> typeFLOAT [
 	^ TypeFLOAT
 	
 ]
 
 { #category : #'as yet unclassified' }
-MysqlTypes class >> typeGEOMETRY [
+MySQLTypes class >> typeGEOMETRY [
 	^ TypeGEOMETRY
 	
 ]
 
 { #category : #'as yet unclassified' }
-MysqlTypes class >> typeINT24 [
+MySQLTypes class >> typeINT24 [
 	^ TypeINT24
 	
 ]
 
 { #category : #'as yet unclassified' }
-MysqlTypes class >> typeLONG [
+MySQLTypes class >> typeLONG [
 	^ TypeLONG
 	
 ]
 
 { #category : #'as yet unclassified' }
-MysqlTypes class >> typeLONGBLOB [
+MySQLTypes class >> typeLONGBLOB [
 	^ TypeLONGBLOB
 	
 ]
 
 { #category : #'as yet unclassified' }
-MysqlTypes class >> typeLONGLONG [
+MySQLTypes class >> typeLONGLONG [
 	^ TypeLONGLONG
 	
 ]
 
 { #category : #'as yet unclassified' }
-MysqlTypes class >> typeMEDIUMBLOB [
+MySQLTypes class >> typeMEDIUMBLOB [
 	^ TypeMEDIUMBLOB
 	
 ]
 
 { #category : #'as yet unclassified' }
-MysqlTypes class >> typeNEWDATE [
+MySQLTypes class >> typeNEWDATE [
 	^ TypeNEWDATE
 	
 ]
 
 { #category : #'as yet unclassified' }
-MysqlTypes class >> typeNEWDECIMAL [
+MySQLTypes class >> typeNEWDECIMAL [
 	^ TypeNEWDECIMAL
 ]
 
 { #category : #'as yet unclassified' }
-MysqlTypes class >> typeNULL [
+MySQLTypes class >> typeNULL [
 	^ TypeNULL
 	
 ]
 
 { #category : #'as yet unclassified' }
-MysqlTypes class >> typeSET [
+MySQLTypes class >> typeSET [
 	^ TypeSET
 	
 ]
 
 { #category : #'as yet unclassified' }
-MysqlTypes class >> typeSHORT [
+MySQLTypes class >> typeSHORT [
 	^ TypeSHORT
 	
 ]
 
 { #category : #'as yet unclassified' }
-MysqlTypes class >> typeSTRING [
+MySQLTypes class >> typeSTRING [
 	^ TypeSTRING
 	
 ]
 
 { #category : #'as yet unclassified' }
-MysqlTypes class >> typeTIME [
+MySQLTypes class >> typeTIME [
 	^ TypeTIME
 	
 ]
 
 { #category : #'as yet unclassified' }
-MysqlTypes class >> typeTIMESTAMP [
+MySQLTypes class >> typeTIMESTAMP [
 	^ TypeTIMESTAMP
 	
 ]
 
 { #category : #'as yet unclassified' }
-MysqlTypes class >> typeTINY [
+MySQLTypes class >> typeTINY [
 	^ TypeTINY
 	
 ]
 
 { #category : #'as yet unclassified' }
-MysqlTypes class >> typeTINYBLOB [
+MySQLTypes class >> typeTINYBLOB [
 	^ TypeTINYBLOB
 	
 ]
 
 { #category : #'as yet unclassified' }
-MysqlTypes class >> typeVARCHAR [
+MySQLTypes class >> typeVARCHAR [
 	^ TypeVARCHAR
 	
 ]
 
 { #category : #'as yet unclassified' }
-MysqlTypes class >> typeVARSTRING [
+MySQLTypes class >> typeVARSTRING [
 	^ TypeVARSTRING
 	
 ]
 
 { #category : #'as yet unclassified' }
-MysqlTypes class >> typeYEAR [
+MySQLTypes class >> typeYEAR [
 	^ TypeYEAR
 	
 ]

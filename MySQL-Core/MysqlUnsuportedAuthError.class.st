@@ -1,5 +1,5 @@
 Class {
-	#name : #MysqlUnsuportedAuthError,
-	#superclass : #MysqlDriverError,
+	#name : #MySQLUnsuportedAuthError,
+	#superclass : #MySQLDriverError,
 	#category : #'MySQL-Core-Exception'
 }

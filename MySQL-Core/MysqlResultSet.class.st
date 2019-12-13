@@ -2,8 +2,8 @@
 I am a simple facade on result set packets, although I behave as a MysqlPacketData. I don't perform a read or write; my clients compose me from specific rasult set packets. I am designed this way to facilitate use of similar metaphors at the connector protocol level. I also behave a multi-result type of packet.
 "
 Class {
-	#name : #MysqlResultSet,
-	#superclass : #MysqlComplexResult,
+	#name : #MySQLResultSet,
+	#superclass : #MySQLComplexResult,
 	#instVars : [
 		'header',
 		'fields',
@@ -16,27 +16,27 @@ Class {
 }
 
 { #category : #'as yet unclassified' }
-MysqlResultSet >> fields [
+MySQLResultSet >> fields [
 	^ fields 
 ]
 
 { #category : #'as yet unclassified' }
-MysqlResultSet >> fields: flds [
+MySQLResultSet >> fields: flds [
 	fields := flds
 ]
 
 { #category : #'as yet unclassified' }
-MysqlResultSet >> fieldsEof [
+MySQLResultSet >> fieldsEof [
 	^ fieldsEof 
 ]
 
 { #category : #'as yet unclassified' }
-MysqlResultSet >> fieldsEof: eofPkt [ 
+MySQLResultSet >> fieldsEof: eofPkt [ 
 	fieldsEof := eofPkt
 ]
 
 { #category : #'as yet unclassified' }
-MysqlResultSet >> hasLastRowSent [
+MySQLResultSet >> hasLastRowSent [
 	"This is signaled during cursor based fetch for the rows. Therefore we
 	check for the singal in the eof field following the rows in the response."
 	^ rowsEof ifNil: [false] ifNotNil: [rowsEof hasLastRowSent]
@@ -44,7 +44,7 @@ MysqlResultSet >> hasLastRowSent [
 ]
 
 { #category : #'as yet unclassified' }
-MysqlResultSet >> hasMoreResults [
+MySQLResultSet >> hasMoreResults [
 	"Looks like the flag, when set, will be set by the server in both the
 	field eof and rowdata eof packets. We are only using field eof here, since
 	rowdata eof may not sometimes sent as part of the result set (e.g., cursor)."
@@ -53,28 +53,28 @@ MysqlResultSet >> hasMoreResults [
 ]
 
 { #category : #'as yet unclassified' }
-MysqlResultSet >> hasOpenCursor [
+MySQLResultSet >> hasOpenCursor [
 	^ fieldsEof hasOpenCursor 
 	
 ]
 
 { #category : #'as yet unclassified' }
-MysqlResultSet >> header [
+MySQLResultSet >> header [
 	^ header
 ]
 
 { #category : #'as yet unclassified' }
-MysqlResultSet >> header: hdr [
+MySQLResultSet >> header: hdr [
 	header := hdr
 ]
 
 { #category : #'as yet unclassified' }
-MysqlResultSet >> isResultSet [
+MySQLResultSet >> isResultSet [
 	^ true
 ]
 
 { #category : #cursor }
-MysqlResultSet >> nextRow [
+MySQLResultSet >> nextRow [
 		
 	(self rows isEmptyOrNil and: [self hasOpenCursor and: [self hasLastRowSent not]])
 			ifTrue: [ statement fetchRows: statement fetchSize ].
@@ -83,40 +83,40 @@ MysqlResultSet >> nextRow [
 ]
 
 { #category : #'as yet unclassified' }
-MysqlResultSet >> parse [
+MySQLResultSet >> parse [
 	self shouldNotImplement
 	
 ]
 
 { #category : #'as yet unclassified' }
-MysqlResultSet >> rows [
+MySQLResultSet >> rows [
 	^ rows
 ]
 
 { #category : #'as yet unclassified' }
-MysqlResultSet >> rows: allRows [
+MySQLResultSet >> rows: allRows [
 	rows := allRows
 	
 ]
 
 { #category : #'as yet unclassified' }
-MysqlResultSet >> rowsEof [
+MySQLResultSet >> rowsEof [
 	^ rowsEof 
 ]
 
 { #category : #'as yet unclassified' }
-MysqlResultSet >> rowsEof: eofPkt [
+MySQLResultSet >> rowsEof: eofPkt [
 	rowsEof := eofPkt
 ]
 
 { #category : #'as yet unclassified' }
-MysqlResultSet >> serverStatus [
+MySQLResultSet >> serverStatus [
 	^ fieldsEof serverStatus
 	
 ]
 
 { #category : #accessing }
-MysqlResultSet >> statement: aStatement [ 
+MySQLResultSet >> statement: aStatement [ 
 	
 	statement := aStatement
 ]

@@ -1,6 +1,6 @@
 Class {
-	#name : #MysqlCommand,
-	#superclass : #MysqlPacket,
+	#name : #MySQLCommand,
+	#superclass : #MySQLPacket,
 	#instVars : [
 		'command',
 		'arg'
@@ -9,14 +9,14 @@ Class {
 }
 
 { #category : #'as yet unclassified' }
-MysqlCommand >> command: cmd arg: text [
+MySQLCommand >> command: cmd arg: text [
 	command := cmd.
 	arg := text.
 	
 ]
 
 { #category : #'as yet unclassified' }
-MysqlCommand >> write [
+MySQLCommand >> write [
 	| buffStream |
 	buffStream := WriteStream on: ByteArray new.
 	buffStream nextPut: command.

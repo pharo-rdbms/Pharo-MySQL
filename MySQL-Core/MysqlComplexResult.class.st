@@ -1,11 +1,11 @@
 Class {
-	#name : #MysqlComplexResult,
-	#superclass : #MysqlResult,
+	#name : #MySQLComplexResult,
+	#superclass : #MySQLResult,
 	#category : #'MySQL-Core-Packet'
 }
 
 { #category : #'as yet unclassified' }
-MysqlComplexResult class >> buildFrom: aSession [
+MySQLComplexResult class >> buildFrom: aSession [
 	^ self subclassResponsibility 
 	
 ]

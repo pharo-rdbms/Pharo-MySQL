@@ -1,6 +1,6 @@
 Class {
-	#name : #Mysql323Scramble,
-	#superclass : #MysqlPacket,
+	#name : #MySQL323Scramble,
+	#superclass : #MySQLPacket,
 	#instVars : [
 		'scrambleBuff',
 		'password'
@@ -9,25 +9,25 @@ Class {
 }
 
 { #category : #'as yet unclassified' }
-Mysql323Scramble >> password: pwd [
+MySQL323Scramble >> password: pwd [
 	password := pwd
 	
 ]
 
 { #category : #'as yet unclassified' }
-Mysql323Scramble >> scrambleBuff: scramble [
+MySQL323Scramble >> scrambleBuff: scramble [
 	scrambleBuff := scramble 
 	
 ]
 
 { #category : #'as yet unclassified' }
-Mysql323Scramble >> write [
+MySQL323Scramble >> write [
 	| scrmbl buffStream |
 	buffStream := WriteStream on: (ByteArray new: 256).
 	scrmbl := password isEmptyOrNil 
 		ifTrue: [ '' asByteArray ]
 		ifFalse: 	[ 
-			MysqlHelper 
+			MySQLHelper 
 				scramble323: scrambleBuff
 				with: password ].
 	"Server expects just the scramble, null terminated and nothing else"

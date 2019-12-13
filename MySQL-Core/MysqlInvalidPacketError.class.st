@@ -1,5 +1,5 @@
 Class {
-	#name : #MysqlInvalidPacketError,
-	#superclass : #MysqlDriverError,
+	#name : #MySQLInvalidPacketError,
+	#superclass : #MySQLDriverError,
 	#category : #'MySQL-Core-Exception'
 }

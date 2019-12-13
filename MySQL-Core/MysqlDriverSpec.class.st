@@ -1,5 +1,5 @@
 Class {
-	#name : #MysqlDriverSpec,
+	#name : #MySQLDriverSpec,
 	#superclass : #Object,
 	#instVars : [
 		'host',
@@ -13,61 +13,61 @@ Class {
 }
 
 { #category : #'as yet unclassified' }
-MysqlDriverSpec >> database: dbName [
+MySQLDriverSpec >> database: dbName [
 	database := dbName
 ]
 
 { #category : #'as yet unclassified' }
-MysqlDriverSpec >> db [
+MySQLDriverSpec >> db [
 	^ database
 ]
 
 { #category : #'as yet unclassified' }
-MysqlDriverSpec >> db: dbName [
+MySQLDriverSpec >> db: dbName [
 	database := dbName
 ]
 
 { #category : #'as yet unclassified' }
-MysqlDriverSpec >> host [
+MySQLDriverSpec >> host [
 	^ host
 ]
 
 { #category : #'as yet unclassified' }
-MysqlDriverSpec >> host: server [
+MySQLDriverSpec >> host: server [
 	host := server
 ]
 
 { #category : #'as yet unclassified' }
-MysqlDriverSpec >> options: driverOptions [
+MySQLDriverSpec >> options: driverOptions [
 	options := driverOptions
 ]
 
 { #category : #'as yet unclassified' }
-MysqlDriverSpec >> password [
+MySQLDriverSpec >> password [
 	^ password
 ]
 
 { #category : #'as yet unclassified' }
-MysqlDriverSpec >> password: userPassword [
+MySQLDriverSpec >> password: userPassword [
 	password := userPassword
 ]
 
 { #category : #'as yet unclassified' }
-MysqlDriverSpec >> port [
+MySQLDriverSpec >> port [
 	^ port
 ]
 
 { #category : #'as yet unclassified' }
-MysqlDriverSpec >> port: serverPort [
+MySQLDriverSpec >> port: serverPort [
 	port := serverPort
 ]
 
 { #category : #'as yet unclassified' }
-MysqlDriverSpec >> user [
+MySQLDriverSpec >> user [
 	^ user
 ]
 
 { #category : #'as yet unclassified' }
-MysqlDriverSpec >> user: userName [
+MySQLDriverSpec >> user: userName [
 	user := userName
 ]

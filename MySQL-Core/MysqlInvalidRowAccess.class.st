@@ -1,5 +1,5 @@
 Class {
-	#name : #MysqlInvalidRowAccess,
-	#superclass : #MysqlDriverError,
+	#name : #MySQLInvalidRowAccess,
+	#superclass : #MySQLDriverError,
 	#category : #'MySQL-Core-Exception'
 }

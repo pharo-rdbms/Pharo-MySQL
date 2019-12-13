@@ -15,13 +15,13 @@
 
 "
 Class {
-	#name : #MysqlQueryStatusTest,
-	#superclass : #MysqlTestCase,
+	#name : #MySQLQueryStatusTest,
+	#superclass : #MySQLTestCase,
 	#category : #'MySQL-Core-Tests-Integration'
 }
 
 { #category : #'as yet unclassified' }
-MysqlQueryStatusTest >> testAffectedRows [
+MySQLQueryStatusTest >> testAffectedRows [
 	| conn resp |
 	conn := self connection.
 
@@ -40,18 +40,18 @@ MysqlQueryStatusTest >> testAffectedRows [
 ]
 
 { #category : #'as yet unclassified' }
-MysqlQueryStatusTest >> testAutoCommitMode [
+MySQLQueryStatusTest >> testAutoCommitMode [
 	| conn resp |
 	conn := self connection.
 	resp := conn query: 'set autocommit = 0'.
-	self assert: (resp serverStatus bitAnd: MysqlServerStatus statusAutoCommit) = 0 .
+	self assert: (resp serverStatus bitAnd: MySQLServerStatus statusAutoCommit) = 0 .
 	resp := conn query: 'set autocommit = 1'.
-	self deny: (resp serverStatus bitAnd: MysqlServerStatus statusAutoCommit) = 0.
+	self deny: (resp serverStatus bitAnd: MySQLServerStatus statusAutoCommit) = 0.
 
 ]
 
 { #category : #'as yet unclassified' }
-MysqlQueryStatusTest >> testInsertId [
+MySQLQueryStatusTest >> testInsertId [
 	| conn resp |
 	conn := self connection.
 
@@ -66,36 +66,36 @@ MysqlQueryStatusTest >> testInsertId [
 ]
 
 { #category : #'as yet unclassified' }
-MysqlQueryStatusTest >> testServerStatus [
+MySQLQueryStatusTest >> testServerStatus [
 	| conn resp |
 	conn := self connection.
 
 	resp := conn query: 'insert into nameValue values(''0'', ''statusKey01'', ''statusValue01'')'.
 	self assert: resp isOkay.
-	self deny: (resp serverStatus bitAnd: MysqlServerStatus statusAutoCommit) = 0.
+	self deny: (resp serverStatus bitAnd: MySQLServerStatus statusAutoCommit) = 0.
 
 	resp := conn query: 'insert into nameValue values(''0'', ''statusKey02'', ''statusValue02'')'.
 	self assert: resp isOkay.
-	self deny: (resp serverStatus bitAnd: MysqlServerStatus statusAutoCommit) = 0.
+	self deny: (resp serverStatus bitAnd: MySQLServerStatus statusAutoCommit) = 0.
 	
 	resp := conn query: 'select * from nameValue'.
 	self assert: resp isResultSet.
-	self deny: (resp serverStatus bitAnd: MysqlServerStatus statusNoIndexUsed) = 0.
-	self deny: (resp serverStatus bitAnd: MysqlServerStatus statusAutoCommit) = 0.
+	self deny: (resp serverStatus bitAnd: MySQLServerStatus statusNoIndexUsed) = 0.
+	self deny: (resp serverStatus bitAnd: MySQLServerStatus statusAutoCommit) = 0.
 
 ]
 
 { #category : #'as yet unclassified' }
-MysqlQueryStatusTest >> testTransactionModeCommit [
+MySQLQueryStatusTest >> testTransactionModeCommit [
 	| conn resp |
 	conn := self connection.
 	resp := conn query: 'start transaction'.
 	self assert: resp isOkay.
-	self assert: (resp serverStatus bitAnd: MysqlServerStatus statusInTransaction) 
-				= MysqlServerStatus statusInTransaction.
+	self assert: (resp serverStatus bitAnd: MySQLServerStatus statusInTransaction) 
+				= MySQLServerStatus statusInTransaction.
 	resp := conn query: 'set autocommit = 0'.
 	self assert: resp isOkay.
-	self assert: (resp serverStatus bitAnd: MysqlServerStatus statusAutoCommit) = 0.
+	self assert: (resp serverStatus bitAnd: MySQLServerStatus statusAutoCommit) = 0.
 
 	resp := conn query: 'insert into nameValue values(''0'', ''statusKey01'', ''statusValue02'')'.
 	self assert: resp isOkay.
@@ -117,7 +117,7 @@ MysqlQueryStatusTest >> testTransactionModeCommit [
 ]
 
 { #category : #'as yet unclassified' }
-MysqlQueryStatusTest >> testTransactionModeRollback [
+MySQLQueryStatusTest >> testTransactionModeRollback [
 	| conn resp |
 	conn := self connection.
 	resp := conn query: 'start transaction'.
@@ -142,19 +142,19 @@ MysqlQueryStatusTest >> testTransactionModeRollback [
 ]
 
 { #category : #'as yet unclassified' }
-MysqlQueryStatusTest >> testTransactionStatus [
+MySQLQueryStatusTest >> testTransactionStatus [
 	| conn resp |
 	conn := self connection.
 	resp := conn query: 'start transaction'.
-	self deny: (resp serverStatus bitAnd: MysqlServerStatus statusInTransaction) = 0.
+	self deny: (resp serverStatus bitAnd: MySQLServerStatus statusInTransaction) = 0.
 
 	resp := conn query: 'rollback'.
-	self assert: (resp serverStatus bitAnd: MysqlServerStatus statusInTransaction) = 0.
+	self assert: (resp serverStatus bitAnd: MySQLServerStatus statusInTransaction) = 0.
 
 ]
 
 { #category : #'as yet unclassified' }
-MysqlQueryStatusTest >> testWarnings [
+MySQLQueryStatusTest >> testWarnings [
 	| conn resp |
 	conn := self connection.
 	

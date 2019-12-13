@@ -7,17 +7,19 @@ Class {
 	#category : #'MySQL-Core-Tests'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : #tests }
 MySQLHelperTest >> isLogging [
-	^true "Allow faillure log to transcript"
+	"Allow failure log to transcript"
+	^true 
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #running }
 MySQLHelperTest >> setUp [
+	super setUp.
 	pwd := MySQLHelper new
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #testing }
 MySQLHelperTest >> testBytesFromHexString [
 	| bytes |
 	bytes := MySQLHelper bytesFromHexString: '00112233445566778899AABBCCDDEEFF'.
@@ -27,7 +29,7 @@ MySQLHelperTest >> testBytesFromHexString [
 	
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #testing }
 MySQLHelperTest >> testHash [
 	self 
 		assert: #(1345345333 305419889 ) = (MySQLHelper hash: '')
@@ -44,7 +46,7 @@ MySQLHelperTest >> testHash [
 		description: 'Hash on nil should throw exception'
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #testing }
 MySQLHelperTest >> testHexStringFromBytes [
 	| bytes str |
 	bytes := ByteArray new: 16.
@@ -59,7 +61,7 @@ MySQLHelperTest >> testHexStringFromBytes [
 	
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #testing }
 MySQLHelperTest >> testMyRandom [
 	MySQLHelper randomInitWith: 3252345 and: 7149734.
 	self assert: (MySQLHelper myRandom closeTo: 0.0157456556481734).
@@ -77,7 +79,7 @@ MySQLHelperTest >> testMyRandom [
 	
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #testing }
 MySQLHelperTest >> testScramble323LongSeedEmptyPassword [
 	self assert: '' = 
 		(MySQLHelper hexStringFromBytes: ( 
@@ -85,7 +87,7 @@ MySQLHelperTest >> testScramble323LongSeedEmptyPassword [
 			
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #testing }
 MySQLHelperTest >> testScramble323LongSeedLongPassword [
 	self assert: '4d545b475f524d45' asUppercase = 
 		(MySQLHelper hexStringFromBytes: ( 
@@ -93,7 +95,7 @@ MySQLHelperTest >> testScramble323LongSeedLongPassword [
 			
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #testing }
 MySQLHelperTest >> testScramble323LongSeedShortPassword [
 	self assert: '5a4d46474353585f' asUppercase = 
 		(MySQLHelper hexStringFromBytes: ( 
@@ -101,7 +103,7 @@ MySQLHelperTest >> testScramble323LongSeedShortPassword [
 			
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #testing }
 MySQLHelperTest >> testScramble323SeedLongPassword [
 	self assert: '5554585a434c5459' asUppercase = 
 		(MySQLHelper hexStringFromBytes: ( 

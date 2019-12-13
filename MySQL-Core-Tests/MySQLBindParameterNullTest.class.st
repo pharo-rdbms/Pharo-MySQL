@@ -7,13 +7,13 @@ Class {
 	#category : #'MySQL-Core-Tests'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : #running }
 MySQLBindParameterNullTest >> setUp [
 	theParam := MySQLBindParameter new.
 	
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #tests }
 MySQLBindParameterNullTest >> testNullParamBinaryWrite [
 	"binding a nil param
 		- should produce an empty string in binary protocol"
@@ -25,7 +25,7 @@ MySQLBindParameterNullTest >> testNullParamBinaryWrite [
 		
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #tests }
 MySQLBindParameterNullTest >> testNullParamBind [
 	"binding a nil value
 		- should set the param type to NULL"
@@ -36,7 +36,7 @@ MySQLBindParameterNullTest >> testNullParamBind [
 		
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #tests }
 MySQLBindParameterNullTest >> testNullParamTest [
 	"binding a nil value
 		- should return true when tested for type NULL

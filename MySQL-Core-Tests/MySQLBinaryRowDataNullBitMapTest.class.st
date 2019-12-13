@@ -7,13 +7,14 @@ Class {
 	#category : #'MySQL-Core-Tests'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : #running }
 MySQLBinaryRowDataNullBitMapTest >> setUp [
-	row := MySQLBinaryRowData new.
+	super setUp.
+	row := MySQLBinaryRowData new
 	
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #tests }
 MySQLBinaryRowDataNullBitMapTest >> testByteBoundaries [
 	row nullBitMap: #(16r84 16r81 16r81 16r81).
 	self assert: (row isColumnNullAt: 1) description: 'Column 1 should be null'.
@@ -27,7 +28,7 @@ MySQLBinaryRowDataNullBitMapTest >> testByteBoundaries [
 	
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #tests }
 MySQLBinaryRowDataNullBitMapTest >> testByteNonBoundaries [
 	row nullBitMap: #(16r78 16r7E 16r7E 16r7E).
 	self deny: (row isColumnNullAt: 1) description: 'Column 1 should not be null'.
@@ -39,7 +40,7 @@ MySQLBinaryRowDataNullBitMapTest >> testByteNonBoundaries [
 	
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #tests }
 MySQLBinaryRowDataNullBitMapTest >> testByteNonBoundariesAtEnd [
 	row nullBitMap: #(16r78 16r7E 16r7E 16r7E).
 	self deny: (row isColumnNullAt: 23) description: 'Column 23 should not be null'.
@@ -53,7 +54,7 @@ MySQLBinaryRowDataNullBitMapTest >> testByteNonBoundariesAtEnd [
 	
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #tests }
 MySQLBinaryRowDataNullBitMapTest >> testByteNonBoundariesInTheMiddle [
 	row nullBitMap: #(16r78 16r7E 16r7E 16r7E).
 	self deny: (row isColumnNullAt: 7) description: 'Column 7 should not be null'.
@@ -67,7 +68,7 @@ MySQLBinaryRowDataNullBitMapTest >> testByteNonBoundariesInTheMiddle [
 	
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #tests }
 MySQLBinaryRowDataNullBitMapTest >> testFirstAndLastIndex [
 	row nullBitMap: #(16r04 16r00 16r00 16r00).
 	self assert: (row isColumnNullAt: 1) description: 'Column 1 should be null'.
@@ -75,7 +76,7 @@ MySQLBinaryRowDataNullBitMapTest >> testFirstAndLastIndex [
 	
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #tests }
 MySQLBinaryRowDataNullBitMapTest >> testFirstAndLastIndexReverted [
 	row nullBitMap: #(16r00 16r00 16r00 16r80).
 	self deny: (row isColumnNullAt: 1) description: 'Column 1 should be null'.

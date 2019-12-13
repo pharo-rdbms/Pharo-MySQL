@@ -7,13 +7,14 @@ Class {
 	#category : #'MySQL-Core-Tests'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : #running }
 MySQLBindParameterIntegerTest >> setUp [
+	super setUp.
 	theParam := MySQLBindParameter new.
 	
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
 MySQLBindParameterIntegerTest >> specText [
 	"
 	Binding an integer in range -128 to 255
@@ -26,7 +27,7 @@ MySQLBindParameterIntegerTest >> specText [
 
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
 MySQLBindParameterIntegerTest >> storeBinary [
 	ByteArray streamContents: [:strm | 
 		theParam storeBinaryOn: strm.
@@ -34,7 +35,7 @@ MySQLBindParameterIntegerTest >> storeBinary [
 	
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #tests }
 MySQLBindParameterIntegerTest >> testParamInBigIntRange [
 	theParam bindValue: -16r8000000000000000.
 	self assert: (theParam paramType = MySQLTypes typeLONGLONG).
@@ -56,7 +57,7 @@ MySQLBindParameterIntegerTest >> testParamInBigIntRange [
 
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #tests }
 MySQLBindParameterIntegerTest >> testParamInLongIntRange [
 	theParam bindValue: -16r80000000.
 	self assert: (theParam paramType = MySQLTypes typeLONG).
@@ -81,7 +82,7 @@ MySQLBindParameterIntegerTest >> testParamInLongIntRange [
 
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #tests }
 MySQLBindParameterIntegerTest >> testParamInShortIntRange [
 	theParam bindValue: -16r8000.
 	self assert: (theParam paramType = MySQLTypes typeSHORT).
@@ -106,7 +107,7 @@ MySQLBindParameterIntegerTest >> testParamInShortIntRange [
 
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #tests }
 MySQLBindParameterIntegerTest >> testParamInTinyIntRange [
 	theParam bindValue: -128.
 	self assert: (theParam paramType = MySQLTypes typeTINY).
@@ -117,7 +118,7 @@ MySQLBindParameterIntegerTest >> testParamInTinyIntRange [
 
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #tests }
 MySQLBindParameterIntegerTest >> testParamOutOfBigIntRange [
 	self should: [theParam bindValue: -16r8000000000000001] raise: MySQLBindError.
 	theParam bindValue: -16r80000000.
@@ -129,7 +130,7 @@ MySQLBindParameterIntegerTest >> testParamOutOfBigIntRange [
 
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #tests }
 MySQLBindParameterIntegerTest >> testParamOutOfLongIntRange [
 	theParam bindValue: -16r80000001.
 	self deny: (theParam paramType = MySQLTypes typeLONG).
@@ -143,7 +144,7 @@ MySQLBindParameterIntegerTest >> testParamOutOfLongIntRange [
 
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #tests }
 MySQLBindParameterIntegerTest >> testParamOutOfShortIntRange [
 	theParam bindValue: -16r8001.
 	self deny: (theParam paramType = MySQLTypes typeSHORT).
@@ -157,7 +158,7 @@ MySQLBindParameterIntegerTest >> testParamOutOfShortIntRange [
 
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #tests }
 MySQLBindParameterIntegerTest >> testParamOutOfTinyIntRange [
 	theParam bindValue: -129.
 	self deny: (theParam paramType = MySQLTypes typeTINY).
@@ -166,7 +167,7 @@ MySQLBindParameterIntegerTest >> testParamOutOfTinyIntRange [
 
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #tests }
 MySQLBindParameterIntegerTest >> testStoreBinaryBigInt [
 	theParam bindValue: -16r8000000000000000.
 	self assert: (self storeBinary hasEqualElements: 
@@ -188,7 +189,7 @@ MySQLBindParameterIntegerTest >> testStoreBinaryBigInt [
 
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #tests }
 MySQLBindParameterIntegerTest >> testStoreBinaryLongInt [
 	theParam bindValue: -16r80000000.
 	self assert: (self storeBinary hasEqualElements: 
@@ -209,7 +210,7 @@ MySQLBindParameterIntegerTest >> testStoreBinaryLongInt [
 	
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #tests }
 MySQLBindParameterIntegerTest >> testStoreBinaryShortInt [
 	theParam bindValue: -16r8000.
 	self assert: (self storeBinary hasEqualElements: (ByteArray with: 16r00 with: 16r80)).
@@ -224,7 +225,7 @@ MySQLBindParameterIntegerTest >> testStoreBinaryShortInt [
 	
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #tests }
 MySQLBindParameterIntegerTest >> testStoreBinaryTinyInt [
 	theParam bindValue: -128.
 	self assert: (self storeBinary hasEqualElements: (ByteArray with: 16r80)).

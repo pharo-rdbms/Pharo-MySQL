@@ -7,13 +7,13 @@ Class {
 	#category : #'MySQL-Core-Tests'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : #running }
 MySQLBindParameterDateTimeTest >> setUp [
 	theParam := MySQLBindParameter new.
 	
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
 MySQLBindParameterDateTimeTest >> storeBinary [
 	ByteArray streamContents: [:strm | 
 		theParam storeBinaryOn: strm.
@@ -21,7 +21,7 @@ MySQLBindParameterDateTimeTest >> storeBinary [
 	
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #tests }
 MySQLBindParameterDateTimeTest >> testParamDate [
 	theParam bindValue: (Date fromString: '06-21-2011').
 	self assert: (theParam detectParamType = MySQLTypes typeDATE).
@@ -30,7 +30,7 @@ MySQLBindParameterDateTimeTest >> testParamDate [
 	
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #tests }
 MySQLBindParameterDateTimeTest >> testParamDateTime [
 	theParam bindValue: DateAndTime current.
 	self assert: (theParam detectParamType = MySQLTypes typeDATETIME).
@@ -38,7 +38,7 @@ MySQLBindParameterDateTimeTest >> testParamDateTime [
 	
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #tests }
 MySQLBindParameterDateTimeTest >> testParamDuration [
 	theParam bindValue: (Duration fromString: '10:02:30:45').
 	self assert: (theParam detectParamType = MySQLTypes typeTIME).
@@ -50,7 +50,7 @@ MySQLBindParameterDateTimeTest >> testParamDuration [
 	
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #tests }
 MySQLBindParameterDateTimeTest >> testParamTime [
 	theParam bindValue: Time now.
 	self assert: (theParam detectParamType = MySQLTypes typeTIME).
@@ -58,7 +58,7 @@ MySQLBindParameterDateTimeTest >> testParamTime [
 	
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #tests }
 MySQLBindParameterDateTimeTest >> testParamTimestamp [
 	theParam bindValue: DateAndTime current.
 	self assert: (theParam detectParamType = MySQLTypes typeTIMESTAMP).
@@ -66,14 +66,14 @@ MySQLBindParameterDateTimeTest >> testParamTimestamp [
 	
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #tests }
 MySQLBindParameterDateTimeTest >> testStoreBinaryDate [
 	theParam bindValue: (Date fromString: '06-21-2011').
 	self assert: (MySQLHelper hexStringFromBytes: self storeBinary) = '04DB070615'
 	
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #tests }
 MySQLBindParameterDateTimeTest >> testStoreBinaryDateAndTime [
 	theParam bindValue: (DateAndTime epoch). "Squeak epoch: 1901-01-01"
 	self assert: (MySQLHelper hexStringFromBytes: self storeBinary) = '046D070101'.
@@ -87,7 +87,7 @@ MySQLBindParameterDateTimeTest >> testStoreBinaryDateAndTime [
 	
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #tests }
 MySQLBindParameterDateTimeTest >> testStoreBinaryDuration [
 	theParam bindValue: (Duration zero).
 	self assert: (MySQLHelper hexStringFromBytes: self storeBinary) = '00'.
@@ -104,7 +104,7 @@ MySQLBindParameterDateTimeTest >> testStoreBinaryDuration [
 	
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #tests }
 MySQLBindParameterDateTimeTest >> testStoreBinaryTime [
 	theParam bindValue: (Time midnight).
 	self assert: (MySQLHelper hexStringFromBytes: self storeBinary) = '00'.
@@ -118,7 +118,7 @@ MySQLBindParameterDateTimeTest >> testStoreBinaryTime [
 	
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #tests }
 MySQLBindParameterDateTimeTest >> testStoreBinaryTimeStamp [
 	theParam bindValue: (DateAndTime epoch). "Squeak epoch: 1901-01-01"
 	self assert: (MySQLHelper hexStringFromBytes: self storeBinary) = '046D070101'.

@@ -7,13 +7,13 @@ Class {
 	#category : #'MySQL-Core-Tests'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : #running }
 MySQLBindParameterStringBlobTest >> setUp [
 	theParam := MySQLBindParameter new.
 	
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
 MySQLBindParameterStringBlobTest >> storeBinary [
 	ByteArray streamContents: [:strm | 
 		theParam storeBinaryOn: strm.
@@ -21,7 +21,7 @@ MySQLBindParameterStringBlobTest >> storeBinary [
 	
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #tests }
 MySQLBindParameterStringBlobTest >> testParamBlob [
 	theParam bindValue: (ByteArray new: 16rFF withAll: 16rAA).
 	self assert: (theParam detectParamType = MySQLTypes typeTINYBLOB).
@@ -42,7 +42,7 @@ MySQLBindParameterStringBlobTest >> testParamBlob [
 
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #tests }
 MySQLBindParameterStringBlobTest >> testParamCharacter [
 	theParam bindValue: $A.
 	self assert: (theParam detectParamType = MySQLTypes typeSTRING).
@@ -50,7 +50,7 @@ MySQLBindParameterStringBlobTest >> testParamCharacter [
 
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #tests }
 MySQLBindParameterStringBlobTest >> testParamStoreBinaryCharacter [
 	theParam bindValue: $A.
 	"lengthcoded + charcter as string"
@@ -58,7 +58,7 @@ MySQLBindParameterStringBlobTest >> testParamStoreBinaryCharacter [
 
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #tests }
 MySQLBindParameterStringBlobTest >> testParamStoreBinaryString [
 	| value binStrm |
 	theParam bindValue: 'hello'.
@@ -75,7 +75,7 @@ MySQLBindParameterStringBlobTest >> testParamStoreBinaryString [
 	
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #tests }
 MySQLBindParameterStringBlobTest >> testParamStoreBinarySymbol [
 	theParam bindValue: #hello.
 	"lengthcoded + string bytes"
@@ -84,7 +84,7 @@ MySQLBindParameterStringBlobTest >> testParamStoreBinarySymbol [
 
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #tests }
 MySQLBindParameterStringBlobTest >> testParamStoreBinaryText [
 	theParam bindValue: (Text fromString: 'This is a text').
 	"lengthcoded + string bytes"
@@ -93,7 +93,7 @@ MySQLBindParameterStringBlobTest >> testParamStoreBinaryText [
 
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #tests }
 MySQLBindParameterStringBlobTest >> testParamString [
 	theParam bindValue: 'Smalltalk is awesome'.
 	self assert: (theParam detectParamType = MySQLTypes typeVARSTRING).
@@ -101,7 +101,7 @@ MySQLBindParameterStringBlobTest >> testParamString [
 	
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #tests }
 MySQLBindParameterStringBlobTest >> testParamSymbol [
 	theParam bindValue: #'Symbols are special'.
 	self assert: (theParam detectParamType = MySQLTypes typeVARSTRING).
@@ -109,7 +109,7 @@ MySQLBindParameterStringBlobTest >> testParamSymbol [
 	
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #tests }
 MySQLBindParameterStringBlobTest >> testParamText [
 	theParam bindValue: (Text fromString: 'Smalltalk is awesome').
 	self assert: (theParam detectParamType = MySQLTypes typeVARSTRING).

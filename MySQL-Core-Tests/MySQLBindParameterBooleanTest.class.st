@@ -7,13 +7,13 @@ Class {
 	#category : #'MySQL-Core-Tests'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : #running }
 MySQLBindParameterBooleanTest >> setUp [
 	theParam := MySQLBindParameter new.
 	
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
 MySQLBindParameterBooleanTest >> storeBinary [
 	ByteArray streamContents: [:strm | 
 		theParam storeBinaryOn: strm.
@@ -21,7 +21,7 @@ MySQLBindParameterBooleanTest >> storeBinary [
 	
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #tests }
 MySQLBindParameterBooleanTest >> testParamBoolean [
 	theParam bindValue: true.
 	self assert: (theParam detectParamType = MySQLTypes typeTINY).
@@ -33,7 +33,7 @@ MySQLBindParameterBooleanTest >> testParamBoolean [
 
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #tests }
 MySQLBindParameterBooleanTest >> testParamStoreBinaryBoolean [
 	theParam bindValue: true.
 	self assert: (self storeBinary hasEqualElements: (ByteArray with: 16r01)).

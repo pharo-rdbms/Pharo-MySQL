@@ -4,7 +4,7 @@ Class {
 	#category : #'MySQL-Core-Tests'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : #tests }
 MySQLCommandExecuteTest >> testNullBitMap [
 	| params cmd |
 
@@ -18,7 +18,7 @@ MySQLCommandExecuteTest >> testNullBitMap [
 
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #tests }
 MySQLCommandExecuteTest >> testNullBitMapAllButFirstAndLastNull [
 	| params cmd |
 
@@ -36,7 +36,7 @@ MySQLCommandExecuteTest >> testNullBitMapAllButFirstAndLastNull [
 
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #tests }
 MySQLCommandExecuteTest >> testNullBitMapAllNull [
 	| params cmd |
 
@@ -50,7 +50,7 @@ MySQLCommandExecuteTest >> testNullBitMapAllNull [
 
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #tests }
 MySQLCommandExecuteTest >> testNullBitMapMajorityNull [
 	| params cmd |
 
@@ -68,7 +68,7 @@ MySQLCommandExecuteTest >> testNullBitMapMajorityNull [
 
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #tests }
 MySQLCommandExecuteTest >> testNullBitMapSomeNull [
 	| params cmd |
 

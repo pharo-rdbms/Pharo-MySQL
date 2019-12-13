@@ -4,7 +4,7 @@ Class {
 	#category : #'MySQL-Core-Tests'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : #scenarios }
 MySQLBinaryReaderTest >> scenarioReadDate [
 '
 Reading binary DATE
@@ -14,7 +14,7 @@ Reading binary DATE
 
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #scenarios }
 MySQLBinaryReaderTest >> scenarioReadDateTime [
 '
 Reading binary DATETIME
@@ -24,7 +24,7 @@ Reading binary DATETIME
 '
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #scenarios }
 MySQLBinaryReaderTest >> scenarioReadTime [
 '
 Reading binary TIME
@@ -39,7 +39,7 @@ Reading binary TIME
 '
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'tests - reading - date' }
 MySQLBinaryReaderTest >> testReadDateIgnoeTimeFields [
 	| strm reader |
 
@@ -54,7 +54,7 @@ MySQLBinaryReaderTest >> testReadDateIgnoeTimeFields [
 		
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'tests - reading - date' }
 MySQLBinaryReaderTest >> testReadDateTimeWithDateFieldsOnly [
 	| strm reader |
 
@@ -72,7 +72,7 @@ MySQLBinaryReaderTest >> testReadDateTimeWithDateFieldsOnly [
 		
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'tests - reading - date' }
 MySQLBinaryReaderTest >> testReadDateTimeWithDateTimeFields [
 	| strm reader |
 
@@ -90,7 +90,7 @@ MySQLBinaryReaderTest >> testReadDateTimeWithDateTimeFields [
 		
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'tests - reading - date' }
 MySQLBinaryReaderTest >> testReadDateTimeWithSubsecondField [
 	| strm reader |
 
@@ -108,7 +108,7 @@ MySQLBinaryReaderTest >> testReadDateTimeWithSubsecondField [
 		
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'tests - reading - date' }
 MySQLBinaryReaderTest >> testReadDateWithDateFieldsOnly [
 	| strm reader |
 
@@ -123,7 +123,7 @@ MySQLBinaryReaderTest >> testReadDateWithDateFieldsOnly [
 		
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'tests - reading - numbers' }
 MySQLBinaryReaderTest >> testReadDecimalWithScale [
 	| aStream reader |
 	aStream := ReadWriteStream on: ByteArray new.
@@ -135,7 +135,7 @@ MySQLBinaryReaderTest >> testReadDecimalWithScale [
 
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'tests - reading - numbers' }
 MySQLBinaryReaderTest >> testReadDouble [
 	| aStream reader |
 	aStream := ReadWriteStream on: ByteArray new.
@@ -148,7 +148,7 @@ MySQLBinaryReaderTest >> testReadDouble [
 	
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'tests - reading - numbers' }
 MySQLBinaryReaderTest >> testReadFloat [
 	| aStream reader |
 	aStream := ReadWriteStream on: ByteArray new.
@@ -160,7 +160,7 @@ MySQLBinaryReaderTest >> testReadFloat [
 	
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'tests - reading - numbers' }
 MySQLBinaryReaderTest >> testReadLongInt [
 	| aStream reader |
 	aStream := ReadWriteStream on: ByteArray new.
@@ -180,7 +180,7 @@ MySQLBinaryReaderTest >> testReadLongInt [
 
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'tests - reading - numbers' }
 MySQLBinaryReaderTest >> testReadMediumInt [
 	| aStream reader |
 	aStream := ReadWriteStream on: ByteArray new.
@@ -196,7 +196,7 @@ MySQLBinaryReaderTest >> testReadMediumInt [
 
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'tests - reading - numbers' }
 MySQLBinaryReaderTest >> testReadShortInt [
 	| aStream reader |
 	aStream := ReadWriteStream on: ByteArray new.
@@ -210,7 +210,7 @@ MySQLBinaryReaderTest >> testReadShortInt [
 
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'tests - reading - time' }
 MySQLBinaryReaderTest >> testReadTimeWithDaysAndTime [
 	| strm reader |
 
@@ -227,7 +227,7 @@ MySQLBinaryReaderTest >> testReadTimeWithDaysAndTime [
 		
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'tests - reading - time' }
 MySQLBinaryReaderTest >> testReadTimeWithDaysOnly [
 	| strm reader |
 
@@ -243,7 +243,7 @@ MySQLBinaryReaderTest >> testReadTimeWithDaysOnly [
 		
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'tests - reading - time' }
 MySQLBinaryReaderTest >> testReadTimeWithDaysTimeAndSubseconds [
 	| strm reader |
 
@@ -261,7 +261,7 @@ MySQLBinaryReaderTest >> testReadTimeWithDaysTimeAndSubseconds [
 		
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'tests - reading - time' }
 MySQLBinaryReaderTest >> testReadTimeWithNegSign [
 	| strm reader |
 
@@ -278,7 +278,7 @@ MySQLBinaryReaderTest >> testReadTimeWithNegSign [
 		
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'tests - reading - time' }
 MySQLBinaryReaderTest >> testReadTimeWithNoDaysButWithTime [
 	| strm reader |
 
@@ -295,7 +295,7 @@ MySQLBinaryReaderTest >> testReadTimeWithNoDaysButWithTime [
 		
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'tests - reading - time' }
 MySQLBinaryReaderTest >> testReadTimeWithNoDaysButWithTimeAndSubseconds [
 	| strm reader |
 
@@ -313,7 +313,7 @@ MySQLBinaryReaderTest >> testReadTimeWithNoDaysButWithTimeAndSubseconds [
 		
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'tests - reading - time' }
 MySQLBinaryReaderTest >> testReadTimeWithZeroDaysOnly [
 	| strm reader |
 
@@ -329,7 +329,7 @@ MySQLBinaryReaderTest >> testReadTimeWithZeroDaysOnly [
 		
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'tests - reading - time' }
 MySQLBinaryReaderTest >> testReadTimeZeroHour [
 	| strm reader |
 
@@ -345,7 +345,7 @@ MySQLBinaryReaderTest >> testReadTimeZeroHour [
 		
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'tests - reading - numbers' }
 MySQLBinaryReaderTest >> testReadTinyInt [
 	| aStream reader |
 	aStream := ReadWriteStream on: ByteArray new.
@@ -358,7 +358,7 @@ MySQLBinaryReaderTest >> testReadTinyInt [
 
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'tests - reading' }
 MySQLBinaryReaderTest >> testReadVarBlob [
 	| aStream reader longString |
 
@@ -381,7 +381,7 @@ MySQLBinaryReaderTest >> testReadVarBlob [
 	
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'tests - reading' }
 MySQLBinaryReaderTest >> testReadVarString [
 	| aStream reader longString |
 	aStream := ReadWriteStream on: ByteArray new.

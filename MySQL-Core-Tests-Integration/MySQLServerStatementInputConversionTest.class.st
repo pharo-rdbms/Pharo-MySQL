@@ -4,7 +4,7 @@ Class {
 	#category : #'MySQL-Core-Tests-Integration-Base'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
 MySQLServerStatementInputConversionTest >> scenarios [
 ^
 '
@@ -34,7 +34,7 @@ Statement
 
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #tests }
 MySQLServerStatementInputConversionTest >> testAcceptEmptyLongParams [
 	| prep stmtId resp params stmt |
 	
@@ -64,7 +64,7 @@ MySQLServerStatementInputConversionTest >> testAcceptEmptyLongParams [
 	
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #tests }
 MySQLServerStatementInputConversionTest >> testAcceptLongParams [
 	| prep stmtId resp params stmt |
 	
@@ -94,7 +94,7 @@ MySQLServerStatementInputConversionTest >> testAcceptLongParams [
 	
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #tests }
 MySQLServerStatementInputConversionTest >> testAcceptNegativeIntegers [
 	| prep stmtId params resp stmt |
 	self withFixtures: #(#integers) do: [:conn |
@@ -130,7 +130,7 @@ MySQLServerStatementInputConversionTest >> testAcceptNegativeIntegers [
 	
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #tests }
 MySQLServerStatementInputConversionTest >> testAcceptNullForIntegers [
 	| conn resp params stmtId stmt |
 	conn := self connection.
@@ -175,7 +175,7 @@ MySQLServerStatementInputConversionTest >> testAcceptNullForIntegers [
 	self assert: (resp rows first atIndex: 6) = 9999999999
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #tests }
 MySQLServerStatementInputConversionTest >> testAcceptPositiveIntegers [
 	| prep stmtId params resp stmt |
 	self withFixtures: #(#integers) do: [:conn |

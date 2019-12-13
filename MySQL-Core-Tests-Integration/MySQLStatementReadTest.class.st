@@ -4,7 +4,7 @@ Class {
 	#category : #'MySQL-Core-Tests-Integration-Base'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
 MySQLStatementReadTest >> scenarios [
 ^ '
 - should read results of integer types  
@@ -27,7 +27,7 @@ MySQLStatementReadTest >> scenarios [
 
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #tests }
 MySQLStatementReadTest >> testReadBlobTypes [
 	| prep stmtId params resp stmt |
 	self 
@@ -54,7 +54,7 @@ MySQLStatementReadTest >> testReadBlobTypes [
 			self assert: (resp rows second atIndex: 5) = '1234567890' asByteArray ]
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #tests }
 MySQLStatementReadTest >> testReadCharTypes [
 	| prep stmtId params resp stmt |
 	self withFixtures: #(#chars) do: [:conn |
@@ -76,7 +76,7 @@ MySQLStatementReadTest >> testReadCharTypes [
 	
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #tests }
 MySQLStatementReadTest >> testReadIntegerTypes [
 	| prep stmtId params resp stmt |
 	self withFixtures: #(#integers) do: [:conn |
@@ -97,7 +97,7 @@ MySQLStatementReadTest >> testReadIntegerTypes [
 		]
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #tests }
 MySQLStatementReadTest >> testReadIntegerTypesNeg [
 	| prep stmtId params resp stmt |
 	self withFixtures: #(#integers) do: [:conn |
@@ -124,7 +124,7 @@ MySQLStatementReadTest >> testReadIntegerTypesNeg [
 		]
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #tests }
 MySQLStatementReadTest >> testReadIntegerTypesNull [
 	| prep stmtId params resp stmt |
 	self 
@@ -147,7 +147,7 @@ MySQLStatementReadTest >> testReadIntegerTypesNull [
 			self assert: (resp rows fourth atIndex: 6) isNil ]
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #tests }
 MySQLStatementReadTest >> testReadRealTypes [
 	| prep stmtId params resp stmt |
 	self withFixtures: #(#reals) do: [:conn |
@@ -169,7 +169,7 @@ MySQLStatementReadTest >> testReadRealTypes [
 		]
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #tests }
 MySQLStatementReadTest >> testReadRealTypesNeg [
 	| prep stmtId params resp stmt |
 	self withFixtures: #(#reals) do: [:conn |
@@ -191,7 +191,7 @@ MySQLStatementReadTest >> testReadRealTypesNeg [
 		]
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #tests }
 MySQLStatementReadTest >> testReadRealTypesNull [
 	| prep stmtId params resp stmt |
 	self 
@@ -215,7 +215,7 @@ MySQLStatementReadTest >> testReadRealTypesNull [
 			self assert: (resp rows second atIndex: 6) = (-5555555555 / 1000000 asScaledDecimal: 6) ]
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #tests }
 MySQLStatementReadTest >> testReadTimeTypes [
 	| prep stmtId params resp stmt |
 	self withFixtures: #(#times) do: [:conn |
@@ -255,7 +255,7 @@ MySQLStatementReadTest >> testReadTimeTypes [
 		
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #tests }
 MySQLStatementReadTest >> testReadTimeTypesNeg [
 	| prep stmtId params resp stmt |
 	self withFixtures: #(#times) do: [:conn |
@@ -273,7 +273,7 @@ MySQLStatementReadTest >> testReadTimeTypesNeg [
 	
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #tests }
 MySQLStatementReadTest >> testReadTimeTypesNull [
 	| prep stmtId params resp stmt |
 	self 

@@ -20,7 +20,7 @@ Class {
 	#category : #'MySQL-Core-Tests-Integration-Base'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : #tests }
 MySQLQueryStatusTest >> testAffectedRows [
 	| conn resp |
 	conn := self connection.
@@ -39,7 +39,7 @@ MySQLQueryStatusTest >> testAffectedRows [
 
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #tests }
 MySQLQueryStatusTest >> testAutoCommitMode [
 	| conn resp |
 	conn := self connection.
@@ -50,7 +50,7 @@ MySQLQueryStatusTest >> testAutoCommitMode [
 
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #tests }
 MySQLQueryStatusTest >> testInsertId [
 	| conn resp |
 	conn := self connection.
@@ -65,7 +65,7 @@ MySQLQueryStatusTest >> testInsertId [
 
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #tests }
 MySQLQueryStatusTest >> testServerStatus [
 	| conn resp |
 	conn := self connection.
@@ -85,7 +85,7 @@ MySQLQueryStatusTest >> testServerStatus [
 
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #tests }
 MySQLQueryStatusTest >> testTransactionModeCommit [
 	| conn resp |
 	conn := self connection.
@@ -116,7 +116,7 @@ MySQLQueryStatusTest >> testTransactionModeCommit [
 
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #tests }
 MySQLQueryStatusTest >> testTransactionModeRollback [
 	| conn resp |
 	conn := self connection.
@@ -141,7 +141,7 @@ MySQLQueryStatusTest >> testTransactionModeRollback [
 
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #tests }
 MySQLQueryStatusTest >> testTransactionStatus [
 	| conn resp |
 	conn := self connection.
@@ -153,7 +153,7 @@ MySQLQueryStatusTest >> testTransactionStatus [
 
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #tests }
 MySQLQueryStatusTest >> testWarnings [
 	| conn resp |
 	conn := self connection.

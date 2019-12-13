@@ -4,7 +4,7 @@ Class {
 	#category : #'MySQL-Core-Tests-Integration-Base'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : #tests }
 MySQLStatementParameterTest >> testParamNull [
 	| inParam |
 	inParam := MySQLBindParameter new.

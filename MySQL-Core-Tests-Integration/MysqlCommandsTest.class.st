@@ -4,7 +4,7 @@ Class {
 	#category : #'MySQL-Core-Tests-Integration-Base'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : #tests }
 MySQLCommandsTest >> testChangeUser [
 	| spec altSpec conn |
 	spec := self driverSpec.
@@ -21,7 +21,7 @@ MySQLCommandsTest >> testChangeUser [
 	self should: [conn changeUser: spec] raise: MySQLNoConnectionError. 
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #tests }
 MySQLCommandsTest >> testDescribeTable [
 	| results |
 	results := self connection query: 'describe nameValue'.
@@ -29,7 +29,7 @@ MySQLCommandsTest >> testDescribeTable [
 
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #tests }
 MySQLCommandsTest >> testPing [
 	| conn |
 	conn := self connection.
@@ -38,7 +38,7 @@ MySQLCommandsTest >> testPing [
 	self should: [conn ping] raise: MySQLNoConnectionError 
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #tests }
 MySQLCommandsTest >> testStmtClose [
 	| resp paramList prepResp conn stmt |
 
@@ -59,7 +59,7 @@ MySQLCommandsTest >> testStmtClose [
 	
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #tests }
 MySQLCommandsTest >> testStmtExecute [
 	| resp paramList prepResp conn stmt |
 	conn := self connection.
@@ -86,7 +86,7 @@ MySQLCommandsTest >> testStmtExecute [
 	
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #tests }
 MySQLCommandsTest >> testStmtPrepare [
 	| resp conn |
 	conn := self connection.

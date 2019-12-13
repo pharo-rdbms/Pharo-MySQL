@@ -7,7 +7,7 @@ Class {
 	#category : #'MySQL-Core-Tests-Integration-Base'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
 MySQLServerStatementFetchTest >> scenarios [
 ^ '
 - should read zero rows
@@ -18,7 +18,7 @@ MySQLServerStatementFetchTest >> scenarios [
 
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #running }
 MySQLServerStatementFetchTest >> setUp [
 	|  stmtId resp |
 	super setUp.
@@ -34,14 +34,14 @@ MySQLServerStatementFetchTest >> setUp [
 	
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #running }
 MySQLServerStatementFetchTest >> tearDown [
+	stmt close.
 	super tearDown.
-	stmt close
 	
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #tests }
 MySQLServerStatementFetchTest >> testReadAllRowsAtATime [
 	| rs rd |
 	stmt params: (Array with: (MySQLBindParameter withValue: '2011-09-01')) .
@@ -54,7 +54,7 @@ MySQLServerStatementFetchTest >> testReadAllRowsAtATime [
 	
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #tests }
 MySQLServerStatementFetchTest >> testReadOneRowAtATime [
 	| rs rd |
 	stmt params: (Array with:  (MySQLBindParameter withValue: '2011-09-01')).
@@ -70,7 +70,7 @@ MySQLServerStatementFetchTest >> testReadOneRowAtATime [
 	
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #tests }
 MySQLServerStatementFetchTest >> testReadSomeRowsAtATime [
 	| rs rd |
 	stmt params: (Array with: (MySQLBindParameter withValue: '2011-09-01')).

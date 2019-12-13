@@ -9,18 +9,18 @@ Class {
 	#category : #'MySQL-Core-Tests-Integration-Network'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : #initialization }
 MySQLNetworkSessionTest >> initialize [
 	maxLen := MySQLNetworkPacket maxLength.
 
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
 MySQLNetworkSessionTest >> maxLen [
 	^maxLen 
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #running }
 MySQLNetworkSessionTest >> setUp [
 	session := MySQLNetworkSession new.
 	ioStream := ReadWriteStream on: (ByteArray new). "test stream"
@@ -29,7 +29,7 @@ MySQLNetworkSessionTest >> setUp [
 	
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #tests }
 MySQLNetworkSessionTest >> testBigSizeReadWrite [
 	| pktData |
 	
@@ -37,7 +37,7 @@ MySQLNetworkSessionTest >> testBigSizeReadWrite [
 	self verifyWriteFollowedByReadForData: pktData	
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #tests }
 MySQLNetworkSessionTest >> testLessThanMaxSizeReadWrite [
 	| pktData |
 	
@@ -45,7 +45,7 @@ MySQLNetworkSessionTest >> testLessThanMaxSizeReadWrite [
 	self verifyWriteFollowedByReadForData: pktData	
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #tests }
 MySQLNetworkSessionTest >> testMaxSizeReadWrite [
 	| pktData |
 	
@@ -53,7 +53,7 @@ MySQLNetworkSessionTest >> testMaxSizeReadWrite [
 	self verifyWriteFollowedByReadForData: pktData	
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #tests }
 MySQLNetworkSessionTest >> testSequenceNumbering [
 	self assert: (session getSequence = 0) description: '0 right after creation'.
 	self assert: (session validateSequence: 0).
@@ -75,7 +75,7 @@ MySQLNetworkSessionTest >> testSequenceNumbering [
 	
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #private }
 MySQLNetworkSessionTest >> verifyWriteFollowedByReadForData: writeData [
 	| readData |
 

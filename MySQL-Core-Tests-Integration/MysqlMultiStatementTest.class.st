@@ -14,7 +14,7 @@ Class {
 	#category : #'MySQL-Core-Tests-Integration-Base'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : #tests }
 MySQLMultiStatementTest >> testErrorAtEnd [
 	| resp qString conn |
 	qString := 
@@ -34,7 +34,7 @@ MySQLMultiStatementTest >> testErrorAtEnd [
 	
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #tests }
 MySQLMultiStatementTest >> testErrorAtFirst [
 	| resp qString conn |
 	
@@ -49,7 +49,7 @@ MySQLMultiStatementTest >> testErrorAtFirst [
 	
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #tests }
 MySQLMultiStatementTest >> testErrorAtMiddle [
 	| resp qString conn |
 	qString := 
@@ -66,7 +66,7 @@ MySQLMultiStatementTest >> testErrorAtMiddle [
 
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #tests }
 MySQLMultiStatementTest >> testNoError [
 	| resp qString conn |
 	qString := 

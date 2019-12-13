@@ -4,7 +4,7 @@ Class {
 	#category : #'MySQL-Core-Tests-Integration-Base'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
 MySQLServerStatementInputTest >> scenarios [
 ^
 '
@@ -34,7 +34,7 @@ Statement
 
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #tests }
 MySQLServerStatementInputTest >> testAcceptLongParams [
 	| prep stmtId resp params stmt |
 	
@@ -64,7 +64,7 @@ MySQLServerStatementInputTest >> testAcceptLongParams [
 	
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #tests }
 MySQLServerStatementInputTest >> testAcceptNegativeIntegers [
 	| prep stmtId params resp stmt |
 	self withFixtures: #(#integers) do: [:conn |
@@ -100,7 +100,7 @@ MySQLServerStatementInputTest >> testAcceptNegativeIntegers [
 	
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #tests }
 MySQLServerStatementInputTest >> testAcceptNullForIntegers [
 	| conn resp params stmtId stmt |
 	conn := self connection.
@@ -146,7 +146,7 @@ MySQLServerStatementInputTest >> testAcceptNullForIntegers [
 	self assert: (resp rows first atIndex: 6) = 9999999999
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #tests }
 MySQLServerStatementInputTest >> testAcceptPositiveIntegers [
 	| prep stmtId params resp stmt |
 	self withFixtures: #(#integers) do: [:conn |
@@ -180,7 +180,7 @@ MySQLServerStatementInputTest >> testAcceptPositiveIntegers [
 	
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #tests }
 MySQLServerStatementInputTest >> testInputParamExpectingNoResultSet [
 	| prep stmtId params resp stmt |
 	self withFixtures: #(#zero) do: [:conn |
@@ -205,7 +205,7 @@ MySQLServerStatementInputTest >> testInputParamExpectingNoResultSet [
 	
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #tests }
 MySQLServerStatementInputTest >> testInputParamExpectingResultSet [
 	| prep stmtId params resp stmt |
 	self withFixtures: #(#zero) do: [:conn |
@@ -234,7 +234,7 @@ MySQLServerStatementInputTest >> testInputParamExpectingResultSet [
 	
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #tests }
 MySQLServerStatementInputTest >> testInputTimeTypes [
 	| prep stmtId params stmt resp |
 	self withFixtures: #(#times) do: [:conn |
@@ -263,7 +263,7 @@ MySQLServerStatementInputTest >> testInputTimeTypes [
 	
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #tests }
 MySQLServerStatementInputTest >> testInputTimeTypesNeg [
 	| prep stmtId params stmt resp |
 	self withFixtures: #(#times) do: [:conn |
@@ -292,7 +292,7 @@ MySQLServerStatementInputTest >> testInputTimeTypesNeg [
 		
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #tests }
 MySQLServerStatementInputTest >> testInputTimeTypesNull [
 	| prep stmtId params stmt resp |
 	self withFixtures: #(#times) do: [:conn |
@@ -319,7 +319,7 @@ MySQLServerStatementInputTest >> testInputTimeTypesNull [
 		
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #tests }
 MySQLServerStatementInputTest >> testNoInputParamExpectingNoResultSet [
 	| prep stmtId params resp stmt |
 	self withFixtures: #(#zero) do: [:conn |
@@ -339,7 +339,7 @@ MySQLServerStatementInputTest >> testNoInputParamExpectingNoResultSet [
 	
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #tests }
 MySQLServerStatementInputTest >> testNoInputParamExpectingResultSet [
 	| prep stmtId params resp stmt |
 	self withFixtures: #(#zero) do: [:conn |

@@ -10,7 +10,7 @@ Class {
 	#category : #'MySQL-Core-Tests-Integration-Driver'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
 MySQLDriverTest >> badConnectionSpec [
 	| connSpec |
 	
@@ -20,7 +20,7 @@ MySQLDriverTest >> badConnectionSpec [
 	^ connSpec
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
 MySQLDriverTest >> goodConnectionSpec [
 	^ MySQLDriverSpec new
 		host: 'localhost';
@@ -30,7 +30,7 @@ MySQLDriverTest >> goodConnectionSpec [
 		yourself
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
 MySQLDriverTest >> invalidHostNameConnectionSpec [
 	| connSpec |
 	
@@ -40,17 +40,19 @@ MySQLDriverTest >> invalidHostNameConnectionSpec [
 	^ connSpec
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #running }
 MySQLDriverTest >> setUp [
+	super setUp.
 	connector := MySQLDriver new
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #running }
 MySQLDriverTest >> tearDown [
-	connector connected ifTrue: [connector disconnect]
+	connector connected ifTrue: [connector disconnect].
+	super tearDown
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #tests }
 MySQLDriverTest >> testConnectAssorted [
 	| connSpec |
 	
@@ -68,7 +70,7 @@ MySQLDriverTest >> testConnectAssorted [
 
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #tests }
 MySQLDriverTest >> testConnectBad [
 	| connSpec |
 	connSpec := self badConnectionSpec .
@@ -76,7 +78,7 @@ MySQLDriverTest >> testConnectBad [
 	
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #tests }
 MySQLDriverTest >> testConnectGood [
 
 	| connSpec resp |
@@ -87,7 +89,7 @@ MySQLDriverTest >> testConnectGood [
 	
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #tests }
 MySQLDriverTest >> testConnectWithDb [
 	| connSpec resp |
 	connSpec := self goodConnectionSpec.
@@ -102,7 +104,7 @@ MySQLDriverTest >> testConnectWithDb [
 
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #tests }
 MySQLDriverTest >> testDisconnect [
 
 	| connSpec |
@@ -113,7 +115,7 @@ MySQLDriverTest >> testDisconnect [
 	self should: [connector disconnect] raise: MySQLNoConnectionError .
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #tests }
 MySQLDriverTest >> testHostLookupError [
 	| connSpec |
 	connSpec := self invalidHostNameConnectionSpec.

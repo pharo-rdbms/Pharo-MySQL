@@ -1,10 +1,13 @@
+"
+Test fixture for MySQL testing
+"
 Class {
 	#name : #MySQLTestFixture,
 	#superclass : #Object,
 	#category : #'MySQL-Core-Tests-Integration-Test-Fixtures'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
 MySQLTestFixture class >> fixtureBlobs [
 	^ #(
 	'insert into 
@@ -15,7 +18,7 @@ MySQLTestFixture class >> fixtureBlobs [
 	)
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
 MySQLTestFixture class >> fixtureChars [
 	^ #(
 	'insert into 
@@ -27,7 +30,7 @@ MySQLTestFixture class >> fixtureChars [
 	
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
 MySQLTestFixture class >> fixtureIntegers [
 	^ #(
 	'insert into 
@@ -39,7 +42,7 @@ MySQLTestFixture class >> fixtureIntegers [
 	)
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
 MySQLTestFixture class >> fixtureReals [
 	^ #(
 	'insert into 
@@ -51,7 +54,7 @@ MySQLTestFixture class >> fixtureReals [
 	)
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
 MySQLTestFixture class >> fixtureTimes [
 	^ #(
 	'insert into 
@@ -64,7 +67,7 @@ MySQLTestFixture class >> fixtureTimes [
 	)
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
 MySQLTestFixture class >> fixtureZero [
 	^ #(
 	'insert into testMisc (name, value, entryOn, notes) values 

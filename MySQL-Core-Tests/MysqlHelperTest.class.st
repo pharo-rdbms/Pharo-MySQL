@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'pwd'
 	],
-	#category : #'MySQL-Core-Tests'
+	#category : #'MySQL-Core-Tests-Utilities'
 }
 
 { #category : #tests }

@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'theParam'
 	],
-	#category : #'MySQL-Core-Tests'
+	#category : #'MySQL-Core-Tests-Utilities'
 }
 
 { #category : #running }

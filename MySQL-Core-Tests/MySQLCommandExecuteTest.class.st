@@ -1,7 +1,7 @@
 Class {
 	#name : #MySQLCommandExecuteTest,
 	#superclass : #TestCase,
-	#category : #'MySQL-Core-Tests'
+	#category : #'MySQL-Core-Tests-Command'
 }
 
 { #category : #tests }

@@ -1,7 +1,7 @@
 Class {
 	#name : #MySQLBinaryReaderTest,
 	#superclass : #TestCase,
-	#category : #'MySQL-Core-Tests'
+	#category : #'MySQL-Core-Tests-Utilities'
 }
 
 { #category : #scenarios }

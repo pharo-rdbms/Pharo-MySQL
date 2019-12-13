@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'row'
 	],
-	#category : #'MySQL-Core-Tests'
+	#category : #'MySQL-Core-Tests-Packet-RowData'
 }
 
 { #category : #running }

@@ -18,15 +18,14 @@ BaselineOfMySQL >> baseline: spec [
 								
 			"Packages"
 			spec 
-				package: 'MySQL';
-				package: 'MySQL-Driver' with: [ spec requires: #('MySQL' 'MySQL-Command' 'MySQL-Exception' 'MySQL-Helper' 'MySQL-Net' 'MySQL-Packet') ];
-				package: 'MySQL-Test-Unit' with: [ spec requires: #('MySQL-Driver') ];
-				package: 'MySQL-Test-Integ' with: [ spec requires: #('MySQL-Driver') ].				
+				package: 'MySQL-Core';
+				package: 'MySQL-Core-Tests' with: [ spec requires: #('MySQL-Core') ];
+				package: 'MySQL-Core-Tests-Integration' with: [ spec requires: #('MySQL-Core-Tests') ].				
 						
 			"Groups"
 			spec
-				group: 'Core' with: #('MySQL-Driver');		
-				group: 'Tests' with: #('MySQL-Test-Integ' 'MySQL-Test-Unit'); 				
+				group: 'Core' with: #('MySQL-Core');		
+				group: 'Tests' with: #('MySQL-Core-Tests' 'MySQL-Core-Tests-Integration'); 				
 				group: 'all' with: #('Core' 'Tests');
 				group: 'default' with: #('all')].
 ]

@@ -10,6 +10,7 @@ Class {
 		'fieldsEof',
 		'rows',
 		'rowsEof',
+		'rowsStream',
 		'statement'
 	],
 	#category : #'MySQL-Core-Packet-Results'
@@ -76,10 +77,10 @@ MySQLResultSet >> isResultSet [
 { #category : #cursor }
 MySQLResultSet >> nextRow [
 		
-	(self rows isEmptyOrNil and: [self hasOpenCursor and: [self hasLastRowSent not]])
+	((self rows isNil or: [ self rowsStream atEnd]) and: [self hasOpenCursor and: [self hasLastRowSent not]])
 			ifTrue: [ statement fetchRows: statement fetchSize ].
 			
-	^ rows ifEmpty: [ nil ] ifNotEmpty: [ rows removeFirst ]
+	^ self rowsStream next
 ]
 
 { #category : #parsing }
@@ -95,8 +96,8 @@ MySQLResultSet >> rows [
 
 { #category : #accessing }
 MySQLResultSet >> rows: allRows [
-	rows := allRows
-	
+	rows := allRows.
+	rowsStream := nil
 ]
 
 { #category : #accessing }
@@ -107,6 +108,12 @@ MySQLResultSet >> rowsEof [
 { #category : #accessing }
 MySQLResultSet >> rowsEof: eofPkt [
 	rowsEof := eofPkt
+]
+
+{ #category : #accessing }
+MySQLResultSet >> rowsStream [
+
+	^rowsStream ifNil: [ rowsStream := ReadStream on: self rows ]
 ]
 
 { #category : #accessing }

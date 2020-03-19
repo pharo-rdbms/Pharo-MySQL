@@ -38,7 +38,7 @@ MySQLHelper class >> bytesFromSha1Hash: num [
 	| index bytes |
 	index := 0.
 	bytes := ByteArray new: (num bytesCount max: 20).	"gurantee 20 bytes; required for authentication"
-	20 - num bytesCount to: 1 by: -1 do: [ :i | bytes at: (index := index + 1) put: (0 digitAt: 1) ].	"filler 0 from msbyte"
+	20 - num bytesCount to: 1 by: -1 do: [ :i | bytes at: (index := index + 1) put: (0 byteAt: 1) ].	"filler 0 from msbyte"
 	num bytesCount to: 1 by: -1 do: [ :i | bytes at: (index := index + 1) put: (num byteAt: i) ].
 	^ bytes
 ]

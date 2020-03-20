@@ -16,6 +16,14 @@ Class {
 	#category : #'MySQL-Core-Packet-Results'
 }
 
+{ #category : #testing }
+MySQLResultSet >> atEnd [
+
+	"Stream/cursored behaviour"
+	
+	^self hasMoreResults not and: [ self rowsStream atEnd ]
+]
+
 { #category : #accessing }
 MySQLResultSet >> fields [
 	^ fields 

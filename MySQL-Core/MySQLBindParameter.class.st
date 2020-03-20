@@ -100,7 +100,7 @@ MySQLBindParameter >> dateTimeBytes [
 MySQLBindParameter >> decimalBytes [
 	"For scaled decimal"
 	ByteArray streamContents: [:strm |
-		MySQLHelper encodeLcs: (paramValue abs printString allButLast:2) asByteArray on: strm.
+		MySQLHelper encodeLcs: (paramValue printString allButLast:2) asByteArray on: strm.
 		^ strm contents]
 ]
 

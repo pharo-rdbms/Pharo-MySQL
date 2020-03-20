@@ -1,6 +1,6 @@
 Class {
 	#name : #MySQLDriverTest,
-	#superclass : #TestCase,
+	#superclass : #MySQLTestCase,
 	#instVars : [
 		'connector'
 	],
@@ -22,12 +22,7 @@ MySQLDriverTest >> badConnectionSpec [
 
 { #category : #accessing }
 MySQLDriverTest >> goodConnectionSpec [
-	^ MySQLDriverSpec new
-		host: 'localhost';
-		port: 3306;
-		user: 'root';
-		password: '';
-		yourself
+	^ MySQLTestResource driverSpecNoDb
 ]
 
 { #category : #accessing }
@@ -93,12 +88,12 @@ MySQLDriverTest >> testConnectGood [
 MySQLDriverTest >> testConnectWithDb [
 	| connSpec resp |
 	connSpec := self goodConnectionSpec.
-	connSpec db: 'sodbxtest2'.
+	connSpec db: MySQLTestResource dbName.
 	resp := connector connect: connSpec.
 	self assert: resp isOkay.
 	connector disconnect.
 
-	connSpec db: 'sodbxtest2' reversed.
+	connSpec db: MySQLTestResource dbName reversed.
 	self assert: (connector connect: connSpec) isError.
 	connector connected ifTrue: [ connector disconnect].
 

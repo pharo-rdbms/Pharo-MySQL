@@ -7,6 +7,24 @@ Class {
 	#category : #'MySQL-Core-Tests-Integration-Base'
 }
 
+{ #category : #tests }
+MySQLServerStatementFetchTest >> _testReadNextRow [
+	| rs rd |
+	stmt params: (Array with:  (MySQLBindParameter withValue: '2011-09-01')).
+	rs := stmt execute.
+	self assert: rs isResultSet; assert: rs hasOpenCursor; deny: rs hasLastRowSent.
+	10 timesRepeat:
+		[ rd := rs nextRow.
+		self deny: rd isNil ].
+	
+	self assert: rs atEnd.
+	rd := rs nextRow.
+	self 
+		assert: rd isNil; 
+		assert: rs atEnd.
+	
+]
+
 { #category : #accessing }
 MySQLServerStatementFetchTest >> scenarios [
 ^ '
@@ -52,6 +70,33 @@ MySQLServerStatementFetchTest >> testReadAllRowsAtATime [
 	rd := stmt fetchRows: 1.
 	self assert: rd isError
 	
+]
+
+{ #category : #tests }
+MySQLServerStatementFetchTest >> testReadNextRowFetchAll [
+	
+	"Test nextRow where fetch size is greater than data size"
+	
+	stmt fetchSize: 100.
+	self _testReadNextRow 
+]
+
+{ #category : #tests }
+MySQLServerStatementFetchTest >> testReadNextRowFetchExact [
+	
+	"Test nextRow where fetch size is same as data size"
+	
+	stmt fetchSize: 10.
+	self _testReadNextRow 
+]
+
+{ #category : #tests }
+MySQLServerStatementFetchTest >> testReadNextRowFetchIncremental [
+	
+	"Test nextRow where incremental fetches are needed"
+	
+	stmt fetchSize: 2.
+	self _testReadNextRow 
 ]
 
 { #category : #tests }

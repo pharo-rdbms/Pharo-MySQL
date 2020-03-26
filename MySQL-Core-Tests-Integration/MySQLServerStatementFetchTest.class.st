@@ -7,24 +7,6 @@ Class {
 	#category : #'MySQL-Core-Tests-Integration-Base'
 }
 
-{ #category : #tests }
-MySQLServerStatementFetchTest >> _testReadNextRow [
-	| rs rd |
-	stmt params: (Array with:  (MySQLBindParameter withValue: '2011-09-01')).
-	rs := stmt execute.
-	self assert: rs isResultSet; assert: rs hasOpenCursor; deny: rs hasLastRowSent.
-	10 timesRepeat:
-		[ rd := rs nextRow.
-		self deny: rd isNil ].
-	
-	self assert: rs atEnd.
-	rd := rs nextRow.
-	self 
-		assert: rd isNil; 
-		assert: rs atEnd.
-	
-]
-
 { #category : #accessing }
 MySQLServerStatementFetchTest >> scenarios [
 ^ '
@@ -76,9 +58,23 @@ MySQLServerStatementFetchTest >> testReadAllRowsAtATime [
 MySQLServerStatementFetchTest >> testReadNextRowFetchAll [
 	
 	"Test nextRow where fetch size is greater than data size"
+
+	| rs rd |
 	
 	stmt fetchSize: 100.
-	self _testReadNextRow 
+
+	stmt params: (Array with:  (MySQLBindParameter withValue: '2011-09-01')).
+	rs := stmt execute.
+	self assert: rs isResultSet; assert: rs hasOpenCursor; deny: rs hasLastRowSent.
+	10 timesRepeat:
+		[ rd := rs nextRow.
+		self deny: rd isNil ].
+	
+	self assert: rs atEnd.
+	rd := rs nextRow.
+	self 
+		assert: rd isNil; 
+		assert: rs atEnd
 ]
 
 { #category : #tests }
@@ -86,8 +82,22 @@ MySQLServerStatementFetchTest >> testReadNextRowFetchExact [
 	
 	"Test nextRow where fetch size is same as data size"
 	
+	| rs rd |
+	
 	stmt fetchSize: 10.
-	self _testReadNextRow 
+
+	stmt params: (Array with:  (MySQLBindParameter withValue: '2011-09-01')).
+	rs := stmt execute.
+	self assert: rs isResultSet; assert: rs hasOpenCursor; deny: rs hasLastRowSent.
+	10 timesRepeat:
+		[ rd := rs nextRow.
+		self deny: rd isNil ].
+	
+	self assert: rs atEnd.
+	rd := rs nextRow.
+	self 
+		assert: rd isNil; 
+		assert: rs atEnd
 ]
 
 { #category : #tests }
@@ -95,8 +105,22 @@ MySQLServerStatementFetchTest >> testReadNextRowFetchIncremental [
 	
 	"Test nextRow where incremental fetches are needed"
 	
+	| rs rd |
+	
 	stmt fetchSize: 2.
-	self _testReadNextRow 
+
+	stmt params: (Array with:  (MySQLBindParameter withValue: '2011-09-01')).
+	rs := stmt execute.
+	self assert: rs isResultSet; assert: rs hasOpenCursor; deny: rs hasLastRowSent.
+	10 timesRepeat:
+		[ rd := rs nextRow.
+		self deny: rd isNil ].
+	
+	self assert: rs atEnd.
+	rd := rs nextRow.
+	self 
+		assert: rd isNil; 
+		assert: rs atEnd
 ]
 
 { #category : #tests }

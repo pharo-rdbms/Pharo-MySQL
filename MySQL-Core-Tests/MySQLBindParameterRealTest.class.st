@@ -47,11 +47,11 @@ MySQLBindParameterRealTest >> testParamDouble [
 { #category : #tests }
 MySQLBindParameterRealTest >> testParamFloat [
 	theParam bindValue: 65.0.
-	self assert: theParam paramType = MySQLTypes typeFLOAT.
+	self assert: theParam paramType = MySQLTypes typeDOUBLE.
 	self assert: theParam isUnsigned.
 
 	theParam bindValue: -65.0.
-	self assert: theParam paramType = MySQLTypes typeFLOAT.
+	self assert: theParam paramType = MySQLTypes typeDOUBLE.
 	self deny: theParam isUnsigned.
 	
 ]
@@ -67,11 +67,11 @@ MySQLBindParameterRealTest >> testParamFraction [
 	self deny: theParam isUnsigned.
 	
 	theParam bindValue: 17/4.
-	self assert: theParam paramType = MySQLTypes typeFLOAT.
+	self assert: theParam paramType = MySQLTypes typeDOUBLE.
 	self assert: theParam isUnsigned.
 	
 	theParam bindValue: -17/4.
-	self assert: theParam paramType = MySQLTypes typeFLOAT.
+	self assert: theParam paramType = MySQLTypes typeDOUBLE.
 	self deny: theParam isUnsigned.
 	
 ]
@@ -81,7 +81,7 @@ MySQLBindParameterRealTest >> testStoreBinarySignedDecimal [
 	theParam bindValue: -12345.678901s6.
 	ByteArray streamContents: [:strm | 
 		theParam storeBinaryOn: strm.
-		self assert: (strm contents asString = '12345.678901')]	
+		self assert: (strm contents asString = ((String with: (Character value: 13 "Length")), '-12345.678901'))]	
 ]
 
 { #category : #tests }
@@ -91,7 +91,7 @@ MySQLBindParameterRealTest >> testStoreBinarySignedDouble [
 		theParam storeBinaryOn: strm.
 		self assert: (strm contents 
 			hasEqualElements: 
-				(MySQLHelper bytesFromHexString: 'B4697BC3F105CDBA'))]
+				(MySQLHelper bytesFromHexString: 'F105CDBAB4697BC3'))]
 			
 ]
 
@@ -101,7 +101,7 @@ MySQLBindParameterRealTest >> testStoreBinarySignedFraction [
 	ByteArray streamContents: [:strm | 
 		theParam storeBinaryOn: strm.
 		self assert: (strm contents 
-			hasEqualElements: (MySQLHelper bytesFromHexString: '000011C0'))]
+			hasEqualElements: (MySQLHelper bytesFromHexString: '00000000000011C0'))]
 		
 ]
 
@@ -111,7 +111,7 @@ MySQLBindParameterRealTest >> testStoreBinarySingedFloat [
 	ByteArray streamContents: [:strm | 
 		theParam storeBinaryOn: strm.
 		self assert: (strm contents 
-			hasEqualElements: (MySQLHelper bytesFromHexString: '004050C0'))]
+			hasEqualElements: (MySQLHelper bytesFromHexString: '00000000004050C0'))]
 		
 ]
 
@@ -120,7 +120,7 @@ MySQLBindParameterRealTest >> testStoreBinaryUnsignedDecimal [
 	theParam bindValue: 12345.678901s6.
 	ByteArray streamContents: [:strm | 
 		theParam storeBinaryOn: strm.
-		self assert: (strm contents asString = '12345.678901')]	
+		self assert: (strm contents asString = ((String with: (Character value: 12 "Length")), '12345.678901'))]	
 ]
 
 { #category : #tests }
@@ -129,7 +129,7 @@ MySQLBindParameterRealTest >> testStoreBinaryUnsignedDouble [
 	ByteArray streamContents: [:strm | 
 		theParam storeBinaryOn: strm.
 		self assert: (strm contents 
-			hasEqualElements: (MySQLHelper bytesFromHexString: 'B4697B43F105CDBA'))]
+			hasEqualElements: (MySQLHelper bytesFromHexString: 'F105CDBAB4697B43'))]
 		
 ]
 
@@ -139,7 +139,7 @@ MySQLBindParameterRealTest >> testStoreBinaryUnsignedFloat [
 	ByteArray streamContents: [:strm | 
 		theParam storeBinaryOn: strm.
 		self assert: (strm contents 
-			hasEqualElements: (MySQLHelper bytesFromHexString: '00405040'))]
+			hasEqualElements: (MySQLHelper bytesFromHexString: '0000000000405040'))]
 		
 ]
 
@@ -149,6 +149,6 @@ MySQLBindParameterRealTest >> testStoreBinaryUnsignedFraction [
 	ByteArray streamContents: [:strm | 
 		theParam storeBinaryOn: strm.
 		self assert: (strm contents 
-			hasEqualElements: (MySQLHelper bytesFromHexString: '00001140'))]
+			hasEqualElements: (MySQLHelper bytesFromHexString: '0000000000001140'))]
 		
 ]

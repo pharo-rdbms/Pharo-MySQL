@@ -217,6 +217,13 @@ MySQLServerStatementReadStringTest >> testReadRealTypesNull [
 
 { #category : #tests }
 MySQLServerStatementReadStringTest >> testReadTimeTypes [
+
+	"From https://dev.mysql.com/doc/refman/8.0/en/datetime.html
+	'The offset is not displayed when selecting a datetime value [column 4], even if one was used when inserting it.'
+	This implies timestamps include the timezone offset, however the example SELECT results at that URL omits it.
+	Therefore we hedge our bets here with a 'beginsWith:' test"
+
+
 	| prep stmtId params resp stmt |
 	self withFixtures: #(#times) do: [:conn |
 		prep := conn prepare: 'select * from testTimes order by id'.
@@ -228,18 +235,18 @@ MySQLServerStatementReadStringTest >> testReadTimeTypes [
 
 		resp := stmt execute.
 		self assert: resp isResultSet.
-		self assert: resp rows size = 4.
+		self assert: resp rows size equals: 4.
 
-		self assert: (resp rows first atIndex: 2) = '2011-07-01'.
-		self assert: (resp rows first atIndex: 3) = '18:35:23'.
-		self assert: (resp rows first atIndex: 4) = '2011-07-02T10:12:45+00:00'.
-		self assert: (resp rows first atIndex: 5) = '1980-01-12T00:45:56+00:00'.
-		self assert: (resp rows first atIndex: 6) = '1999'.
+		self assert: (resp rows first atIndex: 2) equals: '2011-07-01'.
+		self assert: (resp rows first atIndex: 3) equals: '18:35:23'.
+		self assert: (resp rows first atIndex: 4) equals: '2011-07-02T10:12:45'.
+		self assert: ((resp rows first atIndex: 5) beginsWith: '1980-01-12T00:45:56').
+		self assert: (resp rows first atIndex: 6) equals: '1999'.
 
-		self assert: (resp rows second atIndex: 2) = '2011-06-01'.
-		self assert: (resp rows second atIndex: 3) = '3:17:34:22'.
-		self assert: (resp rows second atIndex: 4) = '2011-06-02T09:11:44+00:00'.
-		self assert: (resp rows second atIndex: 5) = '1980-02-13T01:44:55+00:00']
+		self assert: (resp rows second atIndex: 2) equals: '2011-06-01'.
+		self assert: (resp rows second atIndex: 3) equals: '3:17:34:22'.
+		self assert: (resp rows second atIndex: 4) equals: '2011-06-02T09:11:44'.
+		self assert: ((resp rows second atIndex: 5) beginsWith: '1980-02-13T01:44:55')]
 		
 ]
 

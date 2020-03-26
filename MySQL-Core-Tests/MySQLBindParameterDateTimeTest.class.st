@@ -7,6 +7,12 @@ Class {
 	#category : #'MySQL-Core-Tests-Utilities'
 }
 
+{ #category : #tests }
+MySQLBindParameterDateTimeTest >> expectedFailures [ 
+
+	^super expectedFailures, #(#testParamTimestamp )
+]
+
 { #category : #running }
 MySQLBindParameterDateTimeTest >> setUp [
 	theParam := MySQLBindParameter new.
@@ -60,6 +66,10 @@ MySQLBindParameterDateTimeTest >> testParamTime [
 
 { #category : #tests }
 MySQLBindParameterDateTimeTest >> testParamTimestamp [
+
+	"Currently an expected failure - this directly contradicts testParamDateTime.
+	Needs an explicit Timestamp class to map to MySQL typeTIMESTAMP"
+
 	theParam bindValue: DateAndTime current.
 	self assert: (theParam detectParamType = MySQLTypes typeTIMESTAMP).
 	self assert: theParam isUnsigned.

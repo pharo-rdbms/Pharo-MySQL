@@ -1,5 +1,10 @@
 "
-Test resource for MySQL testing
+Test resource for MySQL testing.
+
+Requires MySQL running on the localhost (or edit the ip in driverSpecNoDb) and the following user to be setup:
+
+create user 'sodbxtest'@'<test ip or *>' identified by 'sodbxtest';
+grant create, drop, create user, select, insert, update, delete  on *.*  to 'sodbxtest'@'<test ip or *>';
 "
 Class {
 	#name : #MySQLTestResource,

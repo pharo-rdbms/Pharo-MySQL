@@ -181,6 +181,34 @@ MySQLServerStatementInputTest >> testAcceptPositiveIntegers [
 ]
 
 { #category : #tests }
+MySQLServerStatementInputTest >> testInputDoubles [
+	| prep stmtId resp testVals params stmt |
+	prep := self connection
+		prepare:
+			'insert into 
+			testReals (floatValue, doubleValue, realValue) 
+			values (?, ?, ?)'.
+	stmtId := prep prepareOkay stmtHandlerId.
+	params := MySQLBindParameter
+		listOfSize: prep prepareOkay numParams
+		forDescriptors: prep paramDescriptors.
+	(testVals := #(0 1.0 4.2 4.25 4.5s6))
+		do: [ :val | 
+			params do: [ :param | param bindValue: val ].
+			stmt := MySQLDriverStatement onConnection: self connection.
+			stmt
+				stmtId: stmtId;
+				params: params.
+			resp := stmt execute.
+			self assert: resp isOkay.
+			self assert: resp affectedRows = 1 ].
+		
+	(self connection query: 'select floatValue, doubleValue, realValue from testReals order by floatValue') rows with: testVals do: 
+		[ :row :val |
+		self assert: (row at: 1) asNumber equals: val]
+]
+
+{ #category : #tests }
 MySQLServerStatementInputTest >> testInputParamExpectingNoResultSet [
 	| prep stmtId params resp stmt |
 	self withFixtures: #(#zero) do: [:conn |
@@ -232,6 +260,34 @@ MySQLServerStatementInputTest >> testInputParamExpectingResultSet [
 		self assert: (resp rows last atIndex: 1) = 'key-0010'.
 		self assert: (resp rows last atIndex: 3) = (Date fromString: 'Jul 01 2011')]  
 	
+]
+
+{ #category : #tests }
+MySQLServerStatementInputTest >> testInputScaledDecimals [
+	| prep stmtId resp testVals params stmt |
+	prep := self connection
+		prepare:
+			'insert into 
+			testReals (decimalValue, numericValue) 
+			values (?, ?)'.
+	stmtId := prep prepareOkay stmtHandlerId.
+	params := MySQLBindParameter
+		listOfSize: prep prepareOkay numParams
+		forDescriptors: prep paramDescriptors.
+	(testVals := #(-1s6 0s6 1s6))
+		do: [ :val | 
+			params do: [ :param | param bindValue: val ].
+			stmt := MySQLDriverStatement onConnection: self connection.
+			stmt
+				stmtId: stmtId;
+				params: params.
+			resp := stmt execute.
+			self assert: resp isOkay.
+			self assert: resp affectedRows equals: 1 ].
+		
+	(self connection query: 'select decimalValue, numericValue from testReals order by decimalValue') rows with: testVals do:
+		[ :row :val |
+		self assert: (row at: 1) asNumber equals: val]
 ]
 
 { #category : #tests }

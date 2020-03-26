@@ -100,9 +100,8 @@ MySQLBindParameter >> dateTimeBytes [
 MySQLBindParameter >> decimalBytes [
 	"For scaled decimal"
 	ByteArray streamContents: [:strm |
-		strm nextPutAll: (paramValue abs printString allButLast:2) asByteArray.
+		MySQLHelper encodeLcs: (paramValue printString allButLast:2) asByteArray on: strm.
 		^ strm contents]
-	
 ]
 
 { #category : #accessing }
@@ -134,14 +133,11 @@ MySQLBindParameter >> detectParamType [
 
 	(paramValue isKindOf: ScaledDecimal) ifTrue: [ ^ MySQLTypes typeDECIMAL ].
 	((paramValue isKindOf: Float) or:  [paramValue isKindOf: Fraction]) 
-		ifTrue: [	
-			(paramValue asFloat at: 2) = 0 
-				ifTrue: [^ MySQLTypes typeFLOAT]
-				ifFalse: [^ MySQLTypes typeDOUBLE] ].
+		ifTrue: [	 ^ MySQLTypes typeDOUBLE].
 
 	(paramValue isKindOf: Character) ifTrue: [ ^ MySQLTypes typeSTRING ].
 	((paramValue isKindOf: String) or: [paramValue isKindOf: Text]) 
-		ifTrue: [ ^ MySQLTypes typeVARSTRING ].
+		ifTrue: [^ MySQLTypes typeVARSTRING ].
 
 	(paramValue isMemberOf: DateAndTime) ifTrue: [ ^ MySQLTypes typeDATETIME ].
 	(paramValue isKindOf: DateAndTime) ifTrue: [ ^ MySQLTypes typeTIMESTAMP ].
@@ -164,13 +160,13 @@ MySQLBindParameter >> doubleBytes [
 	| storable |
 	ByteArray
 		streamContents: [ :strm | 
-			storable := paramValue asFloat at: 1.
+			storable := paramValue asFloat at: 2.
 			strm
 				nextPut: (storable byteAt: 1);
 				nextPut: (storable byteAt: 2);
 				nextPut: (storable byteAt: 3);
 				nextPut: (storable byteAt: 4).
-			storable := paramValue asFloat at: 2.
+			storable := paramValue asFloat at: 1.
 			strm
 				nextPut: (storable byteAt: 1);
 				nextPut: (storable byteAt: 2);

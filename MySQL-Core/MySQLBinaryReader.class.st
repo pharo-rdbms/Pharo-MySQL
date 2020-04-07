@@ -64,7 +64,7 @@ MySQLBinaryReader >> dateTimeFrom: aStream [ "ByteStream"
 	^ DateAndTime 
 		year: year month: month day: day 
 		hour: hh minute: mm second: ss 
-		nanoSecond: ns offset: 0 hours
+		nanoSecond: ns offset: DateAndTime localTimeZone offset
 		
 ]
 

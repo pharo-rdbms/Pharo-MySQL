@@ -37,6 +37,11 @@ MySQLQueryRowData >> fields: anObject [
 	fields := anObject
 ]
 
+{ #category : #accessing }
+MySQLQueryRowData >> last [
+	^ columns atIndex: (columns size) 
+]
+
 { #category : #parsing }
 MySQLQueryRowData >> parse [
 	| indx value field |

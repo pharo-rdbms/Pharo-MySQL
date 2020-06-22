@@ -16,6 +16,12 @@ MySQLStringRowData >> atIndex: indx [
 	
 ]
 
+{ #category : #accessing }
+MySQLStringRowData >> last [
+	^ self atIndex: (columnStrings size)
+	
+]
+
 { #category : #parsing }
 MySQLStringRowData >> parse [
 	super parse.

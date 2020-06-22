@@ -15,6 +15,7 @@ Class {
 		'TypeFLOAT',
 		'TypeGEOMETRY',
 		'TypeINT24',
+		'TypeJSON',
 		'TypeLONG',
 		'TypeLONGBLOB',
 		'TypeLONGLONG',
@@ -75,6 +76,7 @@ MySQLTypes class >> initFieldTypes [
  	TypeFLOAT := 4.
  	TypeGEOMETRY := 255.
  	TypeINT24 := 9.
+	TypeJSON := 245.
  	TypeLONG := 3.
  	TypeLONGLONG := 8.
  	TypeLONGBLOB := 251.
@@ -97,6 +99,7 @@ MySQLTypes class >> initFieldTypes [
 
 { #category : #'class initialization' }
 MySQLTypes class >> initialize [
+	"MySQLTypes initialize"
 	self initFieldTypes
 
 ]
@@ -215,6 +218,12 @@ MySQLTypes class >> typeGEOMETRY [
 { #category : #'accessing - types' }
 MySQLTypes class >> typeINT24 [
 	^ TypeINT24
+	
+]
+
+{ #category : #'accessing - types' }
+MySQLTypes class >> typeJSON [
+	^ TypeJSON
 	
 ]
 

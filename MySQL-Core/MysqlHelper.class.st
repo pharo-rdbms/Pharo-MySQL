@@ -65,7 +65,7 @@ MySQLHelper class >> decodeLcsFrom: aStream [
 	"parses length coded string"
 	| len |
 	len := self decodeLcbFrom: aStream.
-	len = -1 ifTrue: [^ 'NULL'].
+	len = -1 ifTrue: [^ nil].
 	^ aStream next: len.
 	
 ]

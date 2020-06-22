@@ -68,6 +68,16 @@ MySQLCommandQuery >> readOneRow: fieldCount [
 ]
 
 { #category : #reading }
+MySQLCommandQuery >> readOneRow: fieldCount fields: fields [
+	| row |
+	row := MySQLQueryRowData new fields: fields; yourself.
+	row columnCount: fieldCount.
+	row read: session read.
+	^ row
+	
+]
+
+{ #category : #reading }
 MySQLCommandQuery >> readResponse [
 	| resp |
 	resp := self readResult.
@@ -84,7 +94,7 @@ MySQLCommandQuery >> readResult [
 		ifFalse: [ resultSetHdr := self readRsHeader ].
 	fields := self readFields.
 	fieldsEof := self readEof.
-	rows := self readRowData: resultSetHdr fieldCount.
+	rows := self readRowData: resultSetHdr fieldCount fields: fields.
 	rowsEof := self readEof.
 	^ MySQLResultSet new
 		header: resultSetHdr;
@@ -103,6 +113,19 @@ MySQLCommandQuery >> readRowData: fieldCount [
 	[self gotEof] whileFalse: [ 
 		"Read each field and save it"
 		row := self readOneRow: fieldCount.
+		respRows add: row].
+		
+	^ respRows asArray
+	
+]
+
+{ #category : #reading }
+MySQLCommandQuery >> readRowData: fieldCount fields: fields [
+	| respRows row |
+	respRows := OrderedCollection new.
+	[self gotEof] whileFalse: [ 
+		"Read each field and save it"
+		row := self readOneRow: fieldCount fields: fields.
 		respRows add: row].
 		
 	^ respRows asArray

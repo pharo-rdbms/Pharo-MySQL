@@ -28,7 +28,6 @@ Class {
 		'PrimaryKeyFlag',
 		'SetFlag',
 		'TimestampFlag',
-		'TypeConverters',
 		'UniqueKeyFlag',
 		'UnsignedFlag',
 		'ZeroFillFlag'
@@ -58,17 +57,7 @@ MySQLField class >> initBitMasksForFlags [
 { #category : #initialization }
 MySQLField class >> initialize [
 	"self initialize"
-	self initBitMasksForFlags.
-	self initializeTypeConverters.
-]
-
-{ #category : #initialization }
-MySQLField class >> initializeTypeConverters [
-	TypeConverters ifNil: [ 
-		TypeConverters := Dictionary new. 
-		
-		
-		]
+	self initBitMasksForFlags
 ]
 
 { #category : #accessing }
@@ -149,12 +138,4 @@ MySQLField >> table [
 MySQLField >> type [
 	^ type
 	
-]
-
-{ #category : #'as yet unclassified' }
-MySQLField >> typedValueFrom: aString [
-	^(TypeConverters 
-		at: self type 
-		ifAbsent: [ self error: ('No Type Converter Registered For Type: ', (self type asString)) ])
-			value: aString
 ]

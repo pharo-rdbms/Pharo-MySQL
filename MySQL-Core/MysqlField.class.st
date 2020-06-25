@@ -57,8 +57,7 @@ MySQLField class >> initBitMasksForFlags [
 { #category : #initialization }
 MySQLField class >> initialize [
 	"self initialize"
-	self initBitMasksForFlags.
-	
+	self initBitMasksForFlags
 ]
 
 { #category : #accessing }

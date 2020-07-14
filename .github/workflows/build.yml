@@ -17,10 +17,12 @@ jobs:
         uses: hpi-swa/setup-smalltalkCI@v1
         with:
           smalltalk-version: ${{ matrix.smalltalk }}
-      - name: Install RDBMS
+      - name: Start RDBMS
         run: ./scripts/setup-RDBMS.sh
         env:
           RDBMS: ${{ matrix.rdbms }}
+      - name: Configure RDBMS
+        run: docker exec ${{ matrix.rdbms }} mysql --user=root --password=secret --execute "CREATE DATABASE IF NOT EXISTS sodbxtest2; CREATE USER sodbxtest@localhost IDENTIFIED BY 'sodbxtest'; GRANT ALL PRIVILEGES ON *.* TO 'sodbxtest'@'localhost'; FLUSH PRIVILEGES;" --verbose
       - name: Load Image and Run Tests
         run: smalltalkci -s ${{ matrix.smalltalk }}
         timeout-minutes: 15
@@ -32,3 +34,5 @@ jobs:
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
           file: ${{ env.SCI_COVERAGE_FILE_LOCATION }}
+      - name: Stop RDBMS
+        run: docker stop ${{ matrix.rdbms }}

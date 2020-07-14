@@ -18,7 +18,7 @@ BaselineOfMySQL >> baseline: spec [
 				setUpPackages: spec.
 			spec
 				group: 'CI' with: #('Tests' 'Glorp-Tests');
-				group: 'Development' with: #('Tests' 'Tools');
+				group: 'Development' with: #('Tests' 'glorp');
 				group: 'default' with: #('all');
 				group: 'all' with: #('core' 'Tests')
 			]

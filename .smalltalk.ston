@@ -1,0 +1,17 @@
+SmalltalkCISpec {
+  #loading : [
+    SCIMetacelloLoadSpec {
+      #baseline : 'MySQL',
+      #directory : '',
+      #load : [ 'CI' ],
+      #platforms : [  #pharo ]
+    }
+  ],
+  #testing : {
+    #coverage : {
+       #packages : [ 'MySQL*' ],
+       #service: #codecov,
+       #auto_upload: false
+    }
+  }
+}

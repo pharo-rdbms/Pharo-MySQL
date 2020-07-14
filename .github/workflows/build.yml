@@ -21,8 +21,9 @@ jobs:
         run: ./scripts/setup-RDBMS.sh
         env:
           RDBMS: ${{ matrix.rdbms }}
+      - run: docker ps -a
       - name: Configure RDBMS
-        run: docker exec ${{ matrix.rdbms }} mysql --user=root --password=secret --execute "CREATE DATABASE IF NOT EXISTS sodbxtest2; CREATE USER sodbxtest@localhost IDENTIFIED BY 'sodbxtest'; GRANT ALL PRIVILEGES ON *.* TO 'sodbxtest'@'localhost'; FLUSH PRIVILEGES;" --verbose
+        run: docker exec -t ${{ matrix.rdbms }} mysql --user=root --password=secret --execute "CREATE DATABASE IF NOT EXISTS sodbxtest2; CREATE USER sodbxtest@localhost IDENTIFIED BY 'sodbxtest'; GRANT ALL PRIVILEGES ON *.* TO 'sodbxtest'@'localhost'; FLUSH PRIVILEGES;" --verbose
       - name: Load Image and Run Tests
         run: smalltalkci -s ${{ matrix.smalltalk }}
         timeout-minutes: 15

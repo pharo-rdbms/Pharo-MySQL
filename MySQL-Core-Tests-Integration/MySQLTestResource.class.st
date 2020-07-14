@@ -17,11 +17,6 @@ Class {
 }
 
 { #category : #accessing }
-MySQLTestResource class >> alternativeUser [
-	^ 'sodbxtest2'
-]
-
-{ #category : #accessing }
 MySQLTestResource class >> alternativeUsername [
 	^ 'sodbxtest2'
 ]

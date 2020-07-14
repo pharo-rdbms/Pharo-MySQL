@@ -7,7 +7,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        smalltalk: [ Pharo-64-9.0, Pharo64-8.0 ]
+        smalltalk: [ Pharo64-8.0 ]
         rdbms: [ MySQLv5.5, MySQLv5.6, MySQLv5.7, MariaDBv10.1, MariaDBv10.2, MariaDBv10.3, MariaDBv10.4 ]
     name: ${{ matrix.smalltalk }} + ${{ matrix.rdbms }}
     steps:

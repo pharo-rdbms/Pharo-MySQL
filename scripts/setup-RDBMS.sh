@@ -15,8 +15,8 @@ elif  [[ "$RDBMS" = MySQL* ]]; then
       -e MYSQL_ROOT_HOST=% \
       -e MYSQL_DATABASE=sodbxtest2 \
       mysql/mysql-server:$DOCKER_IMAGE_VERSION
-    docker exec -it rdbms-server mysql --user=root --password=secret --execute "CREATE DATABASE IF NOT EXISTS sodbxtest2;" --verbose
-    docker exec -it rdbms-server mysql --user=root --password=secret --execute "CREATE USER sodbxtest@localhost IDENTIFIED BY 'sodbxtest';" --verbose
-    docker exec -it rdbms-server mysql --user=root --password=secret --execute "GRANT ALL PRIVILEGES ON *.* TO 'sodbxtest'@'localhost';" --verbose
-    docker exec -it rdbms-server mysql --user=root --password=secret --execute "FLUSH PRIVILEGES;" --verbose
+    docker exec rdbms-server mysql --user=root --password=secret --execute "CREATE DATABASE IF NOT EXISTS sodbxtest2;" --verbose
+    docker exec rdbms-server mysql --user=root --password=secret --execute "CREATE USER sodbxtest@localhost IDENTIFIED BY 'sodbxtest';" --verbose
+    docker exec rdbms-server mysql --user=root --password=secret --execute "GRANT ALL PRIVILEGES ON *.* TO 'sodbxtest'@'localhost';" --verbose
+    docker exec rdbms-server mysql --user=root --password=secret --execute "FLUSH PRIVILEGES;" --verbose
 fi;

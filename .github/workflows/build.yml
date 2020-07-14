@@ -9,7 +9,7 @@ jobs:
       fail-fast: false
       matrix:
         smalltalk: [ Pharo64-8.0 ]
-        rdbms: [ MySQLv5.5, MySQLv5.6, MySQLv5.7, MariaDBv10.1, MariaDBv10.2, MariaDBv10.3, MariaDBv10.4,  MariaDBv10.5 ]
+        rdbms: [ MySQLv5.6, MySQLv5.7, MySQLv8.0, MariaDBv10.1, MariaDBv10.2, MariaDBv10.3, MariaDBv10.4 ]
     name: ${{ matrix.smalltalk }} + ${{ matrix.rdbms }}
     steps:
       - uses: actions/checkout@v2

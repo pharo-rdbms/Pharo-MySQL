@@ -9,7 +9,7 @@ if  [[ "$RDBMS" = MariaDB* ]]; then
 elif  [[ "$RDBMS" = MySQL* ]]; then
     readonly DOCKER_IMAGE_VERSION=$(echo $RDBMS | cut --complement -c -6)
     docker run -d -p 127.0.0.1:3306:3306 \
-      -v db:/docker-entrypoint-initdb.d \
+      -v $GITHUB_WORKSPACE/Pharo-MySQL/scripts/db:/docker-entrypoint-initdb.d \
       -e MYSQL_ROOT_PASSWORD=secret \
       -e MYSQL_ROOT_HOST=% \
       -e MYSQL_DATABASE=sodbxtest2 \

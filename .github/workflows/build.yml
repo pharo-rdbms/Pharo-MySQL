@@ -13,14 +13,14 @@ jobs:
     name: ${{ matrix.smalltalk }} + ${{ matrix.rdbms }}
     steps:
       - uses: actions/checkout@v2
-      - name: Set up Smalltalk CI
-        uses: hpi-swa/setup-smalltalkCI@v1
-        with:
-          smalltalk-version: ${{ matrix.smalltalk }}
       - name: Start RDBMS
         run: ./scripts/setup-RDBMS.sh
         env:
           RDBMS: ${{ matrix.rdbms }}
+      - name: Set up Smalltalk CI
+        uses: hpi-swa/setup-smalltalkCI@v1
+        with:
+          smalltalk-version: ${{ matrix.smalltalk }}
       - name: Wait for the RDBMS to start
         uses: jakejarvis/wait-action@master
         with:
@@ -36,5 +36,3 @@ jobs:
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
           file: ${{ env.SCI_COVERAGE_FILE_LOCATION }}
-      - name: Stop RDBMS
-        run: docker stop ${{ matrix.rdbms }}

@@ -1,4 +1,4 @@
 CREATE DATABASE IF NOT EXISTS sodbxtest2;
-CREATE USER sodbxtest@localhost IDENTIFIED BY 'sodbxtest';
-GRANT ALL PRIVILEGES ON *.* TO 'sodbxtest'@'localhost';
+CREATE USER 'sodbxtest' IDENTIFIED BY 'sodbxtest';
+GRANT ALL PRIVILEGES ON *.* TO 'sodbxtest';
 FLUSH PRIVILEGES;

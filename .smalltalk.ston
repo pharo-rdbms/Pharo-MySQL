@@ -8,7 +8,11 @@ SmalltalkCISpec {
     }
   ],
   #testing : {
-     #packages : [ 'MySQL*' ]
+     #coverage : {
+      #packages : [ 'MySQL*' ],
+      #service: #codecov,
+      #auto_upload: false
+      }
     }
   }
 }

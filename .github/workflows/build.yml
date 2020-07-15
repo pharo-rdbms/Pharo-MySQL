@@ -13,7 +13,7 @@ jobs:
     name: ${{ matrix.smalltalk }} + ${{ matrix.rdbms }}
     steps:
       - uses: actions/checkout@v2
-      - run: ls $GITHUB_WORKSPACE 
+      - run: ls $GITHUB_WORKSPACE
       - name: Start RDBMS
         run: ./scripts/setup-RDBMS.sh
         env:
@@ -22,10 +22,6 @@ jobs:
         uses: hpi-swa/setup-smalltalkCI@v1
         with:
           smalltalk-version: ${{ matrix.smalltalk }}
-      - name: Wait for the RDBMS to start
-        uses: jakejarvis/wait-action@master
-        with:
-          time: '30s'
       - name: Load Image and Run Tests
         run: smalltalkci -s ${{ matrix.smalltalk }}
         timeout-minutes: 15

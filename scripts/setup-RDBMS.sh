@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+set -e
 
 if  [[ "$RDBMS" = MariaDB* ]]; then
   readonly DOCKER_IMAGE_VERSION=$(echo $RDBMS | cut --complement -c -8)
@@ -15,3 +16,6 @@ elif  [[ "$RDBMS" = MySQL* ]]; then
       -e MYSQL_DATABASE=sodbxtest2 \
       mysql/mysql-server:$DOCKER_IMAGE_VERSION
 fi;
+sleep 10
+readonly DOCKER_CONTAINER_ID=$(docker ps -q)
+docker exec $DOCKER_CONTAINER_ID mysql --user=root --password=secret --execute="select user, host from mysql.user order by user;"

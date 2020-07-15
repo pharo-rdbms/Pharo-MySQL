@@ -13,6 +13,7 @@ jobs:
     name: ${{ matrix.smalltalk }} + ${{ matrix.rdbms }}
     steps:
       - uses: actions/checkout@v2
+      - run: ls $GITHUB_WORKSPACE 
       - name: Start RDBMS
         run: ./scripts/setup-RDBMS.sh
         env:

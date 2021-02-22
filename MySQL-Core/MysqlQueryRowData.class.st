@@ -37,6 +37,11 @@ MySQLQueryRowData >> fields: anObject [
 	fields := anObject
 ]
 
+{ #category : #accessing }
+MySQLQueryRowData >> last [
+	^ columns atIndex: (columns size) 
+]
+
 { #category : #parsing }
 MySQLQueryRowData >> parse [
 	| indx value field |
@@ -82,6 +87,8 @@ MySQLQueryRowData >> readColumnFrom: aStream perDescrption: columnDescr [
 		[MySQLTypes typeBLOB]->[string].
 		[MySQLTypes typeMEDIUMBLOB]->[string].
 		[MySQLTypes typeLONGBLOB]->[string].
+	
+		[MySQLTypes typeJSON]->[NeoJSONReader fromString: string].
 		
 		[MySQLTypes typeNULL]->[self shouldBeImplemented].
 	

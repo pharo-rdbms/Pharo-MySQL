@@ -28,7 +28,6 @@ Class {
 		'PrimaryKeyFlag',
 		'SetFlag',
 		'TimestampFlag',
-		'TypeConverters',
 		'UniqueKeyFlag',
 		'UnsignedFlag',
 		'ZeroFillFlag'

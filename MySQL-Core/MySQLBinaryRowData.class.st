@@ -38,6 +38,11 @@ MySQLBinaryRowData >> isColumnNullAt: index [
 ]
 
 { #category : #accessing }
+MySQLBinaryRowData >> last [
+	^ self atIndex: (columnValues size)
+]
+
+{ #category : #accessing }
 MySQLBinaryRowData >> nullBitMap: byteArray [ "primarily for testing"
 	nullBitMap := byteArray 
 	

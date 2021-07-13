@@ -39,7 +39,7 @@ BaselineOfMySQL >> setUpDependencies: spec [
 		
 	spec
 		baseline: 'NeoCSV' with: [ spec repository: 'github://svenvc/NeoCSV:master/repository' ];
-		project: 'NeoCSV-Core' copyFrom: 'NeoCSV' with: [ spec loads: 'core' ].
+		project: 'Neo-CSV-Core' copyFrom: 'NeoCSV' with: [ spec loads: 'core' ].
 	
 	spec
 		baseline: 'ZTimestamp'
@@ -56,7 +56,7 @@ BaselineOfMySQL >> setUpDependencies: spec [
 BaselineOfMySQL >> setUpPackages: spec [
 
 	spec
-		package: 'MySQL-Core' with: [ spec requires: #('NeoJSON-Core' 'NeoCSV-CORE' 'ZTimestamp') ];
+		package: 'MySQL-Core' with: [ spec requires: #('NeoJSON-Core' 'Neo-CSV-Core' 'ZTimestamp') ];
 		group: 'core' with: 'MySQL-Core'.
 
 	spec

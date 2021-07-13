@@ -10,8 +10,7 @@ SmalltalkCISpec {
   #testing : {
      #coverage : {
       #packages : [ 'MySQL*' ],
-      #service: #codecov,
-      #auto_upload: false
+      #format: #lcov
       }
     }
   }

@@ -17,14 +17,6 @@ Class {
 }
 
 { #category : #converting }
-MySQLResultSet >> asCSV [
-	^String streamContents: [ :writeStream |
-	(NeoCSVWriter on: writeStream)
-		writeHeader: (self fields collect: [:ea | ea name]);
-		nextPutAll: rows ]
-]
-
-{ #category : #converting }
 MySQLResultSet >> asJSON [
 	^NeoJSONWriter toString: (self rows collect: [ :ea | ea asDictionary ])
 ]

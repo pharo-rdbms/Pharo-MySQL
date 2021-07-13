@@ -1,3 +1,8 @@
+"
+I am a Glorp database driver implementation for using MySQL with Glorp.
+
+The Glorp database driver provides a unifying common interface for interacting with SQL databases.
+"
 Class {
 	#name : #MySQLDatabaseDriver,
 	#superclass : #DatabaseDriver,

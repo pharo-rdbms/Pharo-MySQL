@@ -57,7 +57,7 @@ MySQLDriverSpec >> password: userPassword [
 
 { #category : #accessing }
 MySQLDriverSpec >> port [
-	^ port
+	^ port ifNil: [ port := 3306 ]
 ]
 
 { #category : #accessing }

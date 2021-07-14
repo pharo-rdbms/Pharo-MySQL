@@ -96,6 +96,16 @@ MySQLNetworkSession >> stream: aStream [
 ]
 
 { #category : #accessing }
+MySQLNetworkSession >> timeout [
+	^theStream timeout
+]
+
+{ #category : #accessing }
+MySQLNetworkSession >> timeout: seconds [ 
+	theStream timeout: seconds
+]
+
+{ #category : #accessing }
 MySQLNetworkSession >> toHost: host andPort: port [ 
 	| aStream |
 	self resetSequence.

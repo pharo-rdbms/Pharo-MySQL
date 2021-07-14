@@ -293,5 +293,5 @@ MySQLStatementReadTest >> testReadTimeTypesNull [
 			self assert: (resp rows third atIndex: 2) isNil.
 			self assert: (resp rows third atIndex: 3) isNil.
 			self assert: (resp rows third atIndex: 4) isNil.
-			self assert: (resp rows third atIndex: 5) isNotNil ]
+			self assert: (resp rows fourth atIndex: 5) isNotNil ]
 ]

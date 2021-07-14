@@ -20,7 +20,7 @@ BaselineOfMySQL >> baseline: spec [
 				group: 'CI' with: #('Tests' 'Glorp-Tests');
 				group: 'Development' with: #('Tests' 'glorp');
 				group: 'default' with: #('all');
-				group: 'all' with: #('core' 'Tests')
+				group: 'all' with: #('Core' 'Tests')
 			]
 ]
 
@@ -53,7 +53,7 @@ BaselineOfMySQL >> setUpPackages: spec [
 
 	spec
 		package: 'MySQL-Core' with: [ spec requires: #('NeoJSON-Core' 'ZTimestamp') ];
-		group: 'core' with: 'MySQL-Core'.
+		group: 'Core' with: 'MySQL-Core'.
 
 	spec
 		package: 'MySQL-Glorp' with: [ spec requires: #('MySQL-Core' 'Glorp-Deployment') ];

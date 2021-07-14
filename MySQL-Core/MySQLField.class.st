@@ -139,6 +139,17 @@ MySQLField >> parse [
 ]
 
 { #category : #accessing }
+MySQLField >> printOn: aStream [
+	super printOn: aStream.
+	aStream 
+		nextPutAll: ' ('; 
+		nextPutAll: table; 
+		nextPut: $.; 
+		nextPutAll: self name; 
+		nextPutAll: ')'
+]
+
+{ #category : #accessing }
 MySQLField >> table [
 	^ table
 	

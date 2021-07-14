@@ -12,8 +12,24 @@ Class {
 }
 
 { #category : #accessing }
+MySQLQueryRowData >> asDictionary [
+	| pairs |
+	pairs := OrderedCollection new: fields size.
+	fields doWithIndex: [ :f :i | pairs add: (f name -> (self atIndex: i)) ].
+	^pairs asDictionary
+]
+
+{ #category : #accessing }
 MySQLQueryRowData >> at: indx [
-	^ self atIndex: indx
+	^ indx isInteger 
+		ifTrue: [self atIndex: indx]
+		ifFalse: [ self atFieldNamed: indx ]
+]
+
+{ #category : #accessing }
+MySQLQueryRowData >> atFieldNamed: aName [
+	^ self atIndex: (self indexOfFieldNamed: aName)
+
 ]
 
 { #category : #accessing }
@@ -27,6 +43,11 @@ MySQLQueryRowData >> columnCount: aCount [
 	
 ]
 
+{ #category : #enumerating }
+MySQLQueryRowData >> do: aBlock [ 
+	^columns do: aBlock
+]
+
 { #category : #accessing }
 MySQLQueryRowData >> fields [
 	^ fields
@@ -35,6 +56,12 @@ MySQLQueryRowData >> fields [
 { #category : #accessing }
 MySQLQueryRowData >> fields: anObject [
 	fields := anObject
+]
+
+{ #category : #accessing }
+MySQLQueryRowData >> indexOfFieldNamed: aName [
+	self fields doWithIndex: [ :f :idx | f name = aName ifTrue: [ ^idx ] ].
+	^0
 ]
 
 { #category : #accessing }

@@ -16,6 +16,11 @@ Class {
 	#category : #'MySQL-Core-Packet-Results'
 }
 
+{ #category : #converting }
+MySQLResultSet >> asJSON [
+	^NeoJSONWriter toString: (self rows collect: [ :ea | ea asDictionary ])
+]
+
 { #category : #testing }
 MySQLResultSet >> atEnd [
 

@@ -3,7 +3,7 @@ name: Build
 on: [push,pull_request]
 
 jobs:
-   build:
+  build:
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
@@ -20,15 +20,15 @@ jobs:
       - name: Set up Smalltalk CI
         uses: hpi-swa/setup-smalltalkCI@v1
         with:
-          smalltalk-version: ${{ matrix.smalltalk }}
+          smalltalk-image: ${{ matrix.smalltalk }}
       - name: Load Image and Run Tests
         run: smalltalkci -s ${{ matrix.smalltalk }}
-        timeout-minutes: 15
         env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           RDBMS: ${{ matrix.rdbms }}
-      - run: echo "::set-env name=SCI_COVERAGE_FILE_LOCATION::${HOME}/.smalltalkCI/_builds/coveralls_results.json"
+        timeout-minutes: 15
       - name: Upload coverage to Codecov
-        uses: codecov/codecov-action@v1.0.6
+        uses: codecov/codecov-action@v1
         with:
+          name: ${{matrix.os}}-${{matrix.smalltalk}}-${{ matrix.rdbms }}
           token: ${{ secrets.CODECOV_TOKEN }}
-          file: ${{ env.SCI_COVERAGE_FILE_LOCATION }}

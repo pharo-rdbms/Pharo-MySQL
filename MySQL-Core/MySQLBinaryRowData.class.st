@@ -25,6 +25,11 @@ MySQLBinaryRowData >> columnDescriptors: fieldList [
 	
 ]
 
+{ #category : #enumerating }
+MySQLBinaryRowData >> do: aBlock [ 
+	^columnValues do: aBlock
+]
+
 { #category : #testing }
 MySQLBinaryRowData >> isColumnNullAt: index [
 	| byteIndex bitsToShift bitMask |

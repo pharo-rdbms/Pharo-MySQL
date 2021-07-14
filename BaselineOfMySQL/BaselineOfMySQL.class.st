@@ -55,17 +55,28 @@ BaselineOfMySQL >> setUpDependencies: spec [
 { #category : #baselines }
 BaselineOfMySQL >> setUpPackages: spec [
 
+	"Usually group names are capitalized, however this baselie has used group names of all lower case.
+	For consistency we have capitalized the group names and kept the lower case names as aliases for compatibility.
+	New projects should use the capitalized names and existing projects should convert to capitalized names as soon
+	as convenient as the lower case names will eventually be removd."
+
 	spec
 		package: 'MySQL-Core' with: [ spec requires: #('NeoJSON-Core' 'ZTimestamp') ];
-		group: 'core' with: 'MySQL-Core'.
+		group: 'Core' with: 'MySQL-Core'.
+		
+	spec group: 'core' with: [ spec requires: #('Core') ].
 		
 	spec
 		package: 'MySQL-CSV' with: [ spec requires: #('MySQL-Core' 'Neo-CSV-Core') ];
-		group: 'csv' with: 'MySQL-CSV'.
+		group: 'CSV' with: 'MySQL-CSV'.
+		
+	spec group: 'csv' with: [ spec requires: #( 'CSV' ) ].
 
 	spec
 		package: 'MySQL-Glorp' with: [ spec requires: #('MySQL-Core' 'Glorp-Deployment') ];
-		group: 'glorp' with: 'MySQL-Glorp'.
+		group: 'MySQL-Glorp' with: 'MySQL-Glorp'.
+		
+	spec group: 'glorp' with: [ spec requires: #( 'MySQL-Glorp' ) ].
 
 	spec
 		package: 'MySQL-Core-Tests' with: [ spec requires: 'MySQL-Core' ];

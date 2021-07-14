@@ -64,26 +64,17 @@ BaselineOfMySQL >> setUpPackages: spec [
 
 	spec
 		package: 'MySQL-Core' with: [ spec requires: #('NeoJSON-Core' 'ZTimestamp') ];
-		group: 'Core' with: 'MySQL-Core'.
-		
-	spec
-		package: 'MySQL-Core' with: [ spec requires: #('NeoJSON-Core' 'ZTimestamp') ];
+		group: 'Core' with: 'MySQL-Core';
 		group: 'core' with: 'MySQL-Core'.
 		
 	spec
 		package: 'MySQL-CSV' with: [ spec requires: #('MySQL-Core' 'Neo-CSV-Core') ];
-		group: 'CSV' with: 'MySQL-CSV'.
-		
-	spec
-		package: 'MySQL-CSV' with: [ spec requires: #('MySQL-Core' 'Neo-CSV-Core') ];
+		group: 'CSV' with: 'MySQL-CSV';
 		group: 'csv' with: 'MySQL-CSV'.
 
 	spec
 		package: 'MySQL-Glorp' with: [ spec requires: #('MySQL-Core' 'Glorp-Deployment') ];
-		group: 'MySQL-Glorp' with: 'MySQL-Glorp'.
-		
-	spec
-		package: 'MySQL-Glorp' with: [ spec requires: #('MySQL-Core' 'Glorp-Deployment') ];
+		group: 'Glorp' with: 'MySQL-Glorp';
 		group: 'glorp' with: 'MySQL-Glorp'.
 
 	spec

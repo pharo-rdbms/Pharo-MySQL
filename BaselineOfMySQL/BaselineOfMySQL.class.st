@@ -57,7 +57,7 @@ BaselineOfMySQL >> setUpPackages: spec [
 
 	spec
 		package: 'MySQL-Glorp' with: [ spec requires: #('MySQL-Core' 'Glorp-Deployment') ];
-		group: 'Glorp' with: 'MySQL-Glorp'.
+		group: 'MySQL-Glorp' with: 'MySQL-Glorp'.
 
 	spec
 		package: 'MySQL-Core-Tests' with: [ spec requires: 'MySQL-Core' ];

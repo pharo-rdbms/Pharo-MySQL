@@ -18,7 +18,7 @@ BaselineOfMySQL >> baseline: spec [
 				setUpPackages: spec.
 			spec
 				group: 'CI' with: #('Tests' 'Glorp-Tests');
-				group: 'Development' with: #('Tests' 'MySQL-Glorp');
+				group: 'Development' with: #('Tests' 'glorp');
 				group: 'default' with: #('all');
 				group: 'all' with: #('Core' 'Tests')
 			]
@@ -57,7 +57,7 @@ BaselineOfMySQL >> setUpPackages: spec [
 
 	spec
 		package: 'MySQL-Glorp' with: [ spec requires: #('MySQL-Core' 'Glorp-Deployment') ];
-		group: 'MySQL-Glorp' with: 'MySQL-Glorp'.
+		group: 'glorp' with: 'MySQL-Glorp'.
 
 	spec
 		package: 'MySQL-Core-Tests' with: [ spec requires: 'MySQL-Core' ];

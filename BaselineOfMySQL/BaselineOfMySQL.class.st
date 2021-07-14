@@ -18,9 +18,11 @@ BaselineOfMySQL >> baseline: spec [
 				setUpPackages: spec.
 			spec
 				group: 'CI' with: #('Tests' 'Glorp-Tests');
-				group: 'Development' with: #('Tests' 'glorp');
+				group: 'CI-CSV' with: #('CI' 'CSV' 'CSV-Tests');
+				group: 'Development' with: #('Tests' 'Glorp');
+				group: 'Development-CSV' with: #('Development' 'CSV' 'CSV=Tests');
 				group: 'default' with: #('all');
-				group: 'all' with: #('core' 'Tests')
+				group: 'all' with: #('Core' 'Tests' 'CSV' 'CSV-Tests')
 			]
 ]
 
@@ -64,19 +66,25 @@ BaselineOfMySQL >> setUpPackages: spec [
 		package: 'MySQL-Core' with: [ spec requires: #('NeoJSON-Core' 'ZTimestamp') ];
 		group: 'Core' with: 'MySQL-Core'.
 		
-	spec group: 'core' with: [ spec requires: #('Core') ].
+	spec
+		package: 'MySQL-Core' with: [ spec requires: #('NeoJSON-Core' 'ZTimestamp') ];
+		group: 'core' with: 'MySQL-Core'.
 		
 	spec
 		package: 'MySQL-CSV' with: [ spec requires: #('MySQL-Core' 'Neo-CSV-Core') ];
 		group: 'CSV' with: 'MySQL-CSV'.
 		
-	spec group: 'csv' with: [ spec requires: #( 'CSV' ) ].
+	spec
+		package: 'MySQL-CSV' with: [ spec requires: #('MySQL-Core' 'Neo-CSV-Core') ];
+		group: 'csv' with: 'MySQL-CSV'.
 
 	spec
 		package: 'MySQL-Glorp' with: [ spec requires: #('MySQL-Core' 'Glorp-Deployment') ];
 		group: 'MySQL-Glorp' with: 'MySQL-Glorp'.
 		
-	spec group: 'glorp' with: [ spec requires: #( 'MySQL-Glorp' ) ].
+	spec
+		package: 'MySQL-Glorp' with: [ spec requires: #('MySQL-Core' 'Glorp-Deployment') ];
+		group: 'glorp' with: 'MySQL-Glorp'.
 
 	spec
 		package: 'MySQL-Core-Tests' with: [ spec requires: 'MySQL-Core' ];

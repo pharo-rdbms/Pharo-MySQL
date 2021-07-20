@@ -228,30 +228,18 @@ MySQLStatementReadTest >> testReadTimeTypes [
 
 		resp := stmt execute.
 		self assert: resp isResultSet.
-		self assert: resp rows size = 4.
+		self assert: resp rows size equals: 4.
 
-		self assert: (resp rows first atIndex: 2) = (Date fromString: '07-01-2011').
-		self assert: (resp rows first atIndex: 3) = (Time fromString: '18:35:23').
-		self assert: (resp rows first atIndex: 4) = 
-			(DateAndTime 
-				localTimeZone: TimeZone default;  
-				fromString: '2011-07-02T10:12:45.000000000').
-		self assert: (resp rows first atIndex: 5) = 
-			(DateAndTime 
-				localTimeZone: TimeZone default; 
-				fromString: '01-12-1980 00:45:56-00:00').
-		self assert: (resp rows first atIndex: 6) = 1999.
+		self assert: (resp rows first atIndex: 2) equals: (Date fromString: '07-01-2011').
+		self assert: (resp rows first atIndex: 3) equals: (Time fromString: '18:35:23').
+		self assert: (resp rows first atIndex: 4) equals: (DateAndTime fromString: '2011-07-02T10:12:45.000000000').
+		self assert: (resp rows first atIndex: 5) equals: (DateAndTime fromString: '01-12-1980 00:45:56').
+		self assert: (resp rows first atIndex: 6) equals: 1999.
 
-		self assert: (resp rows second atIndex: 2) = (Date fromString: '06-01-2011').
-		self assert: (resp rows second atIndex: 3) = (Duration fromString: '03:17:34:22').
-		self assert: (resp rows second atIndex: 4) = 
-			(DateAndTime 
-				localTimeZone: TimeZone default; 
-				fromString: '2011-06-02T09:11:44.000000').
-		self assert: (resp rows second atIndex: 5) = 
-					(DateAndTime  
-						localTimeZone: TimeZone default; 
-						fromString: '02-13-1980 01:44:55')]
+		self assert: (resp rows second atIndex: 2) equals: (Date fromString: '06-01-2011').
+		self assert: (resp rows second atIndex: 3) equals: (Duration fromString: '03:17:34:22').
+		self assert: (resp rows second atIndex: 4) equals: (DateAndTime fromString: '2011-06-02T09:11:44.000000').
+		self assert: (resp rows second atIndex: 5) equals: (DateAndTime fromString: '02-13-1980 01:44:55')]
 		
 ]
 

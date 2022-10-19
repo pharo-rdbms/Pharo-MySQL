@@ -27,17 +27,17 @@ MySQLOkay >> hasMoreResults [
 ]
 
 { #category : #accessing }
+MySQLOkay >> insertId [
+	^ insertId 
+]
+
+{ #category : #accessing }
 MySQLOkay >> inTransaction [
 	| autoCommit inTx |
 	autoCommit := (serverStatus bitAnd: MySQLServerStatus statusInTransaction) ~= 0.
 	inTx := (serverStatus bitAnd: MySQLServerStatus statusInTransaction) ~= 0.
 	^ autoCommit and: inTx
 	
-]
-
-{ #category : #accessing }
-MySQLOkay >> insertId [
-	^ insertId 
 ]
 
 { #category : #testing }

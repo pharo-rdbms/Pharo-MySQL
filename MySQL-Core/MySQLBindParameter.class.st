@@ -99,9 +99,12 @@ MySQLBindParameter >> dateTimeBytes [
 { #category : #writes }
 MySQLBindParameter >> decimalBytes [
 	"For scaled decimal"
-	ByteArray streamContents: [:strm |
-		MySQLHelper encodeLcs: (paramValue printString allButLast:2) asByteArray on: strm.
-		^ strm contents]
+
+	^ ByteArray
+		streamContents: [ :strm | 
+			MySQLHelper
+				encodeLcs: (paramValue printShowingDecimalPlaces: paramValue scale) asByteArray
+				on: strm ]
 ]
 
 { #category : #accessing }

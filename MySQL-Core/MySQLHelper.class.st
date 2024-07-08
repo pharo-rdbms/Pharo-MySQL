@@ -50,9 +50,7 @@ MySQLHelper class >> decodeLcbFrom: byteStream [
 	"parse length coded binary"
 	| first |
 	first := byteStream next.
-	(first 
-		between: 0
-		and: 250) ifTrue: [ ^ first ].
+	first < 251 ifTrue: [ ^ first ].
 	first = 251 ifTrue: [ ^ -1 ].	"column value is NULL; applicable for row data packet only"
 	first = 252 ifTrue: [ ^ byteStream next + (byteStream next bitShift: 8) ].	"value of following 2 bytes"
 	first = 253 ifTrue: 
@@ -79,7 +77,7 @@ MySQLHelper class >> encodeLcb: value on: aStream [
 				error: 'Can not encode value' , value asString , ' to length coded binary' ].
 	value = -1
 		ifTrue: [ "represents null column value" ^ aStream nextPut: 251 ].
-	(value between: 0 and: 250)
+	value < 251
 		ifTrue: [ ^ aStream nextPut: (value byteAt: 1) ].
 	value <= 65535
 		ifTrue: [ ^ aStream

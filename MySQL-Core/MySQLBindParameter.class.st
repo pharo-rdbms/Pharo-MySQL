@@ -48,12 +48,11 @@ MySQLBindParameter >> bigIntRange [
 MySQLBindParameter >> bindValue: aValue [ 
 	| boundType |
 	paramValue := aValue.
-	(boundType := self detectParamType) ~= paramType 
+	(boundType := (aValue mySQLParamTypeFor: self)) ~= paramType 
 		ifTrue: [
 			paramType := boundType.
 			newParamBound := true].
-	unsignedFlag := self detectParamSign.
-	
+	unsignedFlag := aValue mySQLParamSign
 ]
 
 { #category : 'writes' }
@@ -122,39 +121,7 @@ MySQLBindParameter >> detectParamSign [
 { #category : 'accessing' }
 MySQLBindParameter >> detectParamType [
 	"Corresponding database type needs to be inferred from the bound value"
-	paramValue ifNil: [ ^ MySQLTypes typeNULL ].
-
-	(paramValue isKindOf: Boolean) ifTrue: [ ^ MySQLTypes typeTINY ].
-
-	(paramValue isKindOf: Integer) ifTrue: [
-		(self tinyIntRange includes: paramValue) ifTrue: [^ MySQLTypes typeTINY].
-		(self smallIntRange includes: paramValue) ifTrue: [^ MySQLTypes typeSHORT].
-		(self longIntRange includes: paramValue) ifTrue: [^ MySQLTypes typeLONG].
-		(self bigIntRange includes: paramValue) ifTrue: [^ MySQLTypes typeLONGLONG].
-		^ MySQLBindError signal: 'Supplied integer does not have a matching database type'].
-
-	(paramValue isKindOf: ScaledDecimal) ifTrue: [ ^ MySQLTypes typeDECIMAL ].
-	((paramValue isKindOf: Float) or:  [paramValue isKindOf: Fraction]) 
-		ifTrue: [	 ^ MySQLTypes typeDOUBLE].
-
-	(paramValue isKindOf: Character) ifTrue: [ ^ MySQLTypes typeSTRING ].
-	((paramValue isKindOf: String) or: [paramValue isKindOf: Text]) 
-		ifTrue: [^ MySQLTypes typeVARSTRING ].
-
-	(paramValue isMemberOf: DateAndTime) ifTrue: [ ^ MySQLTypes typeDATETIME ].
-	(paramValue isKindOf: DateAndTime) ifTrue: [ ^ MySQLTypes typeTIMESTAMP ].
-	((paramValue isKindOf: Time) or: [paramValue isKindOf: Duration]) 
-		ifTrue: [ ^ MySQLTypes typeTIME ].
-	(paramValue isKindOf: Date) ifTrue: [ ^ MySQLTypes typeDATE ].
-
-	(paramValue isKindOf: ByteArray) ifTrue: [ 
-		paramValue size < 16r100 ifTrue: [ ^ MySQLTypes typeTINYBLOB ].
-		paramValue size < 16r10000 ifTrue: [ ^ MySQLTypes typeBLOB ].
-		paramValue size < 16r1000000 ifTrue: [ ^ MySQLTypes typeMEDIUMBLOB ].
-		^ MySQLTypes typeLONGBLOB ].
-	
-	^ MySQLBindError signal: 'Unsupported data type for param binding'
-	
+	^paramValue mySQLParamTypeFor: self
 ]
 
 { #category : 'writes' }
@@ -217,13 +184,38 @@ MySQLBindParameter >> isDeclaredUnsigned [
 ]
 
 { #category : 'testing' }
+MySQLBindParameter >> isInBigIntRange: anInteger [
+	^ self isDeclaredUnsigned 
+		ifTrue: [anInteger between: 16r0000000000000000 and: 16rFFFFFFFFFFFFFFFF] 
+		ifFalse: [anInteger between: -16r8000000000000000 and: 16r7FFFFFFFFFFFFFFF]
+]
+
+{ #category : 'testing' }
+MySQLBindParameter >> isInLongIntRange: anInteger [
+	^ self isDeclaredUnsigned 
+		ifTrue: [anInteger between: 16r00000000 and: 16rFFFFFFFF] 
+		ifFalse: [anInteger between: -16r80000000 and: 16r7FFFFFFF]
+]
+
+{ #category : 'testing' }
+MySQLBindParameter >> isInSmallIntRange: anInteger [
+	^ self isDeclaredUnsigned 
+		ifTrue: [anInteger between: 16r0000 and: 16rFFFF]
+		ifFalse: [anInteger between: -16r8000 and: 16r7FFF]
+
+]
+
+{ #category : 'testing' }
+MySQLBindParameter >> isInTinyIntRange: anInteger [
+	^ self isDeclaredUnsigned 
+		ifTrue: [anInteger between: 16r00 and: 16rFF] 
+		ifFalse: [anInteger between: -16r80 and: 16r7F]
+]
+
+{ #category : 'testing' }
 MySQLBindParameter >> isLongData [
-	| typeRange |
-	"We also send varchar types as long data"
-	self paramType = MySQLTypes typeVARCHAR ifTrue: [^ true].
-	typeRange := (MySQLTypes typeTINYBLOB to: MySQLTypes typeSTRING).
-	^ typeRange includes: self paramType 
-	
+
+	^paramValue notNil and: [(self paramType = MySQLTypes typeVARCHAR or: [self paramType between: MySQLTypes typeLONGBLOB and: MySQLTypes typeSTRING]) and: [paramValue size > 1048576 "2**20"]]
 ]
 
 { #category : 'testing' }

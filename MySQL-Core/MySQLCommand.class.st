@@ -23,8 +23,12 @@ MySQLCommand >> command: cmd arg: text [
 { #category : 'writing' }
 MySQLCommand >> write [
 	| buffStream |
-	buffStream := WriteStream on: ByteArray new.
+
+	arg isNil ifTrue: [^ByteArray with: command].
+	
+	buffStream := WriteStream on: (ByteArray new: arg size + 1).
 	buffStream nextPut: command.
-	arg isEmptyOrNil ifFalse: [ buffStream nextPutAll: arg asByteArray ].
+	buffStream nextPutAll: arg asByteArray.
+
 	^ buffStream contents
 ]

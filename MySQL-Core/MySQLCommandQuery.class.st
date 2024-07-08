@@ -3,40 +3,15 @@ MySQL query command
 "
 Class {
 	#name : 'MySQLCommandQuery',
-	#superclass : 'MySQLCommandBase',
-	#instVars : [
-		'query'
-	],
+	#superclass : 'MySQLCommandWithQuery',
 	#category : 'MySQL-Core-Command',
 	#package : 'MySQL-Core',
 	#tag : 'Command'
 }
 
 { #category : 'defaults' }
-MySQLCommandQuery >> commandArg [
-	^ query 
-]
-
-{ #category : 'defaults' }
 MySQLCommandQuery >> commandCode [
 	^ ComQuery 
-]
-
-{ #category : 'testing' }
-MySQLCommandQuery >> gotEof [
-	^ (MySQLPacket from: session peek) isEof 
-	
-]
-
-{ #category : 'accessing' }
-MySQLCommandQuery >> queryString: queryString [ 
-	query := queryString
-]
-
-{ #category : 'reading' }
-MySQLCommandQuery >> readEof [
-	^ MySQLEof from: session read
-
 ]
 
 { #category : 'reading' }
@@ -98,7 +73,7 @@ MySQLCommandQuery >> readResult [
 	fieldsEof := self readEof.
 	rows := self readRowData: resultSetHdr fieldCount fields: fields.
 	rowsEof := self readEof.
-	^ MySQLResultSet new
+	^ self resultSetClass new
 		header: resultSetHdr;
 		fields: fields;
 		fieldsEof: fieldsEof;
@@ -138,4 +113,10 @@ MySQLCommandQuery >> readRowData: fieldCount fields: fields [
 MySQLCommandQuery >> readRsHeader [
 	^ MySQLResultSetHeader from: session read
 	
+]
+
+{ #category : 'reading' }
+MySQLCommandQuery >> resultSetClass [
+
+	^MySQLResultSet
 ]

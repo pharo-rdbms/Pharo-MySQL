@@ -11,3 +11,9 @@ DateAndTime >> asISOString [
 		aStream nextPut: $:. 
 		self seconds printOn: aStream base: 10 length: 2 padded: true]
 ]
+
+{ #category : '*MySQL-Core' }
+DateAndTime >> mySQLParamTypeFor: aMySQLBindParameter [
+
+	^MySQLTypes typeDATETIME
+]

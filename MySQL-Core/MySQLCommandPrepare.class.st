@@ -3,20 +3,11 @@ MySQL prepare command
 "
 Class {
 	#name : 'MySQLCommandPrepare',
-	#superclass : 'MySQLCommandBase',
-	#instVars : [
-		'query'
-	],
+	#superclass : 'MySQLCommandWithQuery',
 	#category : 'MySQL-Core-Command',
 	#package : 'MySQL-Core',
 	#tag : 'Command'
 }
-
-{ #category : 'defaults' }
-MySQLCommandPrepare >> commandArg [
-	^ query 
-	
-]
 
 { #category : 'defaults' }
 MySQLCommandPrepare >> commandCode [
@@ -24,30 +15,10 @@ MySQLCommandPrepare >> commandCode [
 	
 ]
 
-{ #category : 'testing' }
-MySQLCommandPrepare >> gotEof [
-	| resp |
-	resp := MySQLPacket from: session peek.
-	^ resp isEof 
-	
-]
-
-{ #category : 'accessing' }
-MySQLCommandPrepare >> queryString: queryString [ 
-	query := queryString
-	
-]
-
 { #category : 'reading' }
 MySQLCommandPrepare >> readColumnDescr [
 	^ MySQLField from: session read.
 
-]
-
-{ #category : 'reading' }
-MySQLCommandPrepare >> readEof [
-	^ MySQLEof from: session read
-	
 ]
 
 { #category : 'reading' }

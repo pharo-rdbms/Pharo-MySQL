@@ -63,7 +63,7 @@ MySQLDriverStatement >> execute [
 	resp := self resetStmt.
 	resp isError ifTrue: [ ^ resp ].
 	self sendLongData.
-	cmd := MySQLCommandExecute onSession: driver netSession.
+	cmd := self executeCommandClass onSession: driver netSession.
 	cmd
 		cursoredFetch: cursoredFetch;
 		mapResultsToNativeTypes: typeMapResults;
@@ -82,9 +82,19 @@ MySQLDriverStatement >> execute [
 ]
 
 { #category : 'accessing' }
+MySQLDriverStatement >> executeCommandClass [
+	^MySQLCommandExecute
+]
+
+{ #category : 'accessing' }
+MySQLDriverStatement >> fetchCommandClass [
+	^MySQLCommandFetch
+]
+
+{ #category : 'accessing' }
 MySQLDriverStatement >> fetchRows: num [
 	| cmd |
-	cmd := MySQLCommandFetch onSession: driver netSession.
+	cmd := self fetchCommandClass onSession: driver netSession.
 	cmd
 		resultSetContext: rsContext;
 		statementId: stmtId;

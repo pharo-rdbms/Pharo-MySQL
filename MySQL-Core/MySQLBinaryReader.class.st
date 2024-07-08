@@ -53,20 +53,20 @@ MySQLBinaryReader >> dateTimeFrom: aStream [ "ByteStream"
 	length = 0 ifTrue: [^ nil].
 	
 	year := self smallIntFrom: aStream.
-	month := self tinyIntFrom: aStream..
-	day := self tinyIntFrom: aStream..
+	month := self tinyIntFrom: aStream.
+	day := self tinyIntFrom: aStream.
 	
 	hh := mm:= ss := ns := 0.
 	length > 4 ifTrue: [
-		hh := self tinyIntFrom: aStream..
+		hh := self tinyIntFrom: aStream.
 		mm := self tinyIntFrom: aStream.
-		ss := self tinyIntFrom: aStream.].	
+		ss := self tinyIntFrom: aStream].
 	length > 7 ifTrue: [ns := (self longIntFrom: aStream) * 1000].
 
 	^ DateAndTime 
 		year: year month: month day: day 
 		hour: hh minute: mm second: ss 
-		nanoSecond: ns offset: 0 hours
+		nanoSecond: ns offset: DateAndTime localOffset
 		
 ]
 

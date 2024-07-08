@@ -3,12 +3,10 @@ MySQL command to execute
 "
 Class {
 	#name : 'MySQLCommandExecute',
-	#superclass : 'MySQLCommandBase',
+	#superclass : 'MySQLCommandWithStatement',
 	#instVars : [
-		'stmtId',
 		'params',
-		'cursoredFetch',
-		'mapResultsToNativeTypes'
+		'cursoredFetch'
 	],
 	#category : 'MySQL-Core-Command',
 	#package : 'MySQL-Core',
@@ -73,12 +71,6 @@ MySQLCommandExecute >> execute [
 ]
 
 { #category : 'testing' }
-MySQLCommandExecute >> gotEof [
-	^ (MySQLPacket from: session peek) isEof 
-
-]
-
-{ #category : 'testing' }
 MySQLCommandExecute >> hasNewParamBound [
 	^ params anySatisfy: [:each | each isRebound]
 	
@@ -87,15 +79,7 @@ MySQLCommandExecute >> hasNewParamBound [
 { #category : 'initialization' }
 MySQLCommandExecute >> initialize [
 	super initialize.
-	cursoredFetch := false.
-	mapResultsToNativeTypes := true
-	
-]
-
-{ #category : 'accessing' }
-MySQLCommandExecute >> mapResultsToNativeTypes: aBoolean [
-	mapResultsToNativeTypes := aBoolean
-	
+	cursoredFetch := false
 ]
 
 { #category : 'private - accessing' }
@@ -123,12 +107,6 @@ MySQLCommandExecute >> params: inParams [
 ]
 
 { #category : 'reading' }
-MySQLCommandExecute >> readEof [
-	^ MySQLEof from: session read
-
-]
-
-{ #category : 'reading' }
 MySQLCommandExecute >> readFields [
 	| respFields field |
 	respFields := OrderedCollection new.
@@ -146,17 +124,6 @@ MySQLCommandExecute >> readFields [
 MySQLCommandExecute >> readOneField [
 	^ MySQLField from: session read.
 
-]
-
-{ #category : 'reading' }
-MySQLCommandExecute >> readOneRow: fields [ 
-	| row |
-	row := mapResultsToNativeTypes 
-		ifTrue: [ MySQLBinaryRowData new ]
-		ifFalse: [ MySQLStringRowData new ].
-	row columnDescriptors: fields.
-	row read: session read.
-	^ row
 ]
 
 { #category : 'reading' }
@@ -184,7 +151,7 @@ MySQLCommandExecute >> readResult [
 		rows := self readRowData: fields.
 		rowsEof := self readEof. "eof"].
 	
-	^ MySQLResultSet new
+	^ self resultSetClass new
 		header: resultSetHdr;
 		fields: fields;
 		fieldsEof: fieldsEof;
@@ -193,28 +160,14 @@ MySQLCommandExecute >> readResult [
 		yourself
 ]
 
-{ #category : 'reading' }
-MySQLCommandExecute >> readRowData: fields [ 
-	| respRows row |
-	respRows := OrderedCollection new.
-	
-	[self gotEof] whileFalse: [ 
-		"Read each row and save it"
-		row := self readOneRow: fields.
-		respRows add: row].
-		
-	^ respRows asArray
-
-]
-
 { #category : 'operating' }
 MySQLCommandExecute >> resetNewParamBound [
 	params do: [:each | each resetReboundFlag]
 	
 ]
 
-{ #category : 'accessing' }
-MySQLCommandExecute >> statementId: id [
-	stmtId := id
-	
+{ #category : 'reading' }
+MySQLCommandExecute >> resultSetClass [
+
+	^MySQLResultSet
 ]

@@ -3,11 +3,9 @@ MySQL fetch command
 "
 Class {
 	#name : 'MySQLCommandFetch',
-	#superclass : 'MySQLCommandBase',
+	#superclass : 'MySQLCommandWithStatement',
 	#instVars : [
-		'stmtId',
 		'numRows',
-		'mapResultsToNativeTypes',
 		'resultSetContext'
 	],
 	#category : 'MySQL-Core-Command',
@@ -38,45 +36,9 @@ MySQLCommandFetch >> commandCode [
 ]
 
 { #category : 'accessing' }
-MySQLCommandFetch >> gotEof [
-	^ (MySQLPacket from: session peek) isEof 
-
-]
-
-{ #category : 'initialization' }
-MySQLCommandFetch >> initialize [
-	super initialize.
-	mapResultsToNativeTypes := true
-	
-]
-
-{ #category : 'accessing' }
-MySQLCommandFetch >> mapResultsToNativeTypes: aBoolean [
-	mapResultsToNativeTypes := aBoolean
-	
-]
-
-{ #category : 'accessing' }
 MySQLCommandFetch >> numRows: count [
 	numRows := count
 	
-]
-
-{ #category : 'reading' }
-MySQLCommandFetch >> readEof [
-	^ MySQLEof from: session read
-
-]
-
-{ #category : 'reading' }
-MySQLCommandFetch >> readOneRow: fields [ 
-	| row |
-	row := mapResultsToNativeTypes 
-		ifTrue: [ MySQLBinaryRowData new ]
-		ifFalse: [ MySQLStringRowData new ].
-	row columnDescriptors: fields.
-	row read: session read.
-	^ row
 ]
 
 { #category : 'reading' }
@@ -107,28 +69,8 @@ MySQLCommandFetch >> readResult [
 		
 ]
 
-{ #category : 'reading' }
-MySQLCommandFetch >> readRowData: fields [ 
-	| respRows row |
-	respRows := OrderedCollection new.
-	
-	[self gotEof] whileFalse: [ 
-		"Read each row and save it"
-		row := self readOneRow: fields.
-		respRows add: row].
-		
-	^ respRows asArray
-
-]
-
 { #category : 'accessing' }
 MySQLCommandFetch >> resultSetContext: partialResultSet [
 	resultSetContext := partialResultSet 
-	
-]
-
-{ #category : 'accessing' }
-MySQLCommandFetch >> statementId: id [
-	stmtId := id
 	
 ]

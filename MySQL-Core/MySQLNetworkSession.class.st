@@ -7,7 +7,8 @@ Class {
 	#instVars : [
 		'theStream',
 		'nextPacketNumber',
-		'peekData'
+		'peekData',
+		'semaphore'
 	],
 	#category : 'MySQL-Core-Network',
 	#package : 'MySQL-Core',
@@ -25,6 +26,15 @@ MySQLNetworkSession >> disconnect [
 
 ]
 
+{ #category : 'reading' }
+MySQLNetworkSession >> executeCommand: cmd [
+
+	^semaphore critical: 
+		[self resetSequence.
+		cmd send: cmd prepare.
+		cmd readResponse]
+]
+
 { #category : 'sequence numbering' }
 MySQLNetworkSession >> getSequence [
 	^ nextPacketNumber 
@@ -33,7 +43,7 @@ MySQLNetworkSession >> getSequence [
 { #category : 'initialize-release' }
 MySQLNetworkSession >> initialize [
 	self resetSequence.
-
+	semaphore := Semaphore forMutualExclusion
 ]
 
 { #category : 'reading' }

@@ -73,13 +73,8 @@ MySQLCommandBase >> commandCode [
 
 { #category : 'operating' }
 MySQLCommandBase >> execute [
-	| resp cmd |
-	session resetSequence.
-	cmd := self prepare.
-	self send: cmd.
-	resp := self readResponse.
 
-	^ resp
+	^session executeCommand: self
 ]
 
 { #category : 'initialization' }

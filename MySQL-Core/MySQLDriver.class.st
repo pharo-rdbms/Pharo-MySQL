@@ -43,6 +43,12 @@ MySQLDriver >> changeUser: connSpec [
 ]
 
 { #category : 'accessing' }
+MySQLDriver >> commandQueryClass [
+
+	^MySQLCommandQuery
+]
+
+{ #category : 'accessing' }
 MySQLDriver >> connect: connSpec [ 
 	| handshake resp |
 	
@@ -143,15 +149,11 @@ MySQLDriver >> prepare: queryString [
 
 { #category : 'accessing' }
 MySQLDriver >> query: queryString [
-	| qry results |
 
 	self assertConnection.		
-	qry := MySQLCommandQuery onSession: netSession.
-	qry queryString: queryString.
-	results := qry execute.
-	
-	^ results
-
+	^(self commandQueryClass onSession: netSession)
+		queryString: queryString;
+		execute
 ]
 
 { #category : 'private' }
